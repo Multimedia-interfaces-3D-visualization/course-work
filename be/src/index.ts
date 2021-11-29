@@ -23,6 +23,12 @@ Passport.use(new PassportJwt.Strategy({ jwtFromRequest: jwtAsBearerToken, secret
 
 app.use("/api/v1", ApiRouter);
 
+import { authorize } from "./configs/auth";
+app.get("/test", authorize, (req, res) => {
+    console.log(req.user);
+    res.send("hello");
+});
+
 // app.use("*", (_req, res) => {
 //     res.sendFile(Path.join(__dirname, `./../dist/index.html`));
 // });
