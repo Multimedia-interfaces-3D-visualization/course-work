@@ -9,12 +9,14 @@ function deleteSensetiveInfoInUserObjectAndReturn(data: IUserModel) {
     const user: AnyKeys<IUserModel> = { ...data.toObject() } ;
     delete user.hashedPassword;
     delete user.__v;
+    user.id = user._id;
+    delete user._id;
     return user;
 }
 
 const router = Express.Router();
 
-router.get("/info/u/:username", authorize, authorizeAdmin, async (req, res) => {
+router.get("/u/:username", authorize, authorizeAdmin, async (req, res) => {
     try {
         const username = req.params.username;
         const result = await User.getByUsername(username);
@@ -30,7 +32,7 @@ router.get("/info/u/:username", authorize, authorizeAdmin, async (req, res) => {
     }
 });
 
-router.get("/info/id/:id", authorize, authorizeAdmin, async (req, res) => {
+router.get("/id/:id", authorize, authorizeAdmin, async (req, res) => {
     try {
         const id = req.params.id;
         const result = await User.getById(id);
@@ -46,7 +48,7 @@ router.get("/info/id/:id", authorize, authorizeAdmin, async (req, res) => {
     }
 });
 
-router.get("/info/all/", authorize, authorizeAdmin, async (_, res) => {
+router.get("/all/", authorize, authorizeAdmin, async (_, res) => {
     try {
         const results = await User.getAllUsers();
         const users = results.map(x => deleteSensetiveInfoInUserObjectAndReturn(x));
@@ -157,7 +159,7 @@ router.delete("/me", authorize, async (req, res) => {
     }
 });
 
-router.delete("/deactivate/:id", authorize, authorizeAdmin, async (req, res) => {
+router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
     try {
         const id = req.params.id;
         const user = await User.getById(id);

@@ -1,9 +1,12 @@
-import { AnyKeys } from "mongoose";
+import { AnyKeys, isValidObjectId } from "mongoose";
 import UserModel, { IUserModel } from "../models/user";
 
 
 class User {
     static async getById(id: string) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
         const user = await UserModel.findById(id);
         return user;
     }
@@ -24,6 +27,9 @@ class User {
     }
 
     static async deleteUserById(id: string) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
         const user = await UserModel.findByIdAndDelete(id);
         return user;
     }
@@ -34,6 +40,9 @@ class User {
     }
 
     static async updateUserById(id: string, data: AnyKeys<IUserModel>) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
         data.registrationDate = undefined;
         data.hashedPassword = undefined;
         data.username = undefined;
