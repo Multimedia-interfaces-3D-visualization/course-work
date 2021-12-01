@@ -23,9 +23,9 @@ Passport.use(new PassportJwt.Strategy({ jwtFromRequest: jwtAsBearerToken, secret
 
 app.use("/api/v1", ApiRouter);
 
-import { authorize } from "./configs/auth";
-app.get("/test", authorize, (req, res) => {
-    console.log(req.user);
+import { authorize, authorizeAdmin, authorizeVisitor } from "./configs/auth";
+app.get("/test", authorize, authorizeVisitor, (req, res) => {
+    console.log(req.user?.id);
     res.send("hello");
 });
 
