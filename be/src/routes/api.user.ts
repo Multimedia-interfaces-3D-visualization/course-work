@@ -28,7 +28,7 @@ router.get("/u/:username", authorize, authorizeAdmin, async (req, res) => {
         const user = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -44,7 +44,7 @@ router.get("/id/:id", authorize, authorizeAdmin, async (req, res) => {
         const user = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -54,7 +54,7 @@ router.get("/all/", authorize, authorizeAdmin, async (_, res) => {
         const users = results.map(x => deleteSensetiveInfoInUserObjectAndReturn(x));
         res.send({ users });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -110,7 +110,7 @@ router.put("/me", authorize, async (req, res) => {
         const updatedUser = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user: updatedUser });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -135,7 +135,7 @@ router.put("/role/:id", authorize, authorizeAdmin, async (req, res) => {
         const updatedUser = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user: updatedUser });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -155,7 +155,7 @@ router.delete("/me", authorize, async (req, res) => {
         const deletedUser = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user: deletedUser });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -177,7 +177,7 @@ router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
         const deletedUser = deleteSensetiveInfoInUserObjectAndReturn(result);
         res.send({ user: deletedUser });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 

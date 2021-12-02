@@ -1,6 +1,6 @@
 {
     "watch": "src",
     "ext": "ts",
-    "exec": "./killserver.sh; npm run compile && npm start",
+    "exec": "npm run compile; ./killserver.sh; npm start",
     "delay": "2500"
 }

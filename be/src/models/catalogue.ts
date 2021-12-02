@@ -24,6 +24,21 @@ const CatalogueScheme = new Mongoose.Schema({
     books:           { type: [Mongoose.Schema.Types.ObjectId], required: true, default: [], ref: "Book" },
 });
 
+CatalogueScheme.pre('findOneAndDelete', async function(next) {
+    const id = this.getQuery()['_id'];
+    const resParent = await CatalogueModel.findOne({ parentCatalogue: id });
+    if (resParent) {
+        throw new Error(`There is a parent catalogue ${resParent.id}, which refers to this catalogue`);
+    }
+
+    const res = await CatalogueModel.findOne({ childCatalogues: id });
+    if (res) {
+        throw new Error(`There is a child catalogue ${res.id}, which refers to this catalogue`);
+    }
+
+    next();
+});
+
 CatalogueScheme.plugin(idValidator);
 CatalogueScheme.plugin(AutoIncrement, { id: 'catalogue_seq', inc_field: 'number' });
 

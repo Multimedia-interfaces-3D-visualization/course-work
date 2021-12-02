@@ -1,4 +1,6 @@
 import Mongoose from "mongoose";
+import OrderModel from "./order";
+import ReviewModel from "./review";
 
 export type UserRole = "visitor" | "admin";
 
@@ -24,6 +26,20 @@ const UserScheme = new Mongoose.Schema({
     role:             { type: String, required: true, default: "visitor", enum: [ "visitor", "admin" ] },
     postalAddress:    { type: String, required: false },
     postcode:         { type: String, required: false },
+});
+
+UserScheme.pre('findOneAndDelete', async function(next) {
+    const id = this.getQuery()['_id'];
+    const res = await ReviewModel.findOne({ reviewer: id });
+    if (res) {
+        throw new Error(`There is a review ${res.id}, which refers to this user`);
+    }
+    const resOrder = await OrderModel.findOne({ borrower: id });
+    if (resOrder) {
+        throw new Error(`There is an order ${resOrder.id}, which refers to this user`);
+    }
+
+    next();
 });
 
 const UserModel = Mongoose.model<IUserModel>("User", UserScheme);

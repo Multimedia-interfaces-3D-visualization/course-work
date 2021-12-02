@@ -1,5 +1,6 @@
 import Mongoose from "mongoose";
 import idValidator from "mongoose-id-validator";
+import OrderModel from "./order";
 
 
 const AutoIncrement = require('mongoose-sequence')(Mongoose);
@@ -24,6 +25,16 @@ const LibraryScheme = new Mongoose.Schema({
     telephone:      { type: String, required: true },
     email:          { type: String, required: true },
     availableBooks: { type: [Mongoose.Schema.Types.ObjectId], required: true, default: [], ref: "Book" },
+});
+
+LibraryScheme.pre('findOneAndDelete', async function(next) {
+    const id = this.getQuery()['_id'];
+    const resOrder = await OrderModel.findOne({ libraryOwner: id });
+    if (resOrder) {
+        throw new Error(`There is an order ${resOrder.id}, which refers to this library`);
+    }
+
+    next();
 });
 
 LibraryScheme.plugin(idValidator);

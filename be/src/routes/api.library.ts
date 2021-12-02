@@ -33,20 +33,25 @@ router.post("/add", authorize, authorizeAdmin, async (req, res) => {
         { name: "schedule", minLength: 5 },
     ];
 
-    for (const reqField of requiredFields) {
-        const fieldValue = req.body[reqField.name];
-        if (!fieldValue || fieldValue.length < reqField.minLength) {
-            res.status(400).send({ err: `Required value '${reqField.name}', expected min length: ${reqField.minLength}` });
-            return;
+    try {
+        for (const reqField of requiredFields) {
+            const fieldValue = req.body[reqField.name];
+            if (!fieldValue || fieldValue.length < reqField.minLength) {
+                res.status(400).send({ err: `Required value '${reqField.name}', expected min length: ${reqField.minLength}` });
+                return;
+            }
         }
-    }
 
-    for (const nonReqField of nonRequiredFields) {
-        const fieldValue = req.body[nonReqField.name];
-        if (fieldValue && fieldValue.length < nonReqField.minLength) {
-            res.status(400).send({ err: `Not required value '${nonReqField.name}', expected min length: ${nonReqField.minLength}` });
-            return;
+        for (const nonReqField of nonRequiredFields) {
+            const fieldValue = req.body[nonReqField.name];
+            if (fieldValue && fieldValue.length < nonReqField.minLength) {
+                res.status(400).send({ err: `Not required value '${nonReqField.name}', expected min length: ${nonReqField.minLength}` });
+                return;
+            }
         }
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+        return;
     }
 
     try {
@@ -60,7 +65,7 @@ router.post("/add", authorize, authorizeAdmin, async (req, res) => {
         });
         res.status(201).send({ id });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -76,7 +81,7 @@ router.get("/n/:number(\\d+)", async (req, res) => {
         const library = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -92,7 +97,7 @@ router.get("/id/:id", async (req, res) => {
         const library = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -102,7 +107,7 @@ router.get("/all/", async (_, res) => {
         const libraries = results.map(x => deleteRedudantInfoInLibraryObjectAndReturn(x));
         res.send({ libraries });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -159,7 +164,7 @@ router.put("/id/:id", authorize, authorizeAdmin, async (req, res) => {
         const updatedLibrary = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library: updatedLibrary });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -176,9 +181,8 @@ router.put("/availableBooks/add/:id", authorize, authorizeAdmin, async (req, res
             return;
         }
 
-        if (req.body.availableBooks &&
-            (!Array.isArray(req.body.availableBooks)
-                || (req.body.availableBooks as []).some(x => typeof x !== "string" || !isValidObjectId(x)))) {
+        if (!Array.isArray(req.body.availableBooks)
+                || (req.body.availableBooks as []).some(x => typeof x !== "string" || !isValidObjectId(x))) {
             res.status(400).send({ err: `availableBooks is invalid, expected array of books' IDs` });
             return;
         }
@@ -195,7 +199,7 @@ router.put("/availableBooks/add/:id", authorize, authorizeAdmin, async (req, res
         const updatedLibrary = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library: updatedLibrary });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -212,14 +216,13 @@ router.put("/availableBooks/remove/:id", authorize, authorizeAdmin, async (req, 
             return;
         }
 
-        if (req.body.availableBooks &&
-            (!Array.isArray(req.body.availableBooks)
-                || (req.body.availableBooks as []).some(x => typeof x !== "string" || !isValidObjectId(x)))) {
+        if (!Array.isArray(req.body.availableBooks)
+                || (req.body.availableBooks as []).some(x => typeof x !== "string" || !isValidObjectId(x))) {
             res.status(400).send({ err: `availableBooks is invalid, expected array of books' IDs` });
             return;
         }
 
-        const newAvailableBooks = library.availableBooks.filter(x => (req.body.availableBooks as []).every(y => x !== y));
+        const newAvailableBooks = library.availableBooks.filter(x => (req.body.availableBooks as []).every(y => x.toString() !== y));
 
         const result = await Library.updateById(id, {
             availableBooks: [ ...newAvailableBooks ]
@@ -233,7 +236,7 @@ router.put("/availableBooks/remove/:id", authorize, authorizeAdmin, async (req, 
         const updatedLibrary = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library: updatedLibrary });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -255,7 +258,7 @@ router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
         const deletedLibrary = deleteRedudantInfoInLibraryObjectAndReturn(result);
         res.send({ library: deletedLibrary });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 

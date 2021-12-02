@@ -25,20 +25,25 @@ router.post("/register", async (req, res) => {
         { name: "lastName", minLength: 2 },
     ];
 
-    for (const reqField of requiredFields) {
-        const fieldValue = req.body[reqField.name];
-        if (!fieldValue || fieldValue.length < reqField.minLength) {
-            res.status(400).send({ err: `Required value '${reqField.name}', expected min length: ${reqField.minLength}` });
-            return;
+    try {
+        for (const reqField of requiredFields) {
+            const fieldValue = req.body[reqField.name];
+            if (!fieldValue || fieldValue.length < reqField.minLength) {
+                res.status(400).send({ err: `Required value '${reqField.name}', expected min length: ${reqField.minLength}` });
+                return;
+            }
         }
-    }
 
-    for (const nonReqField of nonRequiredFields) {
-        const fieldValue = req.body[nonReqField.name];
-        if (fieldValue && fieldValue.length < nonReqField.minLength) {
-            res.status(400).send({ err: `Not required value '${nonReqField.name}', expected min length: ${nonReqField.minLength}` });
-            return;
+        for (const nonReqField of nonRequiredFields) {
+            const fieldValue = req.body[nonReqField.name];
+            if (fieldValue && fieldValue.length < nonReqField.minLength) {
+                res.status(400).send({ err: `Not required value '${nonReqField.name}', expected min length: ${nonReqField.minLength}` });
+                return;
+            }
         }
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+        return;
     }
 
     try {
@@ -51,7 +56,7 @@ router.post("/register", async (req, res) => {
         });
         res.status(201).send({ id });
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
 });
 
@@ -71,7 +76,7 @@ router.post("/login", async (req, res) => {
     try {
         user = await User.getByUsername(username);
     } catch (e) {
-        res.status(500).send({ err: e });
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
         return;
     }
 
