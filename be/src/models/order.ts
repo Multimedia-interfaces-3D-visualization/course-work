@@ -1,4 +1,5 @@
 import Mongoose from "mongoose";
+import idValidator from "mongoose-id-validator";
 
 
 const AutoIncrement = require('mongoose-sequence')(Mongoose);
@@ -19,7 +20,7 @@ export interface IOrderModel extends Mongoose.Document {
 }
 
 const OrderScheme = new Mongoose.Schema({
-    number:             { type: Number, required: true, unique: true },
+    number:             { type: Number, unique: true },
     book:               { type: Mongoose.Schema.Types.ObjectId, required: true, ref: "Book" },
     borrower:           { type: Mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
     libraryOwner:       { type: Mongoose.Schema.Types.ObjectId, required: true, ref: "Library" },
@@ -31,7 +32,8 @@ const OrderScheme = new Mongoose.Schema({
     broughtDate:        { type: Date, required: false },
 });
 
-OrderScheme.plugin(AutoIncrement, { inc_field: 'number' });
+OrderScheme.plugin(idValidator);
+OrderScheme.plugin(AutoIncrement, { id: 'order_seq', inc_field: 'number' });
 
 const OrderModel = Mongoose.model<IOrderModel>("Order", OrderScheme);
 

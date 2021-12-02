@@ -23,11 +23,11 @@ Passport.use(new PassportJwt.Strategy({ jwtFromRequest: jwtAsBearerToken, secret
 
 app.use("/api/v1", ApiRouter);
 
-import { authorize, authorizeAdmin, authorizeVisitor } from "./configs/auth";
-app.get("/test", authorize, authorizeVisitor, (req, res) => {
-    console.log(req.user?.id);
-    res.send("hello");
-});
+// import { authorize, authorizeAdmin, authorizeVisitor } from "./configs/auth";
+// app.get("/test", authorize, authorizeVisitor, (req, res) => {
+//     console.log(req.user?.id);
+//     res.send("hello");
+// });
 
 // app.use("*", (_req, res) => {
 //     res.sendFile(Path.join(__dirname, `./../dist/index.html`));

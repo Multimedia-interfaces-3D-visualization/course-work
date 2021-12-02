@@ -5,4 +5,7 @@ class Review {
 
 }
 
+//
+ReviewModel.find();
+
 export default Review;

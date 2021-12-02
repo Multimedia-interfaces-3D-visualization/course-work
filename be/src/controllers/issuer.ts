@@ -5,4 +5,7 @@ class Issuer {
 
 }
 
+//
+BookModel.find();
+
 export default Issuer;

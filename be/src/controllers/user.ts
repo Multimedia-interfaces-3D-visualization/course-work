@@ -46,7 +46,7 @@ class User {
         data.registrationDate = undefined;
         data.hashedPassword = undefined;
         data.username = undefined;
-        const user = await UserModel.findByIdAndUpdate(id, { $set: { ...data }});
+        const user = await UserModel.findByIdAndUpdate(id, { $set: { ...data }}, { runValidators: true });
         return user;
     }
 
@@ -54,7 +54,7 @@ class User {
         data.registrationDate = undefined;
         data.hashedPassword = undefined;
         data.username = undefined;
-        const user = await UserModel.updateOne({ username }, { $set: { ...data }});
+        const user = await UserModel.updateOne({ username }, { $set: { ...data }}, { runValidators: true });
         return user;
     }
 }

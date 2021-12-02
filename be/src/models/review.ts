@@ -1,4 +1,5 @@
 import Mongoose from "mongoose";
+import idValidator from "mongoose-id-validator";
 
 
 export interface IReviewModel extends Mongoose.Document {
@@ -18,6 +19,8 @@ const ReviewScheme = new Mongoose.Schema({
     title:       { type: String, required: true },
     description: { type: String, required: false },
 });
+
+ReviewScheme.plugin(idValidator);
 
 const ReviewModel = Mongoose.model<IReviewModel>("Review", ReviewScheme);
 

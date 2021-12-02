@@ -5,4 +5,7 @@ class Order {
 
 }
 
+//
+OrderModel.find();
+
 export default Order;

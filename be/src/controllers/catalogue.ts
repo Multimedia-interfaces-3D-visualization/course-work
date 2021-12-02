@@ -5,4 +5,7 @@ class Catalogue {
 
 }
 
+//
+CatalogueModel.find();
+
 export default Catalogue;

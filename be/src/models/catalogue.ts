@@ -1,4 +1,5 @@
 import Mongoose from "mongoose";
+import idValidator from "mongoose-id-validator";
 
 
 const AutoIncrement = require('mongoose-sequence')(Mongoose);
@@ -14,16 +15,17 @@ export interface ICatalogueModel extends Mongoose.Document {
 }
 
 const CatalogueScheme = new Mongoose.Schema({
-    number:          { type: Number, required: true, unique: true },
+    number:          { type: Number, unique: true },
     name:            { type: String, required: true },
     description:     { type: String, required: false },
     parentCatalogue: { type: Mongoose.Schema.Types.ObjectId, required: false, ref: "Catalogue" },
-    childCatalogues: { type: [Mongoose.Schema.Types.ObjectId], required: true, ref: "Catalogue" },
-    tags:            { type: [String], required: true },
-    books:           { type: [Mongoose.Schema.Types.ObjectId], required: true, ref: "Book" },
+    childCatalogues: { type: [Mongoose.Schema.Types.ObjectId], required: true, default: [], ref: "Catalogue" },
+    tags:            { type: [String], required: true, default: [] },
+    books:           { type: [Mongoose.Schema.Types.ObjectId], required: true, default: [], ref: "Book" },
 });
 
-CatalogueScheme.plugin(AutoIncrement, { inc_field: 'number' });
+CatalogueScheme.plugin(idValidator);
+CatalogueScheme.plugin(AutoIncrement, { id: 'catalogue_seq', inc_field: 'number' });
 
 const CatalogueModel = Mongoose.model<ICatalogueModel>("Catalogue", CatalogueScheme);
 

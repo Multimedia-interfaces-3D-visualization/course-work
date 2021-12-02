@@ -28,7 +28,7 @@ const BookScheme = new Mongoose.Schema({
     placePublished: { type: String, required: true },
     issuer:         { type: String, required: true },
     countPages:     { type: Number, required: false },
-    keywords:       { type: [String], required: true },
+    keywords:       { type: [String], required: true, default: [] },
     languageISO:    { type: String, required: false },
     type:           { type: String, required: true },
     imageURL:       { type: String, required: false },

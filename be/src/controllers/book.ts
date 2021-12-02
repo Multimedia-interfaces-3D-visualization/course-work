@@ -5,4 +5,7 @@ class Book {
 
 }
 
+//
+BookModel.find();
+
 export default Book;
