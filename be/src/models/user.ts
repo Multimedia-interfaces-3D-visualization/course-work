@@ -7,11 +7,11 @@ export interface IUserModel extends Mongoose.Document {
     hashedPassword: string;
     firstName: string;
     surname: string;
-    lastName: string;
+    lastName?: string;
     registrationDate: Date;
     role: UserRole;
-    postalAddress: string;
-    postcode: string;
+    postalAddress?: string;
+    postcode?: string;
 }
 
 const UserScheme = new Mongoose.Schema({
