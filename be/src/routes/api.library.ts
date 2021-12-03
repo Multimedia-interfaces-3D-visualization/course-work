@@ -2,6 +2,7 @@ import Express from "express";
 import { AnyKeys, isValidObjectId } from "mongoose";
 import { authorize, authorizeAdmin } from "../configs/auth";
 import Library from "../controllers/library";
+import { IBookModel } from "../models/book";
 import { ILibraryModel } from "../models/library";
 
 
@@ -11,6 +12,14 @@ function deleteRedudantInfoInLibraryObjectAndReturn(data: ILibraryModel) {
     library.id = library._id;
     delete library._id;
     return library;
+}
+
+function deleteRedundantInfoInBookObjectAndReturn(data: IBookModel) {
+    const book: AnyKeys<IBookModel> = { ...data.toObject() } ;
+    delete book.__v;
+    book.id = book._id;
+    delete book._id;
+    return book;
 }
 
 const router = Express.Router();
@@ -260,6 +269,20 @@ router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
     } catch (e) {
         res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
+});
+
+router.get("/availableBooks/id/:id", async (req, res) => {
+    const id = req.params.id;
+    const library = await Library.getById(id);
+    if (!library) {
+        res.status(404).send({ err: "Library not found" });
+        return;
+    }
+
+    const results = await Library.getAvailableBooksById(id);
+
+    const filteredBooks = results?.map(x => deleteRedundantInfoInBookObjectAndReturn(x));
+    res.send({ books: filteredBooks });
 });
 
 
