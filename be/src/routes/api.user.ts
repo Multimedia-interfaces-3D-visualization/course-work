@@ -1,7 +1,9 @@
 import Express from "express";
 import { AnyKeys } from "mongoose";
 import { authorize, authorizeAdmin } from "../configs/auth";
+import Order from "../controllers/order";
 import User from "../controllers/user";
+import { IOrderModel } from "../models/order";
 import { IUserModel } from "../models/user";
 
 
@@ -12,6 +14,14 @@ function deleteSensetiveInfoInUserObjectAndReturn(data: IUserModel) {
     user.id = user._id;
     delete user._id;
     return user;
+}
+
+function deleteRedundantInfoInOrderObjectAndReturn(data: IOrderModel) {
+    const order: AnyKeys<IOrderModel> = { ...data.toObject() } ;
+    delete order.__v;
+    order.id = order._id;
+    delete order._id;
+    return order;
 }
 
 const router = Express.Router();
@@ -179,6 +189,17 @@ router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
     } catch (e) {
         res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
+});
+
+router.get("/me/orders", authorize, async (req, res) => {
+    if (!req.user) {
+        res.status(500).send({ err: "Couldn't retrieve user obj" })
+        return;
+    }
+
+    const orders = await Order.getFromUser(req.user.id);
+    
+    res.send({ orders: orders?.map(x => deleteRedundantInfoInOrderObjectAndReturn(x)) });
 });
 
 

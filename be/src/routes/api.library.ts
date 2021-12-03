@@ -2,8 +2,10 @@ import Express from "express";
 import { AnyKeys, isValidObjectId } from "mongoose";
 import { authorize, authorizeAdmin } from "../configs/auth";
 import Library from "../controllers/library";
+import Order from "../controllers/order";
 import { IBookModel } from "../models/book";
 import { ILibraryModel } from "../models/library";
+import { IOrderModel } from "../models/order";
 
 
 function deleteRedudantInfoInLibraryObjectAndReturn(data: ILibraryModel) {
@@ -20,6 +22,14 @@ function deleteRedundantInfoInBookObjectAndReturn(data: IBookModel) {
     book.id = book._id;
     delete book._id;
     return book;
+}
+
+function deleteRedundantInfoInOrderObjectAndReturn(data: IOrderModel) {
+    const order: AnyKeys<IOrderModel> = { ...data.toObject() } ;
+    delete order.__v;
+    order.id = order._id;
+    delete order._id;
+    return order;
 }
 
 const router = Express.Router();
@@ -283,6 +293,24 @@ router.get("/availableBooks/id/:id", async (req, res) => {
 
     const filteredBooks = results?.map(x => deleteRedundantInfoInBookObjectAndReturn(x));
     res.send({ books: filteredBooks });
+});
+
+router.get("/assignedOrders/id/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Library.getById(id);
+        if (!result) {
+            res.status(404).send({ err: "Library not found" });
+            return;
+        }
+
+        const results = await Order.getForLibrary(id);
+
+        const filteredLibraries = results?.map(x => deleteRedundantInfoInOrderObjectAndReturn(x));
+        res.send({ libraries: filteredLibraries });
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+    }
 });
 
 
