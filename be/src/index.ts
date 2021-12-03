@@ -23,24 +23,19 @@ Passport.use(new PassportJwt.Strategy({ jwtFromRequest: jwtAsBearerToken, secret
 
 app.use("/api/v1", ApiRouter);
 
-// import { authorize, authorizeAdmin, authorizeVisitor } from "./configs/auth";
-// app.get("/test", authorize, authorizeVisitor, (req, res) => {
-//     console.log(req.user?.id);
-//     res.send("hello");
-// });
-
 // app.use("*", (_req, res) => {
 //     res.sendFile(Path.join(__dirname, `./../dist/index.html`));
 // });
 
-// app.use(((err, _req, res, _next) => {
-//     console.error(err);
-//     return res.sendFile(Path.join(__dirname, `./../dist/index.html`));
-// }) as Express.ErrorRequestHandler);
+app.use(((err, _req, res, _next) => {
+    console.error(err);
+    res.status(500).send({ err: (err instanceof Error && JSON.stringify(err) === "{}") ? (err as Error).message : err });
+    return;
+}) as Express.ErrorRequestHandler);
 
 app.use("*", (_req, res) => {
     res.send({
-        init: "Hi there!"
+        info: "No route..."
     });
 });
 
