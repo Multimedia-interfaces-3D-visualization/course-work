@@ -3,6 +3,8 @@ import { AnyKeys } from "mongoose";
 import { authorize, authorizeAdmin } from "../configs/auth";
 import Book from "../controllers/book";
 import { IBookModel } from "../models/book";
+import { ILibraryModel } from "../models/library";
+import { IReviewModel } from "../models/review";
 
 
 function deleteRedundantInfoInBookObjectAndReturn(data: IBookModel) {
@@ -11,6 +13,22 @@ function deleteRedundantInfoInBookObjectAndReturn(data: IBookModel) {
     book.id = book._id;
     delete book._id;
     return book;
+}
+
+function deleteRedudantInfoInLibraryObjectAndReturn(data: ILibraryModel) {
+    const library: AnyKeys<ILibraryModel> = { ...data.toObject() } ;
+    delete library.__v;
+    library.id = library._id;
+    delete library._id;
+    return library;
+}
+
+function deleteRedundantInfoInReviewObjectAndReturn(data: IReviewModel) {
+    const review: AnyKeys<IReviewModel> = { ...data.toObject() } ;
+    delete review.__v;
+    review.id = review._id;
+    delete review._id;
+    return review;
 }
 
 const router = Express.Router();
@@ -142,6 +160,42 @@ router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
 
         const deletedBook = deleteRedundantInfoInBookObjectAndReturn(result);
         res.send({ book: deletedBook });
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+    }
+});
+
+router.get("/librariesWhereAvailable/id/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Book.getById(id);
+        if (!result) {
+            res.status(404).send({ err: "Book not found" });
+            return;
+        }
+
+        const libraries = await Book.getLibrariesWhereAvailable(id);
+
+        const librariesFiltered = libraries?.map(x => deleteRedudantInfoInLibraryObjectAndReturn(x));
+        res.send({ libraries: librariesFiltered });
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+    }
+});
+
+router.get("/reviews/id/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Book.getById(id);
+        if (!result) {
+            res.status(404).send({ err: "Book not found" });
+            return;
+        }
+
+        const reviews = await Book.getAllReviews(id);
+
+        const reviewsFiltered = reviews?.map(x => deleteRedundantInfoInReviewObjectAndReturn(x));
+        res.send({ reviews: reviewsFiltered });
     } catch (e) {
         res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }

@@ -1,5 +1,7 @@
 import { AnyKeys, isValidObjectId } from "mongoose";
 import BookModel, { IBookModel } from "../models/book";
+import LibraryModel from "../models/library";
+import ReviewModel from "../models/review";
 
 
 class Book {
@@ -41,6 +43,23 @@ class Book {
         data.ISBN = undefined;
         const book = await BookModel.findByIdAndUpdate(id, { $set: { ...data }}, { runValidators: true });
         return book;
+    }
+
+    static async getLibrariesWhereAvailable(id: string) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+        const libraries = await LibraryModel.find();
+        const whereAvailable = libraries.filter(x => x.availableBooks.some(y => y.toString() === id));
+        return whereAvailable;
+    }
+
+    static async getAllReviews(id: string) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+        const reviews = await ReviewModel.find({ book: id });
+        return reviews;
     }
 }
 
