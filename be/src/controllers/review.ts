@@ -23,7 +23,7 @@ class Review {
         if (!isValidObjectId(idUser)) {
             return null;
         }
-        const reviews = await ReviewModel.findOne({ reviewer: idUser });
+        const reviews = await ReviewModel.find({ reviewer: idUser });
         return reviews;
     }
 

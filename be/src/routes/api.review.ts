@@ -2,6 +2,7 @@ import Express from "express";
 import { AnyKeys } from "mongoose";
 import { authorize, authorizeVisitor } from "../configs/auth";
 import Review from "../controllers/review";
+import User from "../controllers/user";
 import { IReviewModel } from "../models/review";
 
 
@@ -144,6 +145,24 @@ router.delete("/id/:id", authorize, async (req, res) => {
 
         const deletedReview = deleteRedundantInfoInObjectAndReturn(result);
         res.send({ review: deletedReview });
+    } catch (e) {
+        res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
+    }
+});
+
+router.get("/allFromUser/id/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await User.getById(id);
+        if (!result) {
+            res.status(404).send({ err: "User not found" });
+            return;
+        }
+
+        const reviews = await Review.getFromUser(id);
+
+        const reviewsFiltered = reviews?.map(x => deleteRedundantInfoInObjectAndReturn(x));
+        res.send({ reviews: reviewsFiltered });
     } catch (e) {
         res.status(500).send({ err: (e instanceof Error && JSON.stringify(e) === "{}") ? (e as Error).message : e });
     }
