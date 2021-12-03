@@ -1,4 +1,5 @@
 import { AnyKeys, isValidObjectId } from "mongoose";
+import { IBookModel } from "../models/book";
 import LibraryModel, { ILibraryModel } from "../models/library";
 
 
@@ -14,6 +15,14 @@ class Library {
     static async getByNumber(number: number) {
         const library = await LibraryModel.findOne({ number });
         return library;
+    }
+
+    static async getAvailableBooksById(id: string) {
+        if (!isValidObjectId(id)) {
+            return null;
+        }
+        const library = await LibraryModel.findById(id).populate('availableBooks');
+        return library?.availableBooks as IBookModel[] | null | undefined;
     }
 
     static async create(data: AnyKeys<ILibraryModel>) {
