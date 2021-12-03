@@ -13,7 +13,7 @@ class Author {
         const books = await BookModel.find();
         const authorTrimmed = author.toLowerCase().trim();
 
-        const booksFiltered = books.filter(x => x.authors.some(y => y.toLowerCase().trim() === authorTrimmed));
+        const booksFiltered = books.filter(x => x.authors.some(y => y.toLowerCase().trim().includes(authorTrimmed)));
         return booksFiltered;
     }
 }

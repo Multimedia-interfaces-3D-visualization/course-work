@@ -13,7 +13,7 @@ class Issuer {
         const books = await BookModel.find();
         const issuerTrimmed = issuer.toLowerCase().trim();
 
-        const booksFiltered = books.filter(x => x.issuer === issuerTrimmed);
+        const booksFiltered = books.filter(x => x.issuer.toLowerCase().trim().includes(issuerTrimmed));
         return booksFiltered;
     }
 }
