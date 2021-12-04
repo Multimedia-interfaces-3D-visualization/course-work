@@ -5,6 +5,7 @@ import PassportJwt from "passport-jwt";
 import { DB_URL, PORT, JWT_SECRET } from "./configs/environment";
 import { parseUserFromToken } from "./configs/auth";
 import ApiRouter from "./routes/api";
+import cors from "cors"
 
 // import Path from "path";
 // import { getUserFromToken } from "@services/authentication";
@@ -16,6 +17,8 @@ const app = Express();
 
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
+app.use(cors())
+
 
 const jwtAsBearerToken = PassportJwt.ExtractJwt.fromAuthHeaderAsBearerToken();
 app.use(Passport.initialize());

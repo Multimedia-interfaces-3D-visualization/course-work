@@ -1,0 +1,18 @@
+footer {
+  min-height: 64px;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-link {
+  color: black;
+  font-size: 17px;
+  text-shadow: 1px 1px white;
+  margin-right: 20px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}

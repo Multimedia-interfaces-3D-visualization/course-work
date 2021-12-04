@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+  position: relative;
+}
+.App-content {
+  min-height: calc(100vh - 64px) !important;
+  background-color: whitesmoke;
+  max-width: 1024px;
+  padding-top: 70px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.dcg-graphpaper-branding {
+  display: none !important;
+}
+
+.dcg-expressionlist .dcg-new-expression {
+  display: none !important;
+}
+.App-actions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.App-start {
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.App-article-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.App-content-article {
+  display: flex;
+  align-items: center;
+}
+
+.App-article {
+  font-size: 26px;
+  text-align: justify;
+  padding: 0 22px;
+}
+
+.App-article-letter {
+  padding-left: 45px;
+  font-size: 30px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.App-title {
+  position: absolute;
+  font-size: 30px;
+  font-style: italic;
+  font-family: charter, Georgia, Cambria, 'Times New Roman', Times, serif;
+  color: whitesmoke;
+  font-weight: bold;
+  text-transform: capitalize;
+  top: 10px;
+  right: 40px;
+  text-align: right;
+  text-shadow: -1px -1px snow;
+  z-index: 1;
+}
+
+.App-main {
+  position: relative;
+}
+
+.App-shevron {
+  font-family: charter, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  right: 50%;
+}
+
+.App-shevron:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+/* #282c34 */
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+#root .mq-math-mode {
+  font-size: 25px;
+}
+
+#root td .mq-math-mode {
+  font-size: 20px;
+}
+
+#root .MuiTableCell-stickyHeader {
+  background-color: #e7f7e4;
+}
+
+#root .mq-editable-field.mq-math-mode {
+  min-width: 400px;
+  max-width: calc(100% - 500px);
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid rgba(63, 81, 181, 0.5);
+  outline: none;
+  font-size: 20px;
+}
+
+.mq-editable-field.mq-math-mode:hover {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #3f51b5;
+}
+
+.mq-editable-field.mq-math-mode.mq-focused {
+  outline: 0 !important;
+}
+
+code {
+  font-style: italic;
+}
+.icon-margin {
+  margin-right: 5px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -86,7 +86,13 @@ router.post("/login", async (req, res) => {
     }
 
     const token = JWT.sign({ id: user.id }, JWT_SECRET);
-    return res.json({ token });
+    return res.json({
+        token,
+        userData: {
+            firstName: user.firstName,
+            lastName: user.surname,
+            isAdmin: user.role === 'admin'
+        }});
 });
 
 export default router;
