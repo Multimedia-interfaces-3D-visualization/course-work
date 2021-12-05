@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const getRoot = (state) => state?.books;
+export const getRoot = (state) => state?.search;
 
-export const getBooks = createSelector(getRoot, (root) => root?.books || []);
-export const getBookById = (id) =>
-  createSelector(getBooks, (books) => books.find((book) => book.id === id));
+export const getSelected = (field) =>
+  createSelector(getRoot, (search) => search[field]);
