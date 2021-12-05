@@ -30,6 +30,12 @@ const styles = {
     marginTop: '45px',
     width: '300px',
   },
+  nothing: {
+    fontSize: '25px',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    width: '100%',
+  },
   submit: {
     width: '200px',
     height: '50px',

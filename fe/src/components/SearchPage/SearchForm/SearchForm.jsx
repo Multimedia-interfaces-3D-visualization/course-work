@@ -90,7 +90,8 @@ function SearchForm(props) {
     const found = (arr1, arr2) => arr1.some((r) => arr2.includes(r));
     const fBooks = allBooks.filter(
       (book) =>
-        (!searchText || book.name.includes(searchText)) &&
+        (!searchText ||
+          book.name.toLowerCase().includes(searchText.toLowerCase())) &&
         (!selectedAuthors.length || found(selectedAuthors, book.authors)) &&
         (!selectedKeywords.length || found(selectedKeywords, book.keywords)) &&
         (!selectedIssuers.length || selectedIssuers.includes(book.issuer)) &&
@@ -145,7 +146,11 @@ function SearchForm(props) {
           Шукати
         </Button>
       </div>
-      <BooksList rows={books} hideLabel />
+      {books?.length ? (
+        <BooksList rows={books} hideLabel />
+      ) : (
+        <div className={classes.nothing}>Нічого не знайдено</div>
+      )}
     </div>
   );
 }
