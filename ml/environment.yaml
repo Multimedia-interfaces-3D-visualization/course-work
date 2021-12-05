@@ -45,7 +45,16 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
   - pip:
+    - charset-normalizer==2.0.9
     - click==8.0.3
+    - gtts==2.2.3
+    - idna==3.3
     - jinja2==3.0.3
+    - numpy==1.19.4
     - pydub==0.25.1
     - python-dotenv==0.19.2
+    - requests==2.26.0
+    - six==1.16.0
+    - speechrecognition==3.8.1
+    - stt==1.0.0
+    - urllib3==1.26.7
