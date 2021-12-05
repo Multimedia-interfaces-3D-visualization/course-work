@@ -6,6 +6,7 @@ import * as notifications from './notifications'
 import * as user from './user'
 import * as users from './users'
 import * as libs from './libs'
+import * as books from './books'
 import * as breed from './breed'
 import * as breeds from './breeds'
 
@@ -18,6 +19,7 @@ export default createStore({
     breeds: breeds.reducer,
     breed: breed.reducer,
     libs: libs.reducer,
+    books: books.reducer,
   }),
   sagas: [
     ...user.sagas,
@@ -25,6 +27,7 @@ export default createStore({
     ...libs.sagas,
     ...breeds.sagas,
     ...breed.sagas,
+    ...books.sagas,
   ],
   middleware: [],
 })

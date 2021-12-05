@@ -7,6 +7,7 @@ const apiUrls = {
   breeds: `${base}/ml/serving/breeds/preview`,
   users: `${base}/user/all`,
   libs: `${base}/library/all`,
+  books: `${base}/book/all`,
 }
 
 export default apiUrls
