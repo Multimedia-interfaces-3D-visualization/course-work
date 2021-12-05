@@ -25,7 +25,7 @@ const validationSchema = yup.object({
     .min(5, `Розклад має складатись мінімум з 5 символів`),
   description: yup
     .string(`Введіть опис бібліотеки`)
-    .min(15, `Опис має складатись мінімум з 15 символів`),
+    .min(5, `Опис має складатись мінімум з 15 символів`),
 })
 
 export default validationSchema

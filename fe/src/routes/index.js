@@ -21,6 +21,7 @@ import SearchPage from '../components/SearchPage/SearchPage'
 import Libraries from '../components/libs/Libraries/Libraries'
 import Library from '../components/libs/Library/Library'
 import CreateLibrary from '../components/libs/CreateLibrary/CreateLibrary'
+import CreateBook from '../components/books/CreateBook/CreateBook'
 
 const ImplicitExplicitRouter = ({ history }) => (
   <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
@@ -40,6 +41,9 @@ const ImplicitExplicitRouter = ({ history }) => (
       </Route>
       <Route path="/create-lib">
         <CreateLibrary />
+      </Route>
+      <Route path="/create-book">
+        <CreateBook />
       </Route>
       <Route path="/lib/:id">
         <Library />

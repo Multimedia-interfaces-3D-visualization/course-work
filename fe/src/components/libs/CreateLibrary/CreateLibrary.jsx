@@ -38,6 +38,7 @@ const CreateLibrary = () => {
     },
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
+      console.log('values', values)
       dispatch(
         actions.register({
           ...values,
@@ -189,7 +190,6 @@ const CreateLibrary = () => {
         />
         <TextareaAutosize
           className={classes.emailField}
-          fullWidth
           id="description"
           name="description"
           label="Опис"
@@ -201,15 +201,11 @@ const CreateLibrary = () => {
             errors?.description ||
             (formik.touched.description && !!formik.errors.description)
           } // add custom errors from store
-          helperText={
-            errors?.description ||
-            (formik.touched.description && formik.errors.description)
-          } // add custom errors from store
           minRows={3}
           style={{ width: '100%' }}
         />
         <div className={classes.actions}>
-          <Button className={classes.login} component={RouterLink} to="/users">
+          <Button className={classes.login} component={RouterLink} to="/libs">
             Повернутися
           </Button>
 
