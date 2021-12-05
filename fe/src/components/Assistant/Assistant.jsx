@@ -56,6 +56,24 @@ const Assistant = () => {
     }
   }, [previewAudioStream, stopRecording, inited]);
 
+  
+  const testPlayback = (data) => {
+    console.log('BBFBFBFBFBFB');
+    const formData = new FormData();
+    formData.append('text_data', "Привіт від голосового асистента! Ви сказали фразу: " + data);
+    axios
+      .post('http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech', formData)
+      .then((response) => {
+        console.log(response.data.data);
+        document.getElementById("audio-hidden").setAttribute("src", "data:audio/mp3;base64," + response.data.data);
+        document.getElementById("audio-hidden").play(); 
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+
   useEffect(() => {
     if (mediaBlobUrl) {
       console.log('ALAAAAARM');
@@ -76,21 +94,11 @@ const Assistant = () => {
             .then((response) => {
               console.log(response.data.data);
               dispatch({ type: 'newText', data: response.data.data });
+              testPlayback(response.data.data);
             })
             .catch((error) => {
               console.error(error);
             });
-          // .then(() => {
-          //   console.log('BBFBFBFBFBFB');
-          //   axios
-          //     .post('http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech', { text_data: "Привіт від голосового асистента!" })
-          //     .then((response) => {
-          //       console.log(response.data.data);
-          //     })
-          //     .catch((error) => {
-          //       console.error(error);
-          //     })
-          // });
         });
     }
   }, [mediaBlobUrl]);
@@ -129,7 +137,7 @@ const Assistant = () => {
 
         <p>Розпізнано: {state.recognizedText}</p>
 
-        <audio id="audio-hidden" hidden={true}></audio>
+        <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
       </div>
     </div>
   );
