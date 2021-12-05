@@ -10,7 +10,7 @@ const columns = [
   {
     id: 'authors',
     label: `Автори`,
-    minWidth: 170,
+    minWidth: 150,
     align: 'center',
     format: (authors = []) =>
       authors.length > 1
@@ -23,13 +23,13 @@ const columns = [
   {
     id: 'type',
     label: 'Тип',
-    minWidth: 170,
+    minWidth: 150,
     align: 'center',
   },
   {
     id: 'imageURL',
     label: 'Обложка',
-    minWidth: 170,
+    minWidth: 150,
     align: 'center',
     format: (value, row) =>
       value ? (

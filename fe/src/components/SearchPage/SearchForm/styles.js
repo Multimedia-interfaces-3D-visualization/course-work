@@ -1,6 +1,39 @@
 const styles = {
   formContainer: {
     width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  filters: {
+    minWidth: '350px',
+    maxWidth: '420px',
+  },
+  name: {
+    maxWidth: '400px',
+    padding: '10px',
+    '& .MuiInputBase-root': {
+      background: 'white',
+    },
+  },
+  select: {
+    margin: '10px',
+  },
+  selectForm: {
+    minWidth: '300px',
+    maxWidth: '420px',
+  },
+  inputLabel: {
+    paddingLeft: '10px',
+  },
+  slider: {
+    margin: '10px',
+    marginTop: '45px',
+    width: '300px',
+  },
+  submit: {
+    width: '200px',
+    height: '50px',
+    background: 'white',
   },
   formSwitcher: {
     display: 'flex',

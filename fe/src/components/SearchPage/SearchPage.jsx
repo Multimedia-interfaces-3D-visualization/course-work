@@ -10,7 +10,7 @@ function SearchPage() {
 
   return (
     <div className={classes.page}>
-      <h3 className={classes.title}>Собако-Пошук</h3>
+      <h3 className={classes.title}>Пошук Книг</h3>
       <SearchForm
         setIsTextSearch={setIsTextSearch}
         isTextSearch={isTextSearch}

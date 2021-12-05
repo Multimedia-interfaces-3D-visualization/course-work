@@ -4,7 +4,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     width: '100vw',
-    padding: '20px 10vw',
+    padding: '20px 3vw',
     minHeight: 'calc(100vh - 128px)',
   },
 

@@ -97,9 +97,11 @@ const Book = (props) => {
               displayedValuesLabels['authors'],
               classes,
             )}
-            {book?.keywords?.length
-              ? book?.keywords.map((word) => <Chip label={word} />)
-              : null}
+            <div>
+              {book?.keywords?.length
+                ? book?.keywords.map((word) => <Chip label={word} />)
+                : null}
+            </div>
             {displayedFields.map((field) =>
               Field(book[field], displayedValuesLabels[field], classes),
             )}
