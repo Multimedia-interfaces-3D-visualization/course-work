@@ -3,7 +3,7 @@ import useStyles from '../../utils/hooks/useStyles'
 import styles from './styles'
 import { useReactMediaRecorder } from "react-media-recorder";
 import axios from 'axios';
-
+import hark from './hark';
 
 const initialState = {
   recognizedText: "",
@@ -24,6 +24,7 @@ function reducer(state, action) {
 const Assistant = () => {
   const classes = useStyles(styles);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [inited, setInited] = useState(false);
 
   const {
     status,
@@ -32,6 +33,19 @@ const Assistant = () => {
     mediaBlobUrl,
     previewAudioStream
   } = useReactMediaRecorder({ audio: true, video: false, screen: false });
+
+  useEffect(() => {
+  if(previewAudioStream) {
+    setInited(true);
+    console.log('stbbb');
+    const options = { interval: 100};
+    const speechEvents = hark(previewAudioStream, options);
+    speechEvents.run();
+    speechEvents.on('speaking', function () { console.log('speaking');});
+    speechEvents.on('stopped_speaking', function () {console.log('stopped_speaking'); stopRecording();});
+    speechEvents.on('volume_change', function (volume, threshold) {});
+  }}, [previewAudioStream, stopRecording, inited])
+ 
 
   useEffect(() => {
     if (mediaBlobUrl) {
