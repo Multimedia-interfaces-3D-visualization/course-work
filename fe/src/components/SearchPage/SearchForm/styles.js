@@ -4,6 +4,12 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
   },
+  OwlAssistant: {
+    position: 'fixed',
+    top: '45px',
+    right: '0',
+    'z-index': '999999'
+  },
   filters: {
     minWidth: '350px',
     maxWidth: '420px',

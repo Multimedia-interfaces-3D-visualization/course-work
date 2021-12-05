@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { selectors as searchSelectors, actions } from '../../../store/search';
+import { OwlAssistant } from '../../Assistant/OwlAssistant';
 
 function SearchForm(props) {
   const classes = useStyles(styles);
@@ -93,68 +94,73 @@ function SearchForm(props) {
   ];
 
   return (
-    <div className={classes.formContainer}>
-      <div className={classes.filters}>
-        <TextField
-          className={classes.name}
-          fullWidth
-          id="name"
-          name="name"
-          label="Назва"
-          placeholder="Вкажіть назву книги"
-          variant="outlined"
-          value={searchText}
-          onChange={(e) =>
-            dispatch(
-              actions.setSelected({
-                value: e.target.value,
-                field: 'searchText',
-              }),
-            )
-          }
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <MenuBookIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        {selectors.map((select) =>
-          select.list?.length ? (
-            <ManySelect className={classes.select} {...select} />
-          ) : null,
-        )}
-        <RangeSlider
-          min={1700}
-          max={2021}
-          value={yearRange}
-          setValue={getHandleChange('yearRange')}
-          label="Рік друку"
-        />
-        <Button
-          className={classes.submit}
-          color="primary"
-          variant="outlined"
-          onClick={() => dispatch(actions.executeSearch())}
-        >
-          Шукати
-        </Button>
-        <Button
-          className={classes.submit}
-          color="primary"
-          variant="outlined"
-          onClick={() => dispatch(actions.clear())}
-        >
-          Очистити
-        </Button>
+    <>
+      <div className={classes.OwlAssistant}>
+        <OwlAssistant />
       </div>
-      {searchResult?.length ? (
-        <BooksList rows={searchResult} hideLabel />
-      ) : (
-        <div className={classes.nothing}>Нічого не знайдено</div>
-      )}
-    </div>
+      <div className={classes.formContainer}>
+        <div className={classes.filters}>
+          <TextField
+            className={classes.name}
+            fullWidth
+            id="name"
+            name="name"
+            label="Назва"
+            placeholder="Вкажіть назву книги"
+            variant="outlined"
+            value={searchText}
+            onChange={(e) =>
+              dispatch(
+                actions.setSelected({
+                  value: e.target.value,
+                  field: 'searchText',
+                }),
+              )
+            }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <MenuBookIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {selectors.map((select) =>
+            select.list?.length ? (
+              <ManySelect className={classes.select} {...select} />
+            ) : null,
+          )}
+          <RangeSlider
+            min={1700}
+            max={2021}
+            value={yearRange}
+            setValue={getHandleChange('yearRange')}
+            label="Рік друку"
+          />
+          <Button
+            className={classes.submit}
+            color="primary"
+            variant="outlined"
+            onClick={() => dispatch(actions.executeSearch())}
+          >
+            Шукати
+          </Button>
+          <Button
+            className={classes.submit}
+            color="primary"
+            variant="outlined"
+            onClick={() => dispatch(actions.clear())}
+          >
+            Очистити
+          </Button>
+        </div>
+        {searchResult?.length ? (
+          <BooksList rows={searchResult} hideLabel />
+        ) : (
+          <div className={classes.nothing}>Нічого не знайдено</div>
+        )}
+      </div>
+    </>
   );
 }
 
