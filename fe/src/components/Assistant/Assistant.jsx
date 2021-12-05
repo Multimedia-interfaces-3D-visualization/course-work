@@ -4,6 +4,10 @@ import styles from './styles'
 import { useReactMediaRecorder } from "react-media-recorder";
 import axios from 'axios';
 import hark from './hark';
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { Suspense } from "react";
+import Test from "./test/Deer"
 
 const initialState = {
   recognizedText: "",
@@ -70,6 +74,15 @@ const Assistant = () => {
     <div className={classes.assistantContent}>
       <h2 className={classes.assistantTitle}>Мультимедійний асистент</h2>
       <div>
+        <Canvas style={{width: "800px", height: "500px"}}>
+          <OrbitControls />
+          <ambientLight intensity={0.6} />
+          <directionalLight intensity={0.5} />
+          <Suspense fallback={null}>
+            <Test />
+          </Suspense>
+        </Canvas>
+
         <p>{status}</p>
 
           <button onClick={() => {   startRecording();  }}>Start Recording</button>
