@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const { actions, reducer } = createSlice({
   name: 'notifications',
@@ -23,9 +23,9 @@ const { actions, reducer } = createSlice({
     }),
     clearNotifications: () => ({}),
   },
-})
+});
 
-export { actions, reducer }
+export { actions, reducer };
 
 export const {
   setNotitfication,
@@ -33,4 +33,4 @@ export const {
   setSuccessNotitfication,
   setErrorNotitfication,
   setInfoNotitfication,
-} = actions
+} = actions;

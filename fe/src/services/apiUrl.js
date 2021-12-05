@@ -1,4 +1,4 @@
-const base = `http://localhost:5000/api/v1`
+const base = `http://localhost:5000/api/v1`;
 
 const apiUrls = {
   login: `${base}/auth/login`,
@@ -8,6 +8,6 @@ const apiUrls = {
   users: `${base}/user/all`,
   libs: `${base}/library/all`,
   books: `${base}/book/all`,
-}
+};
 
-export default apiUrls
+export default apiUrls;

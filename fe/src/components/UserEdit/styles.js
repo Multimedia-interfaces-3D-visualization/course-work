@@ -71,6 +71,6 @@ const styles = {
       textDecoration: 'underline',
     },
   },
-}
+};
 
-export default styles
+export default styles;

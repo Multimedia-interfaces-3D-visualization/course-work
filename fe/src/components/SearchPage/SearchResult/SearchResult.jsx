@@ -1,14 +1,14 @@
-import styles from './styles'
-import useStyles from '../../../utils/hooks/useStyles'
-import FeedbackForm from './FeedbackForm/FeedbackForm'
-import { useSelector } from 'react-redux'
-import { getBreedName, getPhotos } from '../../../store/breed/selectors'
+import styles from './styles';
+import useStyles from '../../../utils/hooks/useStyles';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
+import { useSelector } from 'react-redux';
+import { getBreedName, getPhotos } from '../../../store/breed/selectors';
 
 function SearchResult(props) {
-  const classes = useStyles(styles)
+  const classes = useStyles(styles);
 
-  const breedName = useSelector(getBreedName)
-  const photos = useSelector(getPhotos)
+  const breedName = useSelector(getBreedName);
+  const photos = useSelector(getPhotos);
 
   return (
     breedName &&
@@ -32,7 +32,7 @@ function SearchResult(props) {
         </div>
       </div>
     )
-  )
+  );
 }
 
-export default SearchResult
+export default SearchResult;

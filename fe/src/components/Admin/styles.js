@@ -19,6 +19,6 @@ const styles = {
   calc: {
     marginRight: '15px',
   },
-}
+};
 
-export default styles
+export default styles;

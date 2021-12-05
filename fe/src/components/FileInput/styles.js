@@ -59,6 +59,6 @@ const styles = {
     fontSize: '12px',
     color: '#f44336',
   },
-}
+};
 
-export default styles
+export default styles;

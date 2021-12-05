@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination'
-import TableRow from '@material-ui/core/TableRow'
-import Button from '@material-ui/core/Button'
-import columns from './columns'
-import useStyles from '../../utils/hooks/useStyles'
-import tableStyles from './tableStyles'
-import { actions, selectors } from '../../store/users'
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import columns from './columns';
+import useStyles from '../../utils/hooks/useStyles';
+import tableStyles from './tableStyles';
+import { actions, selectors } from '../../store/users';
 
 const Users = () => {
-  const classes = useStyles(tableStyles)
-  const dispatch = useDispatch()
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
-  const rows = useSelector(selectors.getUsers) ?? []
-  console.log('rows', rows)
+  const classes = useStyles(tableStyles);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const rows = useSelector(selectors.getUsers) ?? [];
+  console.log('rows', rows);
 
-  useEffect(() => dispatch(actions.getUsers()), [])
+  useEffect(() => dispatch(actions.getUsers()), []);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <div>
@@ -75,14 +75,14 @@ const Users = () => {
                         key={row.id}
                       >
                         {columns.map((column) => {
-                          const value = row[column.id]
+                          const value = row[column.id];
                           return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format
                                 ? column.format(value, row)
                                 : value}
                             </TableCell>
-                          )
+                          );
                         })}
                         <TableCell key={`${row.id}-controls`} align="center">
                           <Button
@@ -103,7 +103,7 @@ const Users = () => {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    )
+                    );
                   })}
               </TableBody>
             </Table>
@@ -124,7 +124,7 @@ const Users = () => {
         </Paper>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Users
+export default Users;

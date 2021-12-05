@@ -6,6 +6,6 @@ const styles = {
     borderWidth: '1px',
     borderStyle: 'solid',
   },
-}
+};
 
-export default styles
+export default styles;

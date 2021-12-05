@@ -13,7 +13,7 @@ const styles = {
     textAlign: 'center',
     fontSize: '35px',
     textShadow: '1px 1px white',
-  }
+  },
 };
 
 export default styles;

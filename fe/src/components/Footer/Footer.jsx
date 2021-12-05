@@ -1,13 +1,13 @@
-import { Link as RouterLink } from 'react-router-dom'
-import Link from '@material-ui/core/Link'
-import InfoIcon from '@material-ui/icons/Info'
-import DescriptionIcon from '@material-ui/icons/Description'
-import DevicesIcon from '@material-ui/icons/Devices'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import InfoIcon from '@material-ui/icons/Info';
+import DescriptionIcon from '@material-ui/icons/Description';
+import DevicesIcon from '@material-ui/icons/Devices';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
 
 const Footer = () => {
-  const classes = useStyles(styles)
+  const classes = useStyles(styles);
 
   return (
     <footer className={classes.footer}>
@@ -28,7 +28,7 @@ const Footer = () => {
         API
       </Link>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

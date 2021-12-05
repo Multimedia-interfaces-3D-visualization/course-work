@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const { actions, reducer } = createSlice({
   name: 'loading',
@@ -7,8 +7,8 @@ const { actions, reducer } = createSlice({
     startLoading: () => true,
     stopLoading: () => false,
   },
-})
+});
 
-export { actions, reducer }
+export { actions, reducer };
 
-export const { startLoading, stopLoading } = actions
+export const { startLoading, stopLoading } = actions;

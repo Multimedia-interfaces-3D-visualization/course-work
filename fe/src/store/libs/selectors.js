@@ -1,7 +1,7 @@
-import { createSelector } from '@reduxjs/toolkit'
+import { createSelector } from '@reduxjs/toolkit';
 
-const getRoot = (state) => state?.libs
+const getRoot = (state) => state?.libs;
 
-export const getLibs = createSelector(getRoot, (root) => root?.libs || [])
+export const getLibs = createSelector(getRoot, (root) => root?.libs || []);
 export const getLibById = (id) =>
-  createSelector(getLibs, (libs) => libs.find((lib) => lib.id === id))
+  createSelector(getLibs, (libs) => libs.find((lib) => lib.id === id));

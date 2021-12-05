@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination'
-import TableRow from '@material-ui/core/TableRow'
-import Button from '@material-ui/core/Button'
-import columns from './columns'
-import useStyles from '../../../utils/hooks/useStyles'
-import tableStyles from './tableStyles'
-import { selectors as userSelectors } from '../../../store/user'
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import columns from './columns';
+import useStyles from '../../../utils/hooks/useStyles';
+import tableStyles from './tableStyles';
+import { selectors as userSelectors } from '../../../store/user';
 
 const BooksList = (params) => {
-  const classes = useStyles(tableStyles)
-  const dispatch = useDispatch()
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
-  const isAdmin = useSelector(userSelectors.getIsAdmin)
-  const rows = params?.rows || []
-  console.log('books rows', rows)
+  const classes = useStyles(tableStyles);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const isAdmin = useSelector(userSelectors.getIsAdmin);
+  const rows = params?.rows || [];
+  console.log('books rows', rows);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
     <div>
@@ -74,20 +74,20 @@ const BooksList = (params) => {
                         key={row.id}
                       >
                         {columns.map((column) => {
-                          const value = row[column.id]
+                          const value = row[column.id];
                           return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format
                                 ? column.format(value, row)
                                 : value}
                             </TableCell>
-                          )
+                          );
                         })}
                         <TableCell key={`${row.id}-controls`} align="center">
                           <Button
                             className={classes.acceptButton}
                             component={RouterLink}
-                            to={`/lib/${row.id}`}
+                            to={`/book/${row.id}`}
                             variant="outlined"
                           >
                             Переглянути
@@ -102,7 +102,7 @@ const BooksList = (params) => {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    )
+                    );
                   })}
               </TableBody>
             </Table>
@@ -123,7 +123,7 @@ const BooksList = (params) => {
         </Paper>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BooksList
+export default BooksList;

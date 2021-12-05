@@ -7,6 +7,6 @@ const styles = {
     flex: '200px 1 0',
     height: '56px',
   },
-}
+};
 
-export default styles
+export default styles;

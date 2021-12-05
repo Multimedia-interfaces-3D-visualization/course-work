@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import noop from '../../utils/noop'
+import { createSlice } from '@reduxjs/toolkit';
+import noop from '../../utils/noop';
 
 const initialState = {
   breed: {
@@ -7,7 +7,7 @@ const initialState = {
     photos: [],
   },
   requestErrors: null,
-}
+};
 
 const { actions, reducer } = createSlice({
   name: 'breed',
@@ -25,9 +25,9 @@ const { actions, reducer } = createSlice({
     }),
     resetBreedInfo: () => initialState,
   },
-})
+});
 
-export { actions, reducer }
+export { actions, reducer };
 
 export const {
   pictureSearch,
@@ -35,4 +35,4 @@ export const {
   setBreedName,
   setPhotos,
   resetBreedInfo,
-} = actions
+} = actions;

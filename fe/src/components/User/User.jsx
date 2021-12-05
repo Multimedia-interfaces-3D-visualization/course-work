@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
-import { selectors, actions } from '../../store/users'
-import { useDispatch, useSelector } from 'react-redux'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import { Link as RouterLink } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
+import { selectors, actions } from '../../store/users';
+import { useDispatch, useSelector } from 'react-redux';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { Link as RouterLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const displayedValuesLabels = {
   username: 'Пошта',
@@ -14,14 +14,14 @@ const displayedValuesLabels = {
   lastName: 'Прізвище',
   postcode: 'Поштовий код',
   postalAddress: 'Адреса доставки',
-}
+};
 const displayedFields = [
   'username',
   'firstName',
   'lastName',
   'postcode',
   'postalAddress',
-]
+];
 
 const Field = (value, label, classes) => {
   return value ? (
@@ -29,16 +29,16 @@ const Field = (value, label, classes) => {
       <div className={classes.fieldLabel}>{label}</div>
       <div className={classes.fieldValue}>{value}</div>
     </div>
-  ) : null
-}
+  ) : null;
+};
 
 const User = (props) => {
-  const classes = useStyles(styles)
-  const params = useParams()
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const params = useParams();
+  const dispatch = useDispatch();
 
-  useEffect(() => dispatch(actions.getUsers()), [])
-  const user = useSelector(selectors.getUserById(params.id))
+  useEffect(() => dispatch(actions.getUsers()), []);
+  const user = useSelector(selectors.getUserById(params.id));
 
   return (
     <div className={classes.content}>
@@ -71,7 +71,7 @@ const User = (props) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default User
+export default User;

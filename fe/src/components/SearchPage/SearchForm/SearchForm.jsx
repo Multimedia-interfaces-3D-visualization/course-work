@@ -1,22 +1,22 @@
-import styles from './styles'
-import useStyles from '../../../utils/hooks/useStyles'
-import { useCallback } from 'react'
-import PictureForm from './PictureForm/PictureForm'
-import TextForm from './TextForm/TextForm'
-import { useDispatch } from 'react-redux'
-import { resetBreedInfo } from '../../../store/breed/slice'
+import styles from './styles';
+import useStyles from '../../../utils/hooks/useStyles';
+import { useCallback } from 'react';
+import PictureForm from './PictureForm/PictureForm';
+import TextForm from './TextForm/TextForm';
+import { useDispatch } from 'react-redux';
+import { resetBreedInfo } from '../../../store/breed/slice';
 
 function SearchForm(props) {
-  const classes = useStyles(styles)
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const dispatch = useDispatch();
 
   const setFormState = useCallback(
     (isTextSearch) => {
-      props.setIsTextSearch(isTextSearch)
-      dispatch(resetBreedInfo())
+      props.setIsTextSearch(isTextSearch);
+      dispatch(resetBreedInfo());
     },
     [dispatch, props],
-  )
+  );
 
   return (
     <div className={classes.formContainer}>
@@ -41,7 +41,7 @@ function SearchForm(props) {
 
       {props.isTextSearch ? <TextForm /> : <PictureForm />}
     </div>
-  )
+  );
 }
 
-export default SearchForm
+export default SearchForm;

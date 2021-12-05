@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux'
 // import Paper from '@material-ui/core/Paper'
 // import Table from '@material-ui/core/Table'
@@ -151,5 +151,5 @@ import React, { useState, useEffect } from 'react'
 //     </div>
 //   )
 // }
-const Admin = () => null
-export default Admin
+const Admin = () => null;
+export default Admin;

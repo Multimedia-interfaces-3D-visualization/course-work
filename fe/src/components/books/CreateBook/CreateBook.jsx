@@ -1,37 +1,37 @@
-import { useFormik } from 'formik'
-import { Link as RouterLink, Redirect } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import TextareaAutosize from '@material-ui/core/TextareaAutosize'
-import TextField from '@material-ui/core/TextField'
-import MenuBookIcon from '@material-ui/icons/MenuBook'
-import BookIcon from '@material-ui/icons/Book'
-import GroupIcon from '@material-ui/icons/Group'
-import DateRangeIcon from '@material-ui/icons/DateRange'
-import LocationCityIcon from '@material-ui/icons/LocationCity'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import { useFormik } from 'formik';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import BookIcon from '@material-ui/icons/Book';
+import GroupIcon from '@material-ui/icons/Group';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
-import StoreIcon from '@material-ui/icons/Store'
-import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl'
-import StyleIcon from '@material-ui/icons/Style'
-import TranslateIcon from '@material-ui/icons/Translate'
-import ArtTrackIcon from '@material-ui/icons/ArtTrack'
-import AspectRatioIcon from '@material-ui/icons/AspectRatio'
+import StoreIcon from '@material-ui/icons/Store';
+import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
+import StyleIcon from '@material-ui/icons/Style';
+import TranslateIcon from '@material-ui/icons/Translate';
+import ArtTrackIcon from '@material-ui/icons/ArtTrack';
+import AspectRatioIcon from '@material-ui/icons/AspectRatio';
 
-import MuiAlert from '@material-ui/lab/Alert'
-import useStyles from '../../../utils/hooks/useStyles'
-import styles from './styles'
-import validationSchema from './validationSchema'
-import { selectors, actions } from '../../../store/user'
+import MuiAlert from '@material-ui/lab/Alert';
+import useStyles from '../../../utils/hooks/useStyles';
+import styles from './styles';
+import validationSchema from './validationSchema';
+import { selectors, actions } from '../../../store/user';
 
 const CreateBook = () => {
-  const classes = useStyles(styles)
-  const [isClosed, close] = useState(false)
-  const errors = useSelector(selectors.getRegisterErrors)
-  const isAdmin = useSelector(selectors.getIsAdmin)
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const [isClosed, close] = useState(false);
+  const errors = useSelector(selectors.getRegisterErrors);
+  const isAdmin = useSelector(selectors.getIsAdmin);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -50,16 +50,16 @@ const CreateBook = () => {
     },
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
-      console.log('values', values)
+      console.log('values', values);
       dispatch(
         actions.register({
           ...values,
           username: values.email,
           surname: values.lastName,
         }),
-      )
+      );
     },
-  })
+  });
 
   return !isAdmin ? (
     <Redirect to="/search-page" />
@@ -380,7 +380,7 @@ const CreateBook = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateBook
+export default CreateBook;

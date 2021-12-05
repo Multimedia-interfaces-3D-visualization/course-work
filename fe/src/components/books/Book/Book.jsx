@@ -2,28 +2,36 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import useStyles from '../../../utils/hooks/useStyles';
 import styles from './styles';
-import { selectors, actions } from '../../../store/libs';
+import { selectors, actions } from '../../../store/books';
 import { useDispatch, useSelector } from 'react-redux';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import BookIcon from '@material-ui/icons/Book';
 import { Link as RouterLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+
 import { selectors as userSelectors } from '../../../store/user';
 
 const displayedValuesLabels = {
   name: 'Назва',
-  address: 'Адреса',
-  schedule: `Розклад`,
-  telephone: 'Телефон',
-  email: 'Пошта',
-  description: 'Опис',
+  ISBN: 'ISBN',
+  authors: 'Автори',
+  yearPublished: 'Рік друку',
+  placePublished: 'Місце друку',
+  issuer: 'Видавець',
+  countPages: 'Кількість сторінок',
+  keywords: 'Ключові слова',
+  languageISO: 'Мова книги',
+  type: 'Тип',
+  abstract: 'Опис',
 };
 const displayedFields = [
-  'name',
-  'address',
-  'schedule',
-  'telephone',
-  'email',
-  'description',
+  'ISBN',
+  'yearPublished',
+  'placePublished',
+  'issuer',
+  'countPages',
+  'languageISO',
+  'type',
 ];
 
 const Field = (value, label, classes) => {
@@ -34,20 +42,32 @@ const Field = (value, label, classes) => {
     </div>
   ) : null;
 };
+const transformList = (authors = []) =>
+  authors.length > 1
+    ? authors.reduce((res, auth, ind) => `${res}${ind ? ',' : ''} ${auth}`, '')
+    : authors[0];
 
-const Library = (props) => {
+const Book = (props) => {
   const classes = useStyles(styles);
   const params = useParams();
   const dispatch = useDispatch();
   const isAdmin = useSelector(userSelectors.getIsAdmin);
 
-  useEffect(() => dispatch(actions.getLibs()), []);
-  const lib = useSelector(selectors.getLibById(params.id));
+  useEffect(() => dispatch(actions.getBooks()), []);
+  const book = useSelector(selectors.getBookById(params.id));
 
   return (
     <div className={classes.content}>
       <div className={classes.leftside}>
-        <LocalLibraryIcon className={classes.accountPhoto} />
+        {book?.imageURL ? (
+          <img
+            src={book?.imageURL}
+            alt={book?.name}
+            className={classes.accountPhoto}
+          />
+        ) : (
+          <BookIcon className={classes.accountPhoto} />
+        )}
         {isAdmin && (
           <>
             <Button
@@ -69,10 +89,19 @@ const Library = (props) => {
         )}
       </div>
       <div className={classes.userData}>
-        {lib && (
+        {book && (
           <>
+            {Field(book.name, displayedValuesLabels.name, classes)}
+            {Field(
+              transformList(book.authors),
+              displayedValuesLabels['authors'],
+              classes,
+            )}
+            {book?.keywords?.length
+              ? book?.keywords.map((word) => <Chip label={word} />)
+              : null}
             {displayedFields.map((field) =>
-              Field(lib[field], displayedValuesLabels[field], classes),
+              Field(book[field], displayedValuesLabels[field], classes),
             )}
           </>
         )}
@@ -81,4 +110,4 @@ const Library = (props) => {
   );
 };
 
-export default Library;
+export default Book;

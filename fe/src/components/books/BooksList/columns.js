@@ -1,4 +1,4 @@
-import BookIcon from '@material-ui/icons/Book'
+import BookIcon from '@material-ui/icons/Book';
 
 const columns = [
   {
@@ -40,6 +40,6 @@ const columns = [
         />
       ),
   },
-]
+];
 
-export default columns
+export default columns;

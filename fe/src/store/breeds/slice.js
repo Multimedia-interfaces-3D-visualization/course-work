@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
-import noop from '../../utils/noop'
+import { createSlice } from '@reduxjs/toolkit';
+import noop from '../../utils/noop';
 
 const initialState = {
   breeds: null,
-}
+};
 
 const { actions, reducer } = createSlice({
   name: 'breeds',
@@ -12,6 +12,6 @@ const { actions, reducer } = createSlice({
     getBreeds: noop,
     setBreeds: (state, { payload }) => ({ ...initialState, breeds: payload }),
   },
-})
+});
 
-export { actions, reducer }
+export { actions, reducer };

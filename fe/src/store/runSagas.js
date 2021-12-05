@@ -1,11 +1,11 @@
-import { all } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects';
 
 const runSagas = (middleware, sagas = []) => {
   function* rootSaga() {
-    yield all(sagas)
+    yield all(sagas);
   }
 
-  middleware.run(rootSaga)
-}
+  middleware.run(rootSaga);
+};
 
-export default runSagas
+export default runSagas;

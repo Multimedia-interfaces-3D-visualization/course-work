@@ -1,6 +1,6 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const validationSchema = yup.object({
   name: yup
@@ -26,6 +26,6 @@ const validationSchema = yup.object({
   description: yup
     .string(`Введіть опис бібліотеки`)
     .min(5, `Опис має складатись мінімум з 15 символів`),
-})
+});
 
-export default validationSchema
+export default validationSchema;

@@ -1,19 +1,19 @@
-import formStyles from './styles'
-import useStyles from '../../utils/hooks/useStyles'
-import ImageSearch from '@material-ui/icons/ImageSearch'
-import { useCallback, useState } from 'react'
+import formStyles from './styles';
+import useStyles from '../../utils/hooks/useStyles';
+import ImageSearch from '@material-ui/icons/ImageSearch';
+import { useCallback, useState } from 'react';
 
 function FileInput(props) {
-  const classes = useStyles(formStyles)
-  const [value, setValue] = useState('')
+  const classes = useStyles(formStyles);
+  const [value, setValue] = useState('');
 
   const onChange = useCallback(
     (event) => {
-      setValue(event.target.value)
-      props.onChange(event)
+      setValue(event.target.value);
+      props.onChange(event);
     },
     [props],
-  )
+  );
 
   return (
     <div className={classes.wrapper}>
@@ -44,7 +44,7 @@ function FileInput(props) {
       </label>
       {props.error && <div className={classes.error}> {props.helperText} </div>}
     </div>
-  )
+  );
 }
 
-export default FileInput
+export default FileInput;

@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 const validationSchema = yup.object({
   email: yup
@@ -9,6 +9,6 @@ const validationSchema = yup.object({
     .string('Введіть пароль')
     .min(8, 'Пароль має містити як мінімум 8 символів')
     .required(`Необхідно обов'язково ввести пароль`),
-})
+});
 
-export default validationSchema
+export default validationSchema;

@@ -1,35 +1,35 @@
-import { useFormik } from 'formik'
-import { Link as RouterLink, Redirect } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import HomeIcon from '@material-ui/icons/Home'
-import ContactMailIcon from '@material-ui/icons/ContactMail'
-import ContactsIcon from '@material-ui/icons/Contacts'
-import MuiAlert from '@material-ui/lab/Alert'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
-import validationSchema from './validationSchema'
-import { selectors, actions } from '../../store/user'
+import { useFormik } from 'formik';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import HomeIcon from '@material-ui/icons/Home';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import MuiAlert from '@material-ui/lab/Alert';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
+import validationSchema from './validationSchema';
+import { selectors, actions } from '../../store/user';
 
 import {
   selectors as usersSelectors,
   actions as usersActions,
-} from '../../store/users'
+} from '../../store/users';
 
 const UserEdit = () => {
-  const classes = useStyles(styles)
-  const [isClosed, close] = useState(false)
-  const errors = useSelector(selectors.getRegisterErrors)
-  const isAdmin = useSelector(selectors.getIsAdmin)
-  const dispatch = useDispatch()
-  const params = useParams()
-  useEffect(() => dispatch(usersActions.getUsers()), [])
-  const user = useSelector(usersSelectors.getUserById(params.id))
+  const classes = useStyles(styles);
+  const [isClosed, close] = useState(false);
+  const errors = useSelector(selectors.getRegisterErrors);
+  const isAdmin = useSelector(selectors.getIsAdmin);
+  const dispatch = useDispatch();
+  const params = useParams();
+  useEffect(() => dispatch(usersActions.getUsers()), []);
+  const user = useSelector(usersSelectors.getUserById(params.id));
 
   const formik = useFormik({
     initialValues: {
@@ -46,9 +46,9 @@ const UserEdit = () => {
           username: values.email,
           surname: values.lastName,
         }),
-      )
+      );
     },
-  })
+  });
 
   return !isAdmin ? (
     <Redirect to="/search-page" />
@@ -187,7 +187,7 @@ const UserEdit = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default UserEdit
+export default UserEdit;

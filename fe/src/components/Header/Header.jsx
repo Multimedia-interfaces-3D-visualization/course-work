@@ -1,41 +1,41 @@
-import React from 'react'
-import { Link as RouterLink, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { isLoggedIn, getIsAdmin } from '../../store/user/selectors'
-import { logout } from '../../store/user/slice'
-import PropTypes from 'prop-types'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
+import React from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { isLoggedIn, getIsAdmin } from '../../store/user/selectors';
+import { logout } from '../../store/user/slice';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
 
 function ElevationScroll(props) {
-  const { children } = props
+  const { children } = props;
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: window,
-  })
+  });
 
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
-  })
+  });
 }
 
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
-}
+};
 
 export function Header() {
-  const classes = useStyles(styles)
-  const history = useHistory()
-  const loggedIn = useSelector(isLoggedIn)
-  const isAdmin = useSelector(getIsAdmin)
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const history = useHistory();
+  const loggedIn = useSelector(isLoggedIn);
+  const isAdmin = useSelector(getIsAdmin);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -66,6 +66,9 @@ export function Header() {
             </Button>
             <Button className={classes.link} component={RouterLink} to="/libs">
               Бібліотеки
+            </Button>
+            <Button className={classes.link} component={RouterLink} to="/books">
+              Книги
             </Button>
             {isAdmin && (
               <>
@@ -117,7 +120,7 @@ export function Header() {
       </ElevationScroll>
       <Toolbar />
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

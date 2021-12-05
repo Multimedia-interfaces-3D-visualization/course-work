@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -19,6 +19,6 @@ const validationSchema = yup.object({
   postcode: yup
     .string('Введіть ваш поштовий код')
     .min(5, 'Поштовий код має містити як мінімум 5 символів'),
-})
+});
 
-export default validationSchema
+export default validationSchema;

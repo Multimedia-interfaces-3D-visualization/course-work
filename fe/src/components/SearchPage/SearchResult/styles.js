@@ -30,6 +30,6 @@ const styles = {
     maxWidth: 'calc(33% - 40px)',
     margin: '20px',
   },
-}
+};
 
-export default styles
+export default styles;

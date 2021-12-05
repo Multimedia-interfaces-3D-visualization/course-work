@@ -1,16 +1,16 @@
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import Button from '@material-ui/core/Button'
-import formStyles from '../../formStyles'
-import styles from './styles'
-import useStyles from '../../../../utils/hooks/useStyles'
-import { useFormik } from 'formik'
-import validationSchema from './validationSchema'
-import Search from '@material-ui/icons/Search'
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import formStyles from '../../formStyles';
+import styles from './styles';
+import useStyles from '../../../../utils/hooks/useStyles';
+import { useFormik } from 'formik';
+import validationSchema from './validationSchema';
+import Search from '@material-ui/icons/Search';
 
 function FeedbackForm() {
-  const formClasses = useStyles(formStyles)
-  const classes = useStyles(styles)
+  const formClasses = useStyles(formStyles);
+  const classes = useStyles(styles);
 
   const formik = useFormik({
     initialValues: {
@@ -20,7 +20,7 @@ function FeedbackForm() {
     onSubmit: (values) => {
       // TODO: implement submit logic
     },
-  })
+  });
 
   return (
     <form
@@ -56,7 +56,7 @@ function FeedbackForm() {
         Відправити
       </Button>
     </form>
-  )
+  );
 }
 
-export default FeedbackForm
+export default FeedbackForm;

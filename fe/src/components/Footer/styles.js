@@ -19,6 +19,6 @@ const styles = {
   linkIcon: {
     marginRight: '5px',
   },
-}
+};
 
-export default styles
+export default styles;

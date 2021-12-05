@@ -15,6 +15,6 @@ const styles = {
     lineHeight: '1.2',
     textAlign: 'center',
   },
-}
+};
 
-export default styles
+export default styles;

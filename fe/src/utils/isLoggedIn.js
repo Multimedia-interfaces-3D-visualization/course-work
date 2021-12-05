@@ -1,3 +1,3 @@
-const isLoggedIn = () => !!localStorage.getItem('userAuthToken')
+const isLoggedIn = () => !!localStorage.getItem('userAuthToken');
 
-export default isLoggedIn
+export default isLoggedIn;

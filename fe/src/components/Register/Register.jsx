@@ -1,47 +1,47 @@
-import { useFormik } from 'formik'
-import { Link as RouterLink, Redirect } from 'react-router-dom'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import EmailIcon from '@material-ui/icons/Email'
-import IconButton from '@material-ui/core/IconButton'
-import EnhancedEncryptionIcon from '@material-ui/icons/EnhancedEncryption'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import ContactsIcon from '@material-ui/icons/Contacts'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import MuiAlert from '@material-ui/lab/Alert'
-import LockIcon from '@material-ui/icons/Lock'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
-import validationSchema from './validationSchema'
-import { selectors, actions } from '../../store/user'
+import { useFormik } from 'formik';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import EmailIcon from '@material-ui/icons/Email';
+import IconButton from '@material-ui/core/IconButton';
+import EnhancedEncryptionIcon from '@material-ui/icons/EnhancedEncryption';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import MuiAlert from '@material-ui/lab/Alert';
+import LockIcon from '@material-ui/icons/Lock';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
+import validationSchema from './validationSchema';
+import { selectors, actions } from '../../store/user';
 
 const Register = () => {
-  const classes = useStyles(styles)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfPassword, setShowConfPassword] = useState(false)
-  const [checked, setChecked] = useState(false)
-  const [isClosed, close] = useState(false)
-  const errors = useSelector(selectors.getRegisterErrors)
-  const loggedIn = useSelector(selectors.isLoggedIn)
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isClosed, close] = useState(false);
+  const errors = useSelector(selectors.getRegisterErrors);
+  const loggedIn = useSelector(selectors.isLoggedIn);
+  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   const handleClickShowConfPassword = () => {
-    setShowConfPassword(!showConfPassword)
-  }
+    setShowConfPassword(!showConfPassword);
+  };
 
   const handleMouseDownPassword = (event) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -58,9 +58,9 @@ const Register = () => {
           username: values.email,
           surname: values.lastName,
         }),
-      )
+      );
     },
-  })
+  });
 
   return loggedIn ? (
     <Redirect to="/search-page" />
@@ -262,7 +262,7 @@ const Register = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

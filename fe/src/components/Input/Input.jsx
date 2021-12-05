@@ -1,7 +1,7 @@
-import TextField from '@material-ui/core/TextField'
-import { useCallback } from 'react'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
+import TextField from '@material-ui/core/TextField';
+import { useCallback } from 'react';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
 
 const Input = ({
   label,
@@ -12,16 +12,16 @@ const Input = ({
   error,
   ...props
 }) => {
-  const classes = useStyles(styles)
+  const classes = useStyles(styles);
 
   const onChange = useCallback(
     (e) => {
       if (handleChange) {
-        handleChange(e?.target?.value)
+        handleChange(e?.target?.value);
       }
     },
     [handleChange],
-  )
+  );
 
   return (
     <>
@@ -45,7 +45,7 @@ const Input = ({
         }}
       />
     </>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

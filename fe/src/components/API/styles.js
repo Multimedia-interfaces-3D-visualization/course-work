@@ -7,6 +7,6 @@ const styles = {
     flexDirection: 'column',
     minHeight: 'calc(100% - 128px)',
   },
-}
+};
 
-export default styles
+export default styles;

@@ -53,6 +53,6 @@ const styles = {
       backgroundColor: 'rgb(250, 220, 256)',
     },
   },
-}
+};
 
-export default styles
+export default styles;

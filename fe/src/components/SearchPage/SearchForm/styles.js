@@ -26,6 +26,6 @@ const styles = {
   active: {
     background: 'rgba(220, 220, 220, 1)',
   },
-}
+};
 
-export default styles
+export default styles;

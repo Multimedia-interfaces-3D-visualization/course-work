@@ -85,4 +85,4 @@ export const database = {
       actual: 'Celestia',
     },
   ],
-}
+};

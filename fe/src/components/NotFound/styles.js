@@ -9,6 +9,6 @@ const styles = {
     fontSize: '40px',
     textAlign: 'center',
   },
-}
+};
 
-export default styles
+export default styles;

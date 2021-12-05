@@ -1,15 +1,15 @@
-import Button from '@material-ui/core/Button'
-import formStyles from '../../formStyles'
-import useStyles from '../../../../utils/hooks/useStyles'
-import { useFormik } from 'formik'
-import validationSchema from './validationSchema'
-import FileInput from '../../../FileInput/FileInput'
-import { useDispatch } from 'react-redux'
-import { pictureSearch } from '../../../../store/breed/slice'
+import Button from '@material-ui/core/Button';
+import formStyles from '../../formStyles';
+import useStyles from '../../../../utils/hooks/useStyles';
+import { useFormik } from 'formik';
+import validationSchema from './validationSchema';
+import FileInput from '../../../FileInput/FileInput';
+import { useDispatch } from 'react-redux';
+import { pictureSearch } from '../../../../store/breed/slice';
 
 function PictureForm() {
-  const classes = useStyles(formStyles)
-  const dispatch = useDispatch()
+  const classes = useStyles(formStyles);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -17,9 +17,9 @@ function PictureForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(pictureSearch(values))
+      dispatch(pictureSearch(values));
     },
-  })
+  });
 
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -31,7 +31,7 @@ function PictureForm() {
         placeholder="Вставте картинку собаки"
         value={formik.values.email}
         onChange={(e) => {
-          formik.handleChange(e)
+          formik.handleChange(e);
         }}
         error={formik.touched.dogpic && !!formik.errors.dogpic} // add custom errors from store
         helperText={formik.touched.dogpic && formik.errors.dogpic} // add custom errors from store
@@ -45,7 +45,7 @@ function PictureForm() {
         Пошук
       </Button>
     </form>
-  )
+  );
 }
 
-export default PictureForm
+export default PictureForm;

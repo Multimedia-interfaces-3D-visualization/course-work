@@ -48,6 +48,6 @@ const styles = {
     textAlign: 'center',
     height: '100%',
   },
-}
+};
 
-export default styles
+export default styles;

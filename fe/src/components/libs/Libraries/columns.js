@@ -17,6 +17,6 @@ const columns = [
     minWidth: 170,
     align: 'center',
   },
-]
+];
 
-export default columns
+export default columns;

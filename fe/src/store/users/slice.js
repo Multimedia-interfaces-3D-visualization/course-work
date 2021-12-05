@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
-import noop from '../../utils/noop'
+import { createSlice } from '@reduxjs/toolkit';
+import noop from '../../utils/noop';
 
 const initialState = {
   users: null,
-}
+};
 
 const { actions, reducer } = createSlice({
   name: 'users',
@@ -13,8 +13,8 @@ const { actions, reducer } = createSlice({
     setUsers: (state, { payload }) => ({ ...initialState, users: payload }),
     replyReport: noop,
   },
-})
+});
 
-export { actions, reducer }
+export { actions, reducer };
 
-export const { getUsers, setUsers } = actions
+export const { getUsers, setUsers } = actions;

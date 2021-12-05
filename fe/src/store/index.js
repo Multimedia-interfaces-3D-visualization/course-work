@@ -1,14 +1,14 @@
-import { combineReducers } from '@reduxjs/toolkit'
+import { combineReducers } from '@reduxjs/toolkit';
 
-import createStore from './createStore'
-import * as loading from './loading'
-import * as notifications from './notifications'
-import * as user from './user'
-import * as users from './users'
-import * as libs from './libs'
-import * as books from './books'
-import * as breed from './breed'
-import * as breeds from './breeds'
+import createStore from './createStore';
+import * as loading from './loading';
+import * as notifications from './notifications';
+import * as user from './user';
+import * as users from './users';
+import * as libs from './libs';
+import * as books from './books';
+import * as breed from './breed';
+import * as breeds from './breeds';
 
 export default createStore({
   reducer: combineReducers({
@@ -30,4 +30,4 @@ export default createStore({
     ...books.sagas,
   ],
   middleware: [],
-})
+});

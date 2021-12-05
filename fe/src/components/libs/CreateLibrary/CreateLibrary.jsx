@@ -1,31 +1,31 @@
-import { useFormik } from 'formik'
-import { Link as RouterLink, Redirect } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import TextareaAutosize from '@material-ui/core/TextareaAutosize'
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import DateRangeIcon from '@material-ui/icons/DateRange'
-import PermPhoneMsgIcon from '@material-ui/icons/PermPhoneMsg'
-import BusinessIcon from '@material-ui/icons/Business'
-import EmailIcon from '@material-ui/icons/Email'
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary'
-import ContactsIcon from '@material-ui/icons/Contacts'
-import MuiAlert from '@material-ui/lab/Alert'
-import useStyles from '../../../utils/hooks/useStyles'
-import styles from './styles'
-import validationSchema from './validationSchema'
-import { selectors, actions } from '../../../store/user'
+import { useFormik } from 'formik';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import PermPhoneMsgIcon from '@material-ui/icons/PermPhoneMsg';
+import BusinessIcon from '@material-ui/icons/Business';
+import EmailIcon from '@material-ui/icons/Email';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import MuiAlert from '@material-ui/lab/Alert';
+import useStyles from '../../../utils/hooks/useStyles';
+import styles from './styles';
+import validationSchema from './validationSchema';
+import { selectors, actions } from '../../../store/user';
 
 const CreateLibrary = () => {
-  const classes = useStyles(styles)
-  const [isClosed, close] = useState(false)
-  const errors = useSelector(selectors.getRegisterErrors)
-  const isAdmin = useSelector(selectors.getIsAdmin)
-  const dispatch = useDispatch()
-  const params = useParams()
+  const classes = useStyles(styles);
+  const [isClosed, close] = useState(false);
+  const errors = useSelector(selectors.getRegisterErrors);
+  const isAdmin = useSelector(selectors.getIsAdmin);
+  const dispatch = useDispatch();
+  const params = useParams();
 
   const formik = useFormik({
     initialValues: {
@@ -38,16 +38,16 @@ const CreateLibrary = () => {
     },
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
-      console.log('values', values)
+      console.log('values', values);
       dispatch(
         actions.register({
           ...values,
           username: values.email,
           surname: values.lastName,
         }),
-      )
+      );
     },
-  })
+  });
 
   return !isAdmin ? (
     <Redirect to="/search-page" />
@@ -220,7 +220,7 @@ const CreateLibrary = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateLibrary
+export default CreateLibrary;

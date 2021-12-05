@@ -1,39 +1,39 @@
-import { useFormik } from 'formik'
-import { Link as RouterLink, Redirect } from 'react-router-dom'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import EmailIcon from '@material-ui/icons/Email'
-import IconButton from '@material-ui/core/IconButton'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import MuiAlert from '@material-ui/lab/Alert'
-import LockIcon from '@material-ui/icons/Lock'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
-import validationSchema from './validationSchema'
-import { selectors, actions } from '../../store/user'
+import { useFormik } from 'formik';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import EmailIcon from '@material-ui/icons/Email';
+import IconButton from '@material-ui/core/IconButton';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import MuiAlert from '@material-ui/lab/Alert';
+import LockIcon from '@material-ui/icons/Lock';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
+import validationSchema from './validationSchema';
+import { selectors, actions } from '../../store/user';
 
 const Login = () => {
-  const classes = useStyles(styles)
-  const [showPassword, setShowPassword] = useState(false)
-  const [checked, setChecked] = useState(false)
-  const [isClosed, close] = useState(false)
-  const errors = useSelector(selectors.getLoginErrors)
-  const dispatch = useDispatch()
-  const loggedIn = useSelector(selectors.isLoggedIn)
+  const classes = useStyles(styles);
+  const [showPassword, setShowPassword] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isClosed, close] = useState(false);
+  const errors = useSelector(selectors.getLoginErrors);
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(selectors.isLoggedIn);
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   const handleMouseDownPassword = (event) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -47,9 +47,9 @@ const Login = () => {
           ...values,
           username: values.email,
         }),
-      )
+      );
     },
-  })
+  });
 
   return loggedIn ? (
     <Redirect to="/search-page" />
@@ -162,7 +162,7 @@ const Login = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

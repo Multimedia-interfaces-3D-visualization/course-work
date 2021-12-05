@@ -1,17 +1,17 @@
-import { useRef } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { isLoggedIn } from '../../store/user/selectors'
-import Button from '@material-ui/core/Button'
-import '../../App.css'
-import styles from './styles'
-import useStyles from '../../utils/hooks/useStyles'
-import Shevron from '../Shevron/Shevron'
+import { useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { isLoggedIn } from '../../store/user/selectors';
+import Button from '@material-ui/core/Button';
+import '../../App.css';
+import styles from './styles';
+import useStyles from '../../utils/hooks/useStyles';
+import Shevron from '../Shevron/Shevron';
 
 function Main() {
-  const classes = useStyles(styles)
-  const contentRef = useRef(null)
-  const loggedIn = useSelector(isLoggedIn)
+  const classes = useStyles(styles);
+  const contentRef = useRef(null);
+  const loggedIn = useSelector(isLoggedIn);
 
   return (
     <div className="App">
@@ -89,7 +89,7 @@ function Main() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;

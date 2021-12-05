@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 const validationSchema = yup.object({
   name: yup
@@ -40,6 +40,6 @@ const validationSchema = yup.object({
   abstract: yup
     .string(`Введіть опис книги`)
     .min(5, `Опис має складатись мінімум з 5 символів`),
-})
+});
 
-export default validationSchema
+export default validationSchema;

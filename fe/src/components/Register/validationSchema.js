@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -25,6 +25,6 @@ const validationSchema = yup.object({
     .string('Введіть повторно ваш пароль')
     .oneOf([yup.ref('password'), null], 'Паролі не співпадають')
     .required(`Необхідно обов'язково повторити пароль`),
-})
+});
 
-export default validationSchema
+export default validationSchema;

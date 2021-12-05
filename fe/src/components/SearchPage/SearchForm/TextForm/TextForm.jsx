@@ -1,17 +1,17 @@
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import Button from '@material-ui/core/Button'
-import styles from '../../formStyles'
-import useStyles from '../../../../utils/hooks/useStyles'
-import { useFormik } from 'formik'
-import validationSchema from './validationSchema'
-import Search from '@material-ui/icons/Search'
-import { useDispatch } from 'react-redux'
-import { textSearch } from '../../../../store/breed/slice'
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import styles from '../../formStyles';
+import useStyles from '../../../../utils/hooks/useStyles';
+import { useFormik } from 'formik';
+import validationSchema from './validationSchema';
+import Search from '@material-ui/icons/Search';
+import { useDispatch } from 'react-redux';
+import { textSearch } from '../../../../store/breed/slice';
 
 function TextForm() {
-  const classes = useStyles(styles)
-  const dispatch = useDispatch()
+  const classes = useStyles(styles);
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -19,9 +19,9 @@ function TextForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(textSearch(values))
+      dispatch(textSearch(values));
     },
-  })
+  });
 
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -54,7 +54,7 @@ function TextForm() {
         Пошук
       </Button>
     </form>
-  )
+  );
 }
 
-export default TextForm
+export default TextForm;

@@ -1,4 +1,4 @@
-import './Shevron.css'
+import './Shevron.css';
 
 const Shevron = ({ message }) => (
   <div className="container">
@@ -6,6 +6,6 @@ const Shevron = ({ message }) => (
     <div className="chevron"></div>
     <div className="chevron"></div>
   </div>
-)
+);
 
-export default Shevron
+export default Shevron;

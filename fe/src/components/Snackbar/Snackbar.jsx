@@ -1,33 +1,33 @@
-import { useState, useEffect } from 'react'
-import Snackbar from '@material-ui/core/Snackbar'
-import Alert from '@material-ui/lab/Alert'
-import useStyles from '../../utils/hooks/useStyles'
-import styles from './styles'
-import { useSelector, useDispatch } from 'react-redux'
-import { getNotifications } from '../../store/notifications/selectors'
-import { clearNotifications } from '../../store/notifications/slice'
+import { useState, useEffect } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import useStyles from '../../utils/hooks/useStyles';
+import styles from './styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { getNotifications } from '../../store/notifications/selectors';
+import { clearNotifications } from '../../store/notifications/slice';
 
 const ImplicitSnackbar = () => {
-  const classes = useStyles(styles)
-  const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
-  const { message, type } = useSelector(getNotifications) || {}
+  const classes = useStyles(styles);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const { message, type } = useSelector(getNotifications) || {};
 
   useEffect(() => {
     if (message && type) {
-      setOpen(true)
+      setOpen(true);
     } else {
-      setOpen(false)
+      setOpen(false);
     }
-  }, [message, type])
+  }, [message, type]);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    dispatch(clearNotifications())
-    setOpen(false)
-  }
+    dispatch(clearNotifications());
+    setOpen(false);
+  };
   return (
     <Snackbar
       direction="up"
@@ -40,7 +40,7 @@ const ImplicitSnackbar = () => {
         {message}
       </Alert>
     </Snackbar>
-  )
-}
+  );
+};
 
-export default ImplicitSnackbar
+export default ImplicitSnackbar;

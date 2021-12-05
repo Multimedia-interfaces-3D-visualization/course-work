@@ -1,4 +1,4 @@
-import getBreeds from './getBreeds.saga'
+import getBreeds from './getBreeds.saga';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [getBreeds]
+export default [getBreeds];
