@@ -114,7 +114,7 @@ const Users = () => {
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
-            labelRowsPerPage="Кількість запитів на сторінку"
+            labelRowsPerPage="Кількість користувачів на сторінку"
             labelDisplayedRows={({ from, to, count }) =>
               `${from}-${to} з ${count !== -1 ? count : `більше ніж ${to}`}`
             }

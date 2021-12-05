@@ -13,17 +13,16 @@ import Button from '@material-ui/core/Button'
 import columns from './columns'
 import useStyles from '../../../utils/hooks/useStyles'
 import tableStyles from './tableStyles'
-import { actions, selectors } from '../../../store/libs'
+import { selectors as userSelectors } from '../../../store/user'
 
-const Libraries = () => {
+const BooksList = (params) => {
   const classes = useStyles(tableStyles)
   const dispatch = useDispatch()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const rows = useSelector(selectors.getLibs) ?? []
-  console.log('rows', rows)
-
-  useEffect(() => dispatch(actions.getLibs()), [])
+  const isAdmin = useSelector(userSelectors.getIsAdmin)
+  const rows = params?.rows || []
+  console.log('books rows', rows)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -37,7 +36,7 @@ const Libraries = () => {
   return (
     <div>
       <div style={{ margin: 'auto', fontSize: 40, width: 'fit-content' }}>
-        Бібліотеки
+        Знайдені книги
       </div>
       <div>
         <Paper className={classes.root}>
@@ -99,7 +98,7 @@ const Libraries = () => {
                             //onClick={}
                             variant="outlined"
                           >
-                            Видалити
+                            Замовити
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -114,7 +113,7 @@ const Libraries = () => {
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
-            labelRowsPerPage="Кількість бібліотек на сторінку"
+            labelRowsPerPage="Кількість книг на сторінку"
             labelDisplayedRows={({ from, to, count }) =>
               `${from}-${to} з ${count !== -1 ? count : `більше ніж ${to}`}`
             }
@@ -127,4 +126,4 @@ const Libraries = () => {
   )
 }
 
-export default Libraries
+export default BooksList

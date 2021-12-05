@@ -22,7 +22,9 @@ import Libraries from '../components/libs/Libraries/Libraries'
 import Library from '../components/libs/Library/Library'
 import CreateLibrary from '../components/libs/CreateLibrary/CreateLibrary'
 import CreateBook from '../components/books/CreateBook/CreateBook'
+import Books from '../components/books/Books/Books'
 import Assistant from '../components/Assistant/Assistant'
+
 
 const ImplicitExplicitRouter = ({ history }) => (
   <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
@@ -36,6 +38,9 @@ const ImplicitExplicitRouter = ({ history }) => (
       </Route>
       <Route path="/admin">
         <Admin />
+      </Route>
+      <Route path="/books">
+        <Books />
       </Route>
       <Route path="/libs">
         <Libraries />
