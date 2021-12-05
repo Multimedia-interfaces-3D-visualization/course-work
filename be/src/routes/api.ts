@@ -8,6 +8,7 @@ import ApiIssuerRouter from './api.issuer';
 import ApiCatalogueRouter from './api.catalogue';
 import ApiBookRouter from './api.book';
 import ApiAuthorRouter from './api.author';
+import ApiMlRouter from './api.ml';
 
 const router = Express.Router();
 
@@ -20,5 +21,6 @@ router.use("/issuer", ApiIssuerRouter);
 router.use("/catalogue", ApiCatalogueRouter);
 router.use("/book", ApiBookRouter);
 router.use("/author", ApiAuthorRouter);
+router.use("/ml", ApiMlRouter);
 
 export default router;
