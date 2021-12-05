@@ -53,6 +53,13 @@ export function Header() {
             <Button
               className={classes.link}
               component={RouterLink}
+              to="/assistant"
+            >
+              Мультимедійний асистент
+            </Button>
+            <Button
+              className={classes.link}
+              component={RouterLink}
               to="/search-page"
             >
               Пошук книг
