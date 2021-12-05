@@ -122,7 +122,10 @@ def speech_recognition_to_text_handler():
     with audio_bytes as source:
         # SR.adjust_for_ambient_noise(source)
         audio = SR.record(source)
-        text = SR.recognize_google(audio, language="uk-UA")
+        try:
+            text = SR.recognize_google(audio, language="uk-UA", show_all=False)
+        except Exception as e:
+            return jsonify({ "data": "" }), 200
 
     print(text)
     return jsonify({ "data": text }), 200
