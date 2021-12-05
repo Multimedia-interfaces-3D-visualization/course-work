@@ -4,10 +4,10 @@ import styles from './styles';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
 import hark from './hark';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { Suspense } from 'react';
-import Test from './test/Deer';
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { Suspense } from "react";
+import Owl from "./Owl"
 
 const initialState = {
   recognizedText: '',
@@ -80,6 +80,17 @@ const Assistant = () => {
             .catch((error) => {
               console.error(error);
             });
+            // .then(() => {
+            //   console.log('BBFBFBFBFBFB');
+            //   axios
+            //     .post('http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech', { text_data: "Привіт від голосового асистента!" })
+            //     .then((response) => {
+            //       console.log(response.data.data);
+            //     })
+            //     .catch((error) => {
+            //       console.error(error);
+            //     })
+            // });
         });
     }
   }, [mediaBlobUrl]);
@@ -88,12 +99,15 @@ const Assistant = () => {
     <div className={classes.assistantContent}>
       <h2 className={classes.assistantTitle}>Мультимедійний асистент</h2>
       <div>
-        <Canvas style={{ width: '800px', height: '500px' }}>
+        <Canvas style={{width: "800px", height: "500px"}} >
           <OrbitControls />
-          <ambientLight intensity={0.6} />
-          <directionalLight intensity={0.5} />
+          <ambientLight intensity={0.5} />
+          <directionalLight intensity={0.4} />
           <Suspense fallback={null}>
-            <Test />
+            <Owl position={[0, -1.5, 1.4]} rotation={[-0.01, -0.4, 0.0]} />
+            <Environment
+              preset={'lobby'}
+            />
           </Suspense>
         </Canvas>
 
@@ -115,8 +129,10 @@ const Assistant = () => {
           Stop Recording
         </button>
 
-        {/* <audio src={mediaBlobUrl} controls autoPlay={false} loop={false} /> */}
         <p>Розпізнано: {state.recognizedText}</p>
+
+        <audio id="audio-hidden" hidden={true}></audio>
+
       </div>
     </div>
   );
