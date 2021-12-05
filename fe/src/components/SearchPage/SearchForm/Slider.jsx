@@ -19,7 +19,7 @@ export default function RangeSlider({ min, max, label, value, setValue }) {
         min={min}
         max={max}
         defaultValue={[min, max]}
-        onChange={handleChange}
+        onChangeCommitted={handleChange}
         valueLabelDisplay="on"
         getAriaValueText={(value) => `${value} рік`}
       />

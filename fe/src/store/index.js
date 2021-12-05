@@ -8,7 +8,7 @@ import * as users from './users';
 import * as libs from './libs';
 import * as books from './books';
 import * as breed from './breed';
-import * as breeds from './breeds';
+import * as search from './search';
 
 export default createStore({
   reducer: combineReducers({
@@ -16,7 +16,7 @@ export default createStore({
     notifications: notifications.reducer,
     user: user.reducer,
     users: users.reducer,
-    breeds: breeds.reducer,
+    search: search.reducer,
     breed: breed.reducer,
     libs: libs.reducer,
     books: books.reducer,
@@ -25,7 +25,7 @@ export default createStore({
     ...user.sagas,
     ...users.sagas,
     ...libs.sagas,
-    ...breeds.sagas,
+    ...search.sagas,
     ...breed.sagas,
     ...books.sagas,
   ],

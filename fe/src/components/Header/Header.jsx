@@ -75,13 +75,6 @@ export function Header() {
                 <Button
                   className={classes.link}
                   component={RouterLink}
-                  to="/admin"
-                >
-                  Адмін
-                </Button>
-                <Button
-                  className={classes.link}
-                  component={RouterLink}
                   to="/users"
                 >
                   Користувачі

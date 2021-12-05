@@ -37,7 +37,8 @@ const styles = {
     width: '100%',
   },
   submit: {
-    width: '200px',
+    width: '100%',
+    marginTop: '5px',
     height: '50px',
     background: 'white',
   },

@@ -21,6 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { selectors as searchSelectors, actions } from '../../../store/search';
 
 function SearchForm(props) {
   const classes = useStyles(styles);
@@ -35,74 +36,61 @@ function SearchForm(props) {
   const bookTypes = useSelector(bookSelectors.getUniqueTypes);
   const keywords = useSelector(bookSelectors.getUniqueKeywords);
   const bookLanguages = useSelector(bookSelectors.getUniqueLanguage);
-  const allBooks = useSelector(bookSelectors.getBooks);
 
-  const [books, setBooks] = useState(allBooks);
-  const [selectedLibs, setSelectedLibs] = useState([]);
-  const [selectedAuthors, setSelectedAuthors] = useState([]);
-  const [selectedIssuers, setSelectedIssuers] = useState([]);
-  const [selectedBookTypes, setSelectedBookTypes] = useState([]);
-  const [selectedKeywords, setSelectedKeywords] = useState([]);
-  const [selectedBookLanguages, setSelectedBookLanguages] = useState([]);
-  const [yearRange, setYearRange] = useState([1700, 2021]);
-  const [searchText, setSearchText] = useState('');
+  const {
+    selectedLibs,
+    selectedAuthors,
+    selectedIssuers,
+    selectedBookTypes,
+    selectedKeywords,
+    selectedBookLanguages,
+    yearRange,
+    searchText,
+    searchResult,
+  } = useSelector(searchSelectors.getRoot);
+
+  const getHandleChange = (field) => {
+    return (value) => dispatch(actions.setSelected({ value, field }));
+  };
 
   const selectors = [
     {
       list: libNames,
       label: 'Бібліотеки',
       selected: selectedLibs,
-      setSelected: setSelectedLibs,
+      setSelected: getHandleChange('selectedLibs'),
     },
     {
       list: authors,
       label: 'Автори',
       selected: selectedAuthors,
-      setSelected: setSelectedAuthors,
+      setSelected: getHandleChange('selectedAuthors'),
     },
     {
       list: issuers,
       label: 'Видавці',
       selected: selectedIssuers,
-      setSelected: setSelectedIssuers,
+      setSelected: getHandleChange('selectedIssuers'),
     },
     {
       list: bookTypes,
       label: 'Тип',
       selected: selectedBookTypes,
-      setSelected: setSelectedBookTypes,
+      setSelected: getHandleChange('selectedBookTypes'),
     },
     {
       list: keywords,
       label: 'Ключові слова',
       selected: selectedKeywords,
-      setSelected: setSelectedKeywords,
+      setSelected: getHandleChange('selectedKeywords'),
     },
     {
       list: bookLanguages,
       label: 'Мови книг',
       selected: selectedBookLanguages,
-      setSelected: setSelectedBookLanguages,
+      setSelected: getHandleChange('selectedBookLanguages'),
     },
   ];
-
-  const filterBooks = () => {
-    const found = (arr1, arr2) => arr1.some((r) => arr2.includes(r));
-    const fBooks = allBooks.filter(
-      (book) =>
-        (!searchText ||
-          book.name.toLowerCase().includes(searchText.toLowerCase())) &&
-        (!selectedAuthors.length || found(selectedAuthors, book.authors)) &&
-        (!selectedKeywords.length || found(selectedKeywords, book.keywords)) &&
-        (!selectedIssuers.length || selectedIssuers.includes(book.issuer)) &&
-        (!selectedBookTypes.length || selectedBookTypes.includes(book.type)) &&
-        (!selectedBookLanguages.length ||
-          selectedBookLanguages.includes(book.languageISO)) &&
-        book.yearPublished < yearRange[1] &&
-        book.yearPublished > yearRange[0],
-    );
-    setBooks(fBooks);
-  };
 
   return (
     <div className={classes.formContainer}>
@@ -116,7 +104,14 @@ function SearchForm(props) {
           placeholder="Вкажіть назву книги"
           variant="outlined"
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) =>
+            dispatch(
+              actions.setSelected({
+                value: e.target.value,
+                field: 'searchText',
+              }),
+            )
+          }
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -134,20 +129,28 @@ function SearchForm(props) {
           min={1700}
           max={2021}
           value={yearRange}
-          setValue={setYearRange}
+          setValue={getHandleChange('yearRange')}
           label="Рік друку"
         />
         <Button
           className={classes.submit}
           color="primary"
           variant="outlined"
-          onClick={filterBooks}
+          onClick={() => dispatch(actions.executeSearch())}
         >
           Шукати
         </Button>
+        <Button
+          className={classes.submit}
+          color="primary"
+          variant="outlined"
+          onClick={() => dispatch(actions.clear())}
+        >
+          Очистити
+        </Button>
       </div>
-      {books?.length ? (
-        <BooksList rows={books} hideLabel />
+      {searchResult?.length ? (
+        <BooksList rows={searchResult} hideLabel />
       ) : (
         <div className={classes.nothing}>Нічого не знайдено</div>
       )}
