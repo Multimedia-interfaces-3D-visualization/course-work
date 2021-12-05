@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 from dotenv import load_dotenv, find_dotenv
 from waitress import serve
 from blueprints.parse_audio import parseAudio
+from blueprints.generate_audio import generateAudio
 
 
 load_dotenv(find_dotenv())
@@ -15,6 +16,7 @@ DEBUG = bool(os.getenv("DEBUG", "true"))
 app = Flask(__name__, static_url_path='')
 
 app.register_blueprint(parseAudio, url_prefix='/parseAudio')
+app.register_blueprint(generateAudio, url_prefix='/generateAudio')
 
 @app.route('/')
 def serve_static_index():
