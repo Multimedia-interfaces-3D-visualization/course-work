@@ -2,19 +2,19 @@ import { createSlice } from '@reduxjs/toolkit'
 import noop from '../../utils/noop'
 
 const initialState = {
-  libs: null,
+  books: null,
 }
 
 const { actions, reducer } = createSlice({
-  name: 'libs',
+  name: 'books',
   initialState,
   reducers: {
-    getLibs: noop,
-    setLibs: (state, { payload }) => ({ ...initialState, libs: payload }),
+    getBooks: noop,
+    setBooks: (state, { payload }) => ({ ...initialState, books: payload }),
     replyReport: noop,
   },
 })
 
 export { actions, reducer }
 
-export const { getLibs, setLibs } = actions
+export const { getBooks, setBooks } = actions
