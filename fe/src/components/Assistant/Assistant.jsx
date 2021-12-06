@@ -2,12 +2,15 @@ import { useState, useEffect, useReducer } from 'react';
 import useStyles from '../../utils/hooks/useStyles';
 import styles from './styles';
 import { useReactMediaRecorder } from 'react-media-recorder';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import hark from './hark';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Suspense } from 'react';
 import Owl from './Owl';
+import { actions, selectors } from '../../store/assistant';
+
 
 const initialState = {
   recognizedText: '',
@@ -26,6 +29,8 @@ function reducer(state, action) {
 }
 
 const Assistant = () => {
+  const dispatchSaga = useDispatch();
+  const recordedText = useSelector(selectors.getRecordedText) ?? "";
   const classes = useStyles(styles);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inited, setInited] = useState(false);
@@ -99,8 +104,10 @@ const Assistant = () => {
             )
             .then((response) => {
               console.log(response.data.data);
-              dispatch({ type: 'newText', data: response.data.data });
-              testPlayback(response.data.data);
+              dispatchSaga(actions.setRecordedText(response.data.data));
+
+              // dispatch({ type: 'newText', data: response.data.data });
+              // testPlayback(response.data.data);
             })
             .catch((error) => {
               console.error(error);
@@ -123,25 +130,26 @@ const Assistant = () => {
           </Suspense>
         </Canvas>
 
-        <p>{status}</p>
+        <p>Статус: {status}</p>
 
         <button
           onClick={() => {
             startRecording();
           }}
         >
-          Start Recording
+          Start
         </button>
 
-        <button
+        {/* <button
           onClick={() => {
             stopRecording();
           }}
         >
           Stop Recording
-        </button>
+        </button> */}
 
-        <p>Розпізнано: {state.recognizedText}</p>
+        <p>Розпізнано: {recordedText}</p>
+        <p>Сказано: </p>
 
         <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
       </div>
