@@ -38,7 +38,7 @@ export const commands = [
   {
     id: 6,
     text: 'Видавництво додано до пошуку! Продовжимо',
-    next: 4,
+    next: 7,
   },
   {
     id: 7,

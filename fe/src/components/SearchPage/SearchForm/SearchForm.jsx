@@ -25,6 +25,7 @@ import { selectors as searchSelectors, actions } from '../../../store/search';
 import { actions as AssistantActions } from '../../../store/assistant';
 
 import { OwlAssistant } from '../../Assistant/OwlAssistant';
+import Assistant from '../../Assistant/Assistant';
 import VoiceButton from './VoiceButton';
 
 function SearchForm(props) {
@@ -100,6 +101,9 @@ function SearchForm(props) {
     <>
       <div className={classes.OwlAssistant}>
         <OwlAssistant />
+      </div>
+      <div style={{display: "none"}}>
+        <Assistant />
       </div>
       <div
         className={classes.VoiceButton}

@@ -10,9 +10,19 @@ export const getRecordedText = createSelector(
 
 export const getCommand = createSelector(
   getRoot,
-  (root) => commands[root?.command],
+  (root) => commands.find((it) => it.id === root?.command),
 );
 export const getIsCommandPlayed = createSelector(
   getRoot,
   (root) => root.isCommandPlayed,
 );
+
+export const getIsStartedWorking = createSelector(
+    getRoot,
+    (root) => root.started,
+  );
+
+export const getIsAudioFinished = createSelector(
+    getRoot,
+    (root) => root.audioFinished,
+  );

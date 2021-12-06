@@ -11,27 +11,16 @@ import { Suspense } from 'react';
 import Owl from './Owl';
 import { actions, selectors } from '../../store/assistant';
 
-const initialState = {
-  recognizedText: '',
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'newText':
-      return {
-        ...state,
-        recognizedText: action.data,
-      };
-    default:
-      throw new Error();
-  }
-}
 
 const Assistant = () => {
   const dispatchSaga = useDispatch();
   const recordedText = useSelector(selectors.getRecordedText) ?? '';
+  const IsStartedWorking = useSelector(selectors.getIsStartedWorking) ?? false;
+  const IsCommandPlayed = useSelector(selectors.getIsCommandPlayed) ?? false;
+  const IsAudioFinished = useSelector(selectors.getIsAudioFinished) ?? false;
+  const Command = useSelector(selectors.getCommand) ?? null;
+
   const classes = useStyles(styles);
-  const [state, dispatch] = useReducer(reducer, initialState);
   const [inited, setInited] = useState(false);
 
   const {
@@ -45,7 +34,6 @@ const Assistant = () => {
   useEffect(() => {
     if (previewAudioStream) {
       setInited(true);
-      console.log('stbbb');
       const options = { interval: 100 };
       const speechEvents = hark(previewAudioStream, options);
       speechEvents.run();
@@ -61,11 +49,10 @@ const Assistant = () => {
   }, [previewAudioStream, stopRecording, inited]);
 
   const testPlayback = (data) => {
-    console.log('BBFBFBFBFBFB');
     const formData = new FormData();
     formData.append(
       'text_data',
-      'Привіт від голосового асистента! Ви сказали фразу: ' + data,
+      data,
     );
     axios
       .post(
@@ -73,11 +60,9 @@ const Assistant = () => {
         formData,
       )
       .then((response) => {
-        console.log(response.data.data);
         document
           .getElementById('audio-hidden')
           .setAttribute('src', 'data:audio/mp3;base64,' + response.data.data);
-        document.getElementById('audio-hidden').play();
       })
       .catch((error) => {
         console.error(error);
@@ -85,8 +70,14 @@ const Assistant = () => {
   };
 
   useEffect(() => {
+    document.getElementById('audio-hidden').addEventListener('ended', function ttt () {
+      console.log("Audio played");
+      dispatchSaga(actions.setAudioFinished());
+    }, false);
+  }, []);
+
+  useEffect(() => {
     if (mediaBlobUrl) {
-      console.log('ALAAAAARM');
       fetch(mediaBlobUrl)
         .then((r) => r.blob())
         .then((blob) => {
@@ -102,11 +93,11 @@ const Assistant = () => {
               formData,
             )
             .then((response) => {
+              console.log("===== parsed ======");
               console.log(response.data.data);
+              console.log("===== parsed ======");
               dispatchSaga(actions.setRecordedText(response.data.data));
-
-              // dispatch({ type: 'newText', data: response.data.data });
-              // testPlayback(response.data.data);
+              dispatchSaga(actions.setNextCommand());
             })
             .catch((error) => {
               console.error(error);
@@ -114,6 +105,28 @@ const Assistant = () => {
         });
     }
   }, [mediaBlobUrl]);
+
+  useEffect(() => {
+    if (IsAudioFinished && !IsCommandPlayed) {
+      if (!Command.skip && !Command.field) {
+        dispatchSaga(actions.setNextCommand());
+      } else {
+        startRecording();
+      } 
+    } else {
+      if (IsStartedWorking && !IsCommandPlayed) {
+        console.log(Command);
+        const txt = Command.text;
+        testPlayback(txt);
+      }
+    }
+
+
+  }, [IsStartedWorking, IsCommandPlayed, IsAudioFinished]);
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <div className={classes.assistantContent}>
@@ -149,7 +162,6 @@ const Assistant = () => {
 
         <p>Розпізнано: {recordedText}</p>
         <p>Сказано: </p>
-
         <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
       </div>
     </div>

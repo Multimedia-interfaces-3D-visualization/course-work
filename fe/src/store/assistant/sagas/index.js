@@ -1,4 +1,4 @@
-// import getLibs from './getLibs.saga';
+import setNextCommand from './setNextCommand.saga';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [];
+export default [setNextCommand];

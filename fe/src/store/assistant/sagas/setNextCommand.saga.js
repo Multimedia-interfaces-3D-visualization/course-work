@@ -12,44 +12,45 @@ function* setNextCommand() {
     yield put(startLoading());
 
     const { command, recordedText } = yield select(getRoot);
+    const commandObj = commands[command];
 
-    if (command.skip) {
+    if (commandObj.skip) {
       if (
         ['ні', 'нет', 'не', 'нє'].some((t) =>
           recordedText.toLowerCase().includes(t),
         )
       ) {
-        return yield put(actions.updateCommand(command.skip));
+        return yield put(actions.updateCommand(commandObj.skip));
       }
     }
 
-    if (command.field && recordedText) {
-      if (command.field === 'yearRange' && !isNaN(Number(recordedText))) {
+    if (commandObj.field && recordedText) {
+      if (commandObj.field === 'yearRange' && !isNaN(Number(recordedText))) {
         yield put(
           searchActions.setSelected({
-            field: command.field,
+            field: commandObj.field,
             value: [Number(recordedText) - 10, Number(recordedText) + 10],
           }),
         );
       } else {
         yield put(
           searchActions.addToSelected({
-            field: command.field,
+            field: commandObj.field,
             value: recordedText,
           }),
         );
       }
     }
 
-    if (command.action) {
-      yield put(command.action);
+    if (commandObj.action) {
+      yield put(commandObj.action);
     }
 
-    if (command.stop) {
+    if (commandObj.stop) {
       yield put(actions.stopWorking());
     }
 
-    return yield put(actions.updateCommand(command.next));
+    return yield put(actions.updateCommand(commandObj.next));
   } catch (error) {
     console.error(error);
   } finally {
