@@ -11,7 +11,6 @@ import { Suspense } from 'react';
 import Owl from './Owl';
 import { actions, selectors } from '../../store/assistant';
 
-
 const initialState = {
   recognizedText: '',
 };
@@ -30,7 +29,7 @@ function reducer(state, action) {
 
 const Assistant = () => {
   const dispatchSaga = useDispatch();
-  const recordedText = useSelector(selectors.getRecordedText) ?? "";
+  const recordedText = useSelector(selectors.getRecordedText) ?? '';
   const classes = useStyles(styles);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inited, setInited] = useState(false);

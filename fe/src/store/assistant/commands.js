@@ -2,7 +2,7 @@ export const commands = [
   {
     id: 0,
     text: 'Привіт! Почнімо пошук книг!',
-    next: 1
+    next: 1,
   },
   {
     id: 1,
@@ -14,7 +14,7 @@ export const commands = [
     id: 2,
     text: 'Вкажіть, будь ласка, автора',
     next: 3,
-    field: 'selectedAuthors'
+    field: 'selectedAuthors',
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ export const commands = [
     id: 5,
     text: 'Вкажіть, будь ласка, видавництво',
     next: 6,
-    field: 'selectedIssuers'
+    field: 'selectedIssuers',
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ export const commands = [
     id: 8,
     text: 'Вкажіть, будь ласка, тип книги',
     next: 9,
-    field: 'selectedBookTypes'
+    field: 'selectedBookTypes',
   },
   {
     id: 9,
@@ -65,7 +65,7 @@ export const commands = [
     id: 11,
     text: 'Вкажіть, будь ласка, ключові слова книги',
     next: 12,
-    field: 'selectedKeywords'
+    field: 'selectedKeywords',
   },
   {
     id: 12,
@@ -82,7 +82,7 @@ export const commands = [
     id: 14,
     text: 'Вкажіть, будь ласка, мову тексту книги',
     next: 15,
-    field: 'selectedBookLanguages'
+    field: 'selectedBookLanguages',
   },
   {
     id: 15,
@@ -99,7 +99,7 @@ export const commands = [
     id: 17,
     text: 'Вкажіть, будь ласка, рік друку книги',
     next: 18,
-    field: 'yearRange'
+    field: 'yearRange',
   },
   {
     id: 18,

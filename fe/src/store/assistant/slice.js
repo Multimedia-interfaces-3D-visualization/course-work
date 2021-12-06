@@ -3,6 +3,8 @@ import noop from '../../utils/noop';
 
 const initialState = {
   started: false,
+  isCommandPlayed: false,
+  command: 0,
   recordedText: '',
 };
 
@@ -14,6 +16,13 @@ const { actions, reducer } = createSlice({
     setRecordedText: (state, { payload }) => ({
       ...state,
       recordedText: payload,
+    }),
+    setNextCommand: (state) => ({ ...state, isCommandPlayed: true }),
+    updateCommand: (state, { payload }) => ({
+      ...state,
+      command: payload,
+      isCommandPlayed: false,
+      recordedText: '',
     }),
     startRecording: noop,
   },
