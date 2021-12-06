@@ -8,7 +8,13 @@ const styles = {
     position: 'fixed',
     top: '45px',
     right: '0',
-    'z-index': '999999'
+    'z-index': '999999',
+  },
+  VoiceButton: {
+    position: 'fixed',
+    bottom: '70px',
+    right: '20px',
+    'z-index': '999999',
   },
   filters: {
     minWidth: '350px',

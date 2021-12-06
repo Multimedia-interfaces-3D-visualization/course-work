@@ -22,7 +22,10 @@ import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { selectors as searchSelectors, actions } from '../../../store/search';
+import { actions as AssistantActions } from '../../../store/assistant';
+
 import { OwlAssistant } from '../../Assistant/OwlAssistant';
+import VoiceButton from './VoiceButton';
 
 function SearchForm(props) {
   const classes = useStyles(styles);
@@ -97,6 +100,12 @@ function SearchForm(props) {
     <>
       <div className={classes.OwlAssistant}>
         <OwlAssistant />
+      </div>
+      <div
+        className={classes.VoiceButton}
+        onClick={() => dispatch(AssistantActions.startWorking())}
+      >
+        <VoiceButton />
       </div>
       <div className={classes.formContainer}>
         <div className={classes.filters}>

@@ -8,6 +8,7 @@ import * as users from './users';
 import * as libs from './libs';
 import * as books from './books';
 import * as breed from './breed';
+import * as assistant from './assistant';
 import * as search from './search';
 
 export default createStore({
@@ -18,6 +19,7 @@ export default createStore({
     users: users.reducer,
     search: search.reducer,
     breed: breed.reducer,
+    assistant: assistant.reducer,
     libs: libs.reducer,
     books: books.reducer,
   }),
@@ -27,6 +29,7 @@ export default createStore({
     ...libs.sagas,
     ...search.sagas,
     ...breed.sagas,
+    ...assistant.sagas,
     ...books.sagas,
   ],
   middleware: [],

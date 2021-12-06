@@ -56,23 +56,29 @@ const Assistant = () => {
     }
   }, [previewAudioStream, stopRecording, inited]);
 
-  
   const testPlayback = (data) => {
     console.log('BBFBFBFBFBFB');
     const formData = new FormData();
-    formData.append('text_data', "Привіт від голосового асистента! Ви сказали фразу: " + data);
+    formData.append(
+      'text_data',
+      'Привіт від голосового асистента! Ви сказали фразу: ' + data,
+    );
     axios
-      .post('http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech', formData)
+      .post(
+        'http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech',
+        formData,
+      )
       .then((response) => {
         console.log(response.data.data);
-        document.getElementById("audio-hidden").setAttribute("src", "data:audio/mp3;base64," + response.data.data);
-        document.getElementById("audio-hidden").play(); 
+        document
+          .getElementById('audio-hidden')
+          .setAttribute('src', 'data:audio/mp3;base64,' + response.data.data);
+        document.getElementById('audio-hidden').play();
       })
       .catch((error) => {
         console.error(error);
       });
   };
-  
 
   useEffect(() => {
     if (mediaBlobUrl) {
