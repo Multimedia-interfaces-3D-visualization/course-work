@@ -7,6 +7,7 @@ const initialState = {
   command: 0,
   recordedText: '',
   audioFinished: false,
+  audioStarted: false,
 };
 
 const { actions, reducer } = createSlice({
@@ -21,12 +22,14 @@ const { actions, reducer } = createSlice({
     }),
     setNextCommand: (state) => ({ ...state, isCommandPlayed: true }),
     setAudioFinished: (state) => ({ ...state, audioFinished: true }),
+    setAudioStarted: (state) => ({ ...state, audioStarted: true }),
     updateCommand: (state, { payload }) => ({
       ...state,
       command: payload,
       isCommandPlayed: false,
       recordedText: '',
-      audioFinished: false
+      audioFinished: false,
+      audioStarted: false
     }),
     startRecording: noop,
   },

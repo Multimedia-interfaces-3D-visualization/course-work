@@ -54,6 +54,7 @@ const Assistant = () => {
       'text_data',
       data,
     );
+    dispatchSaga(actions.setAudioStarted());
     axios
       .post(
         'http://localhost:5000' + '/api/v1/ml/generateAudio/textToSpeech',
@@ -131,13 +132,13 @@ const Assistant = () => {
   return (
     <div className={classes.assistantContent}>
       <h2 className={classes.assistantTitle}>Мультимедійний асистент</h2>
-      <div>
+      {/* <div>
         <Canvas style={{ width: '800px', height: '500px' }}>
           <OrbitControls />
           <ambientLight intensity={0.5} />
           <directionalLight intensity={0.4} />
           <Suspense fallback={null}>
-            <Owl position={[0, -1.5, 1.4]} rotation={[-0.01, -0.4, 0.0]} />
+             <Owl position={[0, -1.5, 1.4]} rotation={[-0.01, -0.4, 0.0]} /> 
             <Environment preset={'lobby'} />
           </Suspense>
         </Canvas>
@@ -152,18 +153,19 @@ const Assistant = () => {
           Start
         </button>
 
-        {/* <button
+        <button
           onClick={() => {
             stopRecording();
           }}
         >
           Stop Recording
-        </button> */}
+        </button>
 
         <p>Розпізнано: {recordedText}</p>
         <p>Сказано: </p>
-        <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
-      </div>
+        
+      </div> */}
+      <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
     </div>
   );
 };

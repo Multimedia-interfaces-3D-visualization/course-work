@@ -26,3 +26,8 @@ export const getIsAudioFinished = createSelector(
     getRoot,
     (root) => root.audioFinished,
   );
+
+  export const getIsAudioStarted = createSelector(
+    getRoot,
+    (root) => root.audioStarted,
+  );

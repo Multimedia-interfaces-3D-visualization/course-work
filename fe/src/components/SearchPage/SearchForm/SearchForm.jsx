@@ -14,6 +14,7 @@ import {
   actions as bookActions,
   selectors as bookSelectors,
 } from '../../../store/books';
+import { selectors as assistantSelectors } from '../../../store/assistant';
 import ManySelect from './ManySelect';
 import RangeSlider from './Slider';
 import BooksList from '../../books/BooksList/BooksList';
@@ -41,6 +42,9 @@ function SearchForm(props) {
   const bookTypes = useSelector(bookSelectors.getUniqueTypes);
   const keywords = useSelector(bookSelectors.getUniqueKeywords);
   const bookLanguages = useSelector(bookSelectors.getUniqueLanguage);
+  const IsAudioFinished = useSelector(assistantSelectors.getIsAudioFinished) ?? false;
+  const IsAudioStarted = useSelector(assistantSelectors.getIsAudioStarted) ?? false;
+  const [ owl, setOwl ] = useState((<OwlAssistant speaking={false} />));
 
   const {
     selectedLibs,
@@ -97,10 +101,18 @@ function SearchForm(props) {
     },
   ];
 
+  useEffect(() => {
+    if (IsAudioStarted && !IsAudioFinished) {
+      setOwl(<OwlAssistant speaking={true} />);
+    } else {
+      setOwl(<OwlAssistant speaking={false} />);
+    }
+  }, [IsAudioStarted, IsAudioFinished]);
+
   return (
     <>
       <div className={classes.OwlAssistant}>
-        <OwlAssistant />
+      {owl}
       </div>
       <div style={{display: "none"}}>
         <Assistant />
