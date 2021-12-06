@@ -1,3 +1,5 @@
+import { executeSearch } from '../search/slice';
+
 export const commands = [
   {
     id: 0,
@@ -110,11 +112,12 @@ export const commands = [
     id: 19,
     text: 'Чудово! Виконати пошук?',
     next: 20,
-    action: 'executeSearch',
+    action: executeSearch(),
   },
   {
     id: 20,
     text: 'Гарного читання!',
     next: 0,
+    stop: true,
   },
 ];

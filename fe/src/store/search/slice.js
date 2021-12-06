@@ -20,6 +20,10 @@ const { actions, reducer } = createSlice({
       ...state,
       [field]: value,
     }),
+    addToSelected: (state, { payload: { field, value } }) => ({
+      ...state,
+      [field]: [...state[field], value],
+    }),
     executeSearch: noop,
     setSearchResult: (state, { payload }) => ({
       ...state,
@@ -31,4 +35,4 @@ const { actions, reducer } = createSlice({
 
 export { actions, reducer };
 
-export const { getBooks, setBooks } = actions;
+export const { executeSearch } = actions;

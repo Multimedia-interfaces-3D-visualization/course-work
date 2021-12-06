@@ -12,7 +12,8 @@ const { actions, reducer } = createSlice({
   name: 'assistant',
   initialState,
   reducers: {
-    startWorking: () => ({ started: true }),
+    startWorking: () => ({ ...initialState, started: true }),
+    stopWorking: () => ({ ...initialState, started: false }),
     setRecordedText: (state, { payload }) => ({
       ...state,
       recordedText: payload,
