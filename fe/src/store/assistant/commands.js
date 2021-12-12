@@ -4,7 +4,7 @@ export const commands = [
   {
     id: 0,
     text: 'Привіт! Почнімо пошук книг!',
-    next: 19,
+    next: 1,
   },
   {
     id: 1,
@@ -169,12 +169,5 @@ export const commands = [
     text: 'Перехід на сторінку замовлення. Гарного читання!',
     redirect: '/orders/orderBook/',
     next: 0,
-  },
-  {
-    id: 24,
-    text: 'Вкажіть, будь ласка, назву книги',
-    next: 22,
-    skip: 20,
-    firstOrder: true,
-  },
+  }
 ];

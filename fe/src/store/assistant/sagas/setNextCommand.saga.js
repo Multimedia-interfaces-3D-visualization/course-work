@@ -28,6 +28,7 @@ function* setNextCommand() {
       const books = yield select(getSearchResults);
       if (books.length == 1) {
         history.push(`/book/${books[0].id}`);
+        yield put(actions.updateCommand(0));
       }
     }
 
@@ -35,6 +36,7 @@ function* setNextCommand() {
       const books = yield select(getSearchResults);
       if (books.length == 1) {
         history.push(`/orders/orderBook/${books[0].id}`);
+        yield put(actions.updateCommand(0));
       }
     }
 
@@ -42,6 +44,7 @@ function* setNextCommand() {
       console.log('selectedBook', selectedBook);
       console.log('commandObj.redirect', commandObj.redirect);
       history.push(`${commandObj.redirect}${selectedBook}`);
+      yield put(actions.updateCommand(0));
     }
 
     if (commandObj.fail && recordedText) {
