@@ -52,7 +52,7 @@ function Main() {
       </div>
       <div className="App-content" ref={contentRef}>
         <div className="App-content-article">
-          <img src="/owl.png" alt="Math and pen" width="500px" height="280px" />
+          <img src="/owl.png" alt="Math and pen" height="280px" />
           <span style={{ paddingLeft: '0' }} className="App-article">
             <b className="App-article-letter">Д</b>аний вебсервіс є реалізацією
             інтерактивної системи пошуку книг у бібліотеці з використанням

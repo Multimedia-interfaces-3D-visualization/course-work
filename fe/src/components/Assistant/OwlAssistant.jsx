@@ -9,7 +9,7 @@ import Owl from './Owl';
 export const OwlAssistant = ({ animation }) => {
   return (
     <Canvas style={{ width: '300px', height: '300px' }}>
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <ambientLight intensity={0.5} />
       <directionalLight intensity={0.4} />
       <Suspense fallback={null}>

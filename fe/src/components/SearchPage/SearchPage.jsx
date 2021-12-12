@@ -9,14 +9,16 @@ function SearchPage() {
   const [isTextSearch, setIsTextSearch] = useState(false);
 
   return (
-    <div className={classes.page}>
-      <h3 className={classes.title}>Пошук Книг</h3>
-      <SearchForm
-        setIsTextSearch={setIsTextSearch}
-        isTextSearch={isTextSearch}
-      />
-      <SearchResult isTextSearch={isTextSearch} />
-    </div>
+    <>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }} >Пошук книг</h1>
+      <div className={classes.page}>
+        <SearchForm
+          setIsTextSearch={setIsTextSearch}
+          isTextSearch={isTextSearch}
+        />
+        <SearchResult isTextSearch={isTextSearch} />
+      </div>
+    </>
   );
 }
 

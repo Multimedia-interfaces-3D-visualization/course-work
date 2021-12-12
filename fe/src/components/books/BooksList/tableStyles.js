@@ -15,10 +15,40 @@ const styles = {
     marginTop: '10px',
     marginRight: '10px',
     backgroundColor: 'white',
+    fontSize: '13px',
+    width: '200px',
 
     '&:hover': {
       borderColor: 'darkgreen',
       backgroundColor: 'rgb(239, 247, 236)',
+    },
+  },
+  orderButton: {
+    color: 'blueviolet',
+    borderColor: 'blueviolet',
+    marginTop: '10px',
+    marginRight: '10px',
+    backgroundColor: 'white',
+    width: 'inherit',
+    fontSize: '13px',
+
+    '&:hover': {
+      borderColor: 'darkblue',
+      backgroundColor: '#9c42f024',
+    },
+  },
+  orderButtonDisabled: {
+    color: 'blueviolet',
+    borderColor: 'blueviolet',
+    marginTop: '10px',
+    marginRight: '10px',
+    backgroundColor: 'white',
+    fontSize: '13px',
+    width: 'inherit',
+
+    '&:hover': {
+      borderColor: 'darkblue',
+      backgroundColor: '#9c42f024',
     },
   },
   breedPhotoContainer: {

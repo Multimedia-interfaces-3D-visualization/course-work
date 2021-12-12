@@ -14,6 +14,7 @@ import columns from './columns';
 import useStyles from '../../../utils/hooks/useStyles';
 import tableStyles from './tableStyles';
 import { selectors as userSelectors } from '../../../store/user';
+import { selectors as libSelector, actions as libActions } from '../../../store/libs';
 
 const BooksList = (params) => {
   const classes = useStyles(tableStyles);
@@ -21,8 +22,10 @@ const BooksList = (params) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const isAdmin = useSelector(userSelectors.getIsAdmin);
+  const libs = useSelector(libSelector.getLibs) ?? [];
   const rows = params?.rows || [];
-  console.log('books rows', rows);
+  // console.log('books rows', rows);
+  useEffect(() => dispatch(libActions.getLibs()), []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -84,23 +87,35 @@ const BooksList = (params) => {
                           );
                         })}
                         <TableCell key={`${row.id}-controls`} align="center">
-                          <Button
-                            className={classes.acceptButton}
-                            component={RouterLink}
-                            to={`/book/${row.id}`}
-                            variant="outlined"
-                          >
-                            Переглянути
-                          </Button>
+                          <div style={{ display: "flex", width: "350px", margin: "auto"}}>
+                            <Button
+                              className={classes.acceptButton}
+                              component={RouterLink}
+                              to={`/book/${row.id}`}
+                              variant="outlined"
+                            >
+                              Переглянути
+                            </Button>
 
-                          <Button
-                            className={classes.rejectButton}
-                            component={RouterLink}
-                            to={`/orders/orderBook/${row.id}`}
-                            variant="outlined"
-                          >
-                            Замовити
-                          </Button>
+                            {libs?.find(x => x?.availableBooks?.find(y => y.toString() === row.id.toString())) ?
+                              <Button
+                                className={classes.orderButton}
+                                component={RouterLink}
+                                to={`/orders/orderBook/${row.id}`}
+                                variant="outlined"
+                              >
+                                Замовити
+                              </Button>
+                              :
+                              <Button
+                                className={classes.orderButtonDisabled}
+                                variant="outlined"
+                                disabled={true}
+                              >
+                                Немає в наявності
+                              </Button>
+                            }
+                          </div>
                         </TableCell>
                       </TableRow>
                     );
