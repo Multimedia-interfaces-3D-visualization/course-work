@@ -8,6 +8,8 @@ const apiUrls = {
   users: `${base}/user/all`,
   libs: `${base}/library/all`,
   books: `${base}/book/all`,
+  orders: `${base}/order/all`,
+  makeOrder: `${base}/order/add`,
 };
 
 export default apiUrls;

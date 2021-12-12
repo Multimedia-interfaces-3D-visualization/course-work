@@ -52,6 +52,7 @@ const Book = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
   const isAdmin = useSelector(userSelectors.getIsAdmin);
+  const isLoggedIn = useSelector(userSelectors.isLoggedIn);
 
   useEffect(() => dispatch(actions.getBooks()), []);
   const book = useSelector(selectors.getBookById(params.id));
@@ -86,6 +87,16 @@ const Book = (props) => {
               Видалити
             </Button>
           </>
+        )}
+        {isLoggedIn && (
+          <Button
+            className={classes.acceptButton}
+            component={RouterLink}
+            to={`/orders/orderBook/${params.id}`}
+            variant="outlined"
+          >
+            Замовити
+          </Button>
         )}
       </div>
       <div className={classes.userData}>

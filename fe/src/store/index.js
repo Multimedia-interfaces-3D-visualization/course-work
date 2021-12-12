@@ -10,6 +10,7 @@ import * as books from './books';
 import * as breed from './breed';
 import * as assistant from './assistant';
 import * as search from './search';
+import * as orders from './orders'
 
 export default createStore({
   reducer: combineReducers({
@@ -22,6 +23,7 @@ export default createStore({
     assistant: assistant.reducer,
     libs: libs.reducer,
     books: books.reducer,
+    orders: orders.reducer,
   }),
   sagas: [
     ...user.sagas,
@@ -31,6 +33,7 @@ export default createStore({
     ...breed.sagas,
     ...assistant.sagas,
     ...books.sagas,
+    ...orders.sagas,
   ],
   middleware: [],
 });

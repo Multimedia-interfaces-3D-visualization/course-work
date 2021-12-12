@@ -25,6 +25,8 @@ import CreateBook from '../components/books/CreateBook/CreateBook';
 import Books from '../components/books/Books/Books';
 import Book from '../components/books/Book/Book';
 import Assistant from '../components/Assistant/Assistant';
+import Orders from '../components/Orders/Orders/Orders';
+import MakeOrder from '../components/Orders/MakeOrder/MakeOrder';
 
 const ImplicitExplicitRouter = ({ history }) => (
   <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
@@ -86,6 +88,12 @@ const ImplicitExplicitRouter = ({ history }) => (
       </Route>
       <Route path="/assistant">
         <Assistant />
+      </Route>
+      <Route exact path="/orders">
+        <Orders />
+      </Route>
+      <Route exact path="/orders/orderBook/:id">
+        <MakeOrder />
       </Route>
       <NotFound />
     </Switch>
