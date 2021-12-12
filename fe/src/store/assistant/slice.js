@@ -8,6 +8,8 @@ const initialState = {
   recordedText: '',
   audioFinished: false,
   audioStarted: false,
+  isStartedListening: false,
+  isStoppedListening: false,
   selectedBook: '',
 };
 
@@ -24,6 +26,8 @@ const { actions, reducer } = createSlice({
     setNextCommand: (state) => ({ ...state, isCommandPlayed: true }),
     setAudioFinished: (state) => ({ ...state, audioFinished: true }),
     setAudioStarted: (state) => ({ ...state, audioStarted: true }),
+    setStartedListening: (state) => ({ ...state, isStartedListening: true }),
+    setStoppedListening: (state) => ({ ...state, isStoppedListening: true }),
     updateCommand: (state, { payload }) => ({
       ...state,
       command: payload,
@@ -31,6 +35,8 @@ const { actions, reducer } = createSlice({
       recordedText: '',
       audioFinished: false,
       audioStarted: false,
+      isStartedListening: false,
+      isStoppedListening: false,
     }),
     setSelectedBook: (state, { payload }) => ({
       ...state,

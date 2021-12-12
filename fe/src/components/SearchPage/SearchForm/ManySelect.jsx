@@ -59,7 +59,7 @@ export default function ManySelect({ label, list, selected, setSelected }) {
   };
 
   const testList = exist(selected, list);
-  console.log('testList', testList);
+  // console.log('testList', testList);
   return (
     <div className={classes.select}>
       <FormControl className={classes.selectForm} sx={{ m: 1, width: 300 }}>
