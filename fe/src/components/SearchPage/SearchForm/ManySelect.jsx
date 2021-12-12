@@ -44,7 +44,7 @@ const MenuProps = {
     },
   },
 };
-
+// add parameter to check substring
 export default function ManySelect({ label, list, selected, setSelected }) {
   const classes = useStyles(styles);
 

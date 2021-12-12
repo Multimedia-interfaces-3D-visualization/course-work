@@ -71,7 +71,11 @@ export function Header() {
               Книги
             </Button>
             {loggedIn && (
-              <Button className={classes.link} component={RouterLink} to="/orders">
+              <Button
+                className={classes.link}
+                component={RouterLink}
+                to="/orders"
+              >
                 Замовлення
               </Button>
             )}

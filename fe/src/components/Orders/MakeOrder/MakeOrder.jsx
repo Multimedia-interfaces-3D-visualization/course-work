@@ -17,8 +17,14 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import ContactsIcon from '@material-ui/icons/Contacts';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router-dom';
-import { actions as bookActions, selectors as bookSelectors } from '../../../store/books';
-import { actions as libActions, selectors as libSelectors } from '../../../store/libs';
+import {
+  actions as bookActions,
+  selectors as bookSelectors,
+} from '../../../store/books';
+import {
+  actions as libActions,
+  selectors as libSelectors,
+} from '../../../store/libs';
 import { useFormik } from 'formik';
 
 const MakeOrder = () => {
@@ -36,7 +42,7 @@ const MakeOrder = () => {
   const formik = useFormik({
     initialValues: {
       type: '',
-      library: ''
+      library: '',
     },
     onSubmit: ({ passwordConfirmation, ...values }) => {
       dispatch(
@@ -53,14 +59,20 @@ const MakeOrder = () => {
     return <p>This page can see only logged in users</p>;
   }
 
-  const cur_book = books.find(x => x.id.toString() === params.id.toString());
-  const libs_available = libs?.filter(x => x?.availableBooks.find(y => y?.toString() === params?.id?.toString()));
+  const cur_book = books.find((x) => x.id.toString() === params.id.toString());
+  const libs_available = libs?.filter((x) =>
+    x?.availableBooks.find((y) => y?.toString() === params?.id?.toString()),
+  );
 
   if (libs_available?.length === 0) {
     return (
       <div>
-        <h1 style={{ textAlign: 'center', fontSize: 40 }}>Замовити книжку {cur_book?.name}</h1>
-        <p style={{ textAlign: 'center', fontSize: 20 }}>На жаль, дана книжка не доступна в жодній біблотеці.</p>
+        <h1 style={{ textAlign: 'center', fontSize: 40 }}>
+          Замовити книжку {cur_book?.name}
+        </h1>
+        <p style={{ textAlign: 'center', fontSize: 20 }}>
+          На жаль, дана книжка не доступна в жодній біблотеці.
+        </p>
         <p style={{ textAlign: 'center', fontSize: 20 }}>Спробуйте пізніше</p>
       </div>
     );
@@ -68,8 +80,19 @@ const MakeOrder = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }}>Замовити книжку {cur_book?.name}</h1>
-      <form style={{ width: "600px", marginLeft: "auto", marginRight: "auto", marginBottom: "20px" }} className={classes.registerForm} onSubmit={formik.handleSubmit}>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>
+        Замовити книжку {cur_book?.name}
+      </h1>
+      <form
+        style={{
+          width: '600px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          marginBottom: '20px',
+        }}
+        className={classes.registerForm}
+        onSubmit={formik.handleSubmit}
+      >
         <FormControl fullWidth>
           <InputLabel id="type-select-label">Спосіб видачі</InputLabel>
           <Select
@@ -81,8 +104,8 @@ const MakeOrder = () => {
             value={formik.values.type}
             onChange={formik.handleChange}
           >
-            <MenuItem value={"self-pickup"}>У біблотеці</MenuItem>
-            <MenuItem value={"shipping"}>Адресна доставка</MenuItem>
+            <MenuItem value={'self-pickup'}>У біблотеці</MenuItem>
+            <MenuItem value={'shipping'}>Адресна доставка</MenuItem>
           </Select>
         </FormControl>
         <FormControl fullWidth>
@@ -96,19 +119,21 @@ const MakeOrder = () => {
             value={formik.values.library}
             onChange={formik.handleChange}
           >
-            {libs_available.map(z => (
-              <MenuItem key={z.id} value={z.id}>{z.name}</MenuItem>
+            {libs_available.map((z) => (
+              <MenuItem key={z.id} value={z.id}>
+                {z.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
 
-        <div style={{marginTop: "15px"}} className={classes.actions}>
+        <div style={{ marginTop: '15px' }} className={classes.actions}>
           {/* <Button className={classes.login} component={RouterLink} to="/users">
             Повернутися
           </Button> */}
 
           <Button
-            style={{ marginLeft: "auto", marginRight: "auto" }}
+            style={{ marginLeft: 'auto', marginRight: 'auto' }}
             className={classes.submit}
             color="primary"
             variant="outlined"

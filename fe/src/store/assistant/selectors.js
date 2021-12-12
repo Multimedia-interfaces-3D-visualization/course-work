@@ -30,3 +30,8 @@ export const getIsAudioStarted = createSelector(
   getRoot,
   (root) => root.audioStarted,
 );
+
+export const getSelectedBook = createSelector(
+  getRoot,
+  (root) => root.selectedBook,
+);

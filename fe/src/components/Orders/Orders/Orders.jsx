@@ -15,10 +15,22 @@ import useStyles from '../../../utils/hooks/useStyles';
 import tableStyles from './tableStyles';
 import styles from './styles';
 import { selectors as userSelectors } from '../../../store/user';
-import { actions as ordersActions, selectors as ordersSelectors } from '../../../store/orders';
-import { actions as libActions, selectors as libSelectors } from '../../../store/libs';
-import { actions as bookActions, selectors as bookSelectors } from '../../../store/books';
-import { actions as usersActions, selectors as usersSelectors } from '../../../store/users';
+import {
+  actions as ordersActions,
+  selectors as ordersSelectors,
+} from '../../../store/orders';
+import {
+  actions as libActions,
+  selectors as libSelectors,
+} from '../../../store/libs';
+import {
+  actions as bookActions,
+  selectors as bookSelectors,
+} from '../../../store/books';
+import {
+  actions as usersActions,
+  selectors as usersSelectors,
+} from '../../../store/users';
 
 const Orders = () => {
   const classes = useStyles(tableStyles);
@@ -32,7 +44,6 @@ const Orders = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-
   useEffect(() => dispatch(bookActions.getBooks()), []);
   useEffect(() => dispatch(ordersActions.getOrders()), []);
   useEffect(() => dispatch(libActions.getLibs()), []);
@@ -41,7 +52,6 @@ const Orders = () => {
       dispatch(usersActions.getUsers());
     }
   }, [isAdmin]);
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -53,7 +63,7 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    if (isAdmin && !columns.find(x => x.id === "borrower")) {
+    if (isAdmin && !columns.find((x) => x.id === 'borrower')) {
       columns.splice(2, 0, {
         id: 'borrower',
         label: 'Читач',
@@ -61,21 +71,20 @@ const Orders = () => {
         align: 'center',
       });
     }
-    if (!isAdmin && columns.find(x => x.id === "borrower")) {
+    if (!isAdmin && columns.find((x) => x.id === 'borrower')) {
       columns.splice(2, 1);
     }
   }, []);
 
-
   if (!isLoggedIn) {
-    return (
-      <p>This page can see only logged in users</p>
-    );
+    return <p>This page can see only logged in users</p>;
   }
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }}>{isAdmin ? 'Усі замовлення в системі' : 'Мої замовлення книжок'}</h1>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>
+        {isAdmin ? 'Усі замовлення в системі' : 'Мої замовлення книжок'}
+      </h1>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -104,42 +113,48 @@ const Orders = () => {
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.id}
-                    >
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
                         const value = row[column.id];
-                        if (column.id === "libraryOwner") {
-                          const cur_lib = libs?.find(x => x.id.toString() === value.toString());
+                        if (column.id === 'libraryOwner') {
+                          const cur_lib = libs?.find(
+                            (x) => x.id.toString() === value.toString(),
+                          );
                           return (
                             <TableCell key={column.id} align={column.align}>
-                              <RouterLink to={`/lib/${cur_lib?.id}`}>{cur_lib?.name}</RouterLink>
+                              <RouterLink to={`/lib/${cur_lib?.id}`}>
+                                {cur_lib?.name}
+                              </RouterLink>
                             </TableCell>
                           );
-                        } else if (column.id === "book") {
-                          const cur_book = books?.find(x => x.id.toString() === value.toString());
+                        } else if (column.id === 'book') {
+                          const cur_book = books?.find(
+                            (x) => x.id.toString() === value.toString(),
+                          );
                           return (
                             <TableCell key={column.id} align={column.align}>
-                              <RouterLink to={`/book/${cur_book?.id}`}>{cur_book?.name}</RouterLink>
+                              <RouterLink to={`/book/${cur_book?.id}`}>
+                                {cur_book?.name}
+                              </RouterLink>
                             </TableCell>
                           );
-                        } else if (column.id === "borrower") {
-                          const cur_user = users?.find(x => x.id.toString() === value.toString());
+                        } else if (column.id === 'borrower') {
+                          const cur_user = users?.find(
+                            (x) => x.id.toString() === value.toString(),
+                          );
                           return (
                             <TableCell key={column.id} align={column.align}>
-                              <RouterLink to={`/user/${cur_user?.id}`}>{cur_user?.surname} {cur_user?.firstName} {cur_user?.lastName}</RouterLink>
+                              <RouterLink to={`/user/${cur_user?.id}`}>
+                                {cur_user?.surname} {cur_user?.firstName}{' '}
+                                {cur_user?.lastName}
+                              </RouterLink>
                             </TableCell>
                           );
                         }
 
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format
-                              ? column.format(value, row)
-                              : value}
+                            {column.format ? column.format(value, row) : value}
                           </TableCell>
                         );
                       })}

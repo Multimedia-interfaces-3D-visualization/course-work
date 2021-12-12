@@ -8,6 +8,7 @@ const initialState = {
   recordedText: '',
   audioFinished: false,
   audioStarted: false,
+  selectedBook: '',
 };
 
 const { actions, reducer } = createSlice({
@@ -31,10 +32,14 @@ const { actions, reducer } = createSlice({
       audioFinished: false,
       audioStarted: false,
     }),
+    setSelectedBook: (state, { payload }) => ({
+      ...state,
+      selectedBook: payload,
+    }),
     startRecording: noop,
   },
 });
 
 export { actions, reducer };
 
-export const { getLibs, setLibs } = actions;
+export const { setSelectedBook } = actions;

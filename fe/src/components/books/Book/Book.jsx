@@ -59,7 +59,7 @@ const Book = (props) => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center', fontSize: 40}}>Книга {book?.name}</h1>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>Книга {book?.name}</h1>
       <div className={classes.content}>
         <div className={classes.leftside}>
           {book?.imageURL ? (
@@ -112,7 +112,9 @@ const Book = (props) => {
               )}
               <div>
                 {book?.keywords?.length
-                  ? book?.keywords.map((word) => <Chip label={word} />)
+                  ? book?.keywords.map((word) => (
+                      <Chip label={word} style={{ margin: '2px' }} />
+                    ))
                   : null}
               </div>
               {displayedFields.map((field) =>
