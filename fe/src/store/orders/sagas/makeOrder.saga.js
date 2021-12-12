@@ -3,6 +3,7 @@ import { actions } from '../slice';
 import api from '../../../services/api';
 import urls from '../../../services/apiUrl';
 import { startLoading, stopLoading } from '../../loading/slice';
+import history from '../../../history';
 
 function* makeOrder({ payload }) {
   try {
@@ -19,6 +20,7 @@ function* makeOrder({ payload }) {
     console.error(error);
   } finally {
     yield put(stopLoading());
+    history.push("/orders");
   }
 }
 

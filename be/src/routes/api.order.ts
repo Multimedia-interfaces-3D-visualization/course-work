@@ -26,6 +26,7 @@ router.post("/add", authorize, async (req, res) => {
         const id = await Order.create({
             book: req.body.book,
             borrower: req.user?.id,
+            dateCreated: Date.now(),
             libraryOwner: req.body.libraryOwner,
             type: req.body.type,
         });

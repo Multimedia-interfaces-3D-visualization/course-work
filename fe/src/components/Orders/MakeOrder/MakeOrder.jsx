@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from '../../../utils/hooks/useStyles';
 import styles from './styles';
@@ -35,6 +35,7 @@ const MakeOrder = () => {
   const books = useSelector(bookSelectors.getBooks) ?? [];
   const libs = useSelector(libSelectors.getLibs) ?? [];
   const params = useParams();
+  const history = useHistory();
 
   useEffect(() => dispatch(actions.getBooks()), []);
   useEffect(() => dispatch(libActions.getLibs()), []);
@@ -79,13 +80,24 @@ const MakeOrder = () => {
   }
 
   return (
-    <div>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }}>
-        Замовити книжку {cur_book?.name}
+    <div className={classes.registerContent}>
+      <h1 style={{ textAlign: 'center', fontSize: 40, marginBottom: '10px' }}>
+        Замовити книжку
       </h1>
+      <h2 style={{ textAlign: 'center', lineHeight: '32px', fontSize: '25px', marginTop: 0 }}>
+        {cur_book?.name}
+      </h2>
+      <img
+        src={cur_book?.imageURL}
+        alt={cur_book?.name}
+        height="320px"
+      />
+      <h3 style={{ textAlign: 'center', marginTop: '30px', marginBottom: 0 }}>
+        Заповніть інформацію про те, як ви хочете отримати книгу:
+      </h3>
       <form
         style={{
-          width: '600px',
+          width: '450px',
           marginLeft: 'auto',
           marginRight: 'auto',
           marginBottom: '20px',
