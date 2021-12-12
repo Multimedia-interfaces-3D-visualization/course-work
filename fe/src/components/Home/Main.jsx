@@ -7,6 +7,10 @@ import '../../App.css';
 import styles from './styles';
 import useStyles from '../../utils/hooks/useStyles';
 import Shevron from '../Shevron/Shevron';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Environment } from '@react-three/drei';
+import { Suspense } from 'react';
+import Owl from './../Assistant/Owl';
 
 function Main() {
   const classes = useStyles(styles);
@@ -16,11 +20,19 @@ function Main() {
   return (
     <div className="App">
       <div className="App-main">
-        <img
-          src="./dogs.png"
-          alt="Math and notebook"
-          className={classes.logo}
-        />
+      <Canvas style={{ width: '100%', height: 'calc(100vh - 64px)' }}>
+        <OrbitControls autoRotate={true}  autoRotateSpeed={7} />
+        <ambientLight intensity={0.5} />
+        <directionalLight intensity={0.4} />
+        <Suspense fallback={null}>
+          <Owl
+            animation={"idle"}
+            position={[0, -1.5, 1.4]}
+            rotation={[-0.01, -0.4, 0.0]}
+          />
+          <Environment preset={'lobby'} />
+        </Suspense>
+      </Canvas>
         <div
           className="App-shevron"
           onClick={() =>
