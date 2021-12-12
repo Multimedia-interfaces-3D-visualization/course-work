@@ -9,7 +9,10 @@ export default function Model({ ...props }) {
   const group = useRef();
   const prevAnimationRef = useRef();
   const { nodes, materials, animations } = useGLTF('/final_i_believe_2.glb');
-  const { ref, mixer, names, actions, clips } = useAnimations(animations, group);
+  const { ref, mixer, names, actions, clips } = useAnimations(
+    animations,
+    group,
+  );
 
   useEffect(() => {
     prevAnimationRef.current = props.animation;
@@ -17,7 +20,6 @@ export default function Model({ ...props }) {
   const prevAnimation = prevAnimationRef.current;
 
   useEffect(() => {
-
     if (prevAnimation === props.animation) {
       return;
     }
@@ -29,29 +31,27 @@ export default function Model({ ...props }) {
       }
     });
 
-    if (props.animation === "listening") {
+    if (props.animation === 'listening') {
       actions.listening_start.play();
       setTimeout(() => {
         actions.listening_start.stop();
         actions.listening_long.play();
       }, 1500);
     } else {
-      if (prevAnimation === "listening") {
-        console.log("listening_end");
+      if (prevAnimation === 'listening') {
+        console.log('listening_end');
         actions.listening_end.play();
         setTimeout(() => {
-          console.log("listening_end after timeout");
+          console.log('listening_end after timeout');
           actions.listening_end.stop();
           actions[props.animation].play();
         }, 1500);
       } else {
-        console.log("another animation");
-        console.log("prev: " + prevAnimation, "cur: " + props.animation);
+        console.log('another animation');
+        console.log('prev: ' + prevAnimation, 'cur: ' + props.animation);
         actions[props.animation].play();
       }
     }
-
-    
 
     // if (props.speaking.speaking === true) {
     //   actions['listening_start'].stop();

@@ -33,8 +33,9 @@ export const getMatchesCount = (name) =>
 
 export const getMaxCount = (name) =>
   createSelector(getMatchesCount(name), (counts) => {
-    console.log('counts', JSON.stringify(counts));
-    return Object.keys(counts)?.reduce((a, b) =>
-      counts[a] > counts[b] ? a : b,
-    );
+    const keys = Object.keys(counts);
+    console.log('keys', keys);
+    return keys.length
+      ? keys?.reduce((a, b) => (counts[a] > counts[b] ? a : b))
+      : '';
   });

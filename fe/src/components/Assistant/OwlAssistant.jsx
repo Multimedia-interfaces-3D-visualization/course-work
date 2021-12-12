@@ -6,7 +6,7 @@ import { OrbitControls, Environment } from '@react-three/drei';
 import { Suspense } from 'react';
 import Owl from './Owl';
 
-export const OwlAssistant = ({animation}) => {
+export const OwlAssistant = ({ animation }) => {
   return (
     <Canvas style={{ width: '300px', height: '300px' }}>
       <OrbitControls />
