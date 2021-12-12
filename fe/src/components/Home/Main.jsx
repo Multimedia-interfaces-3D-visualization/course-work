@@ -21,7 +21,7 @@ function Main() {
     <div className="App">
       <div className="App-main">
       <Canvas style={{ width: '100%', height: 'calc(100vh - 64px)' }}>
-        <OrbitControls autoRotate={true}  autoRotateSpeed={7} />
+        <OrbitControls autoRotate={true}  autoRotateSpeed={5} />
         <ambientLight intensity={0.5} />
         <directionalLight intensity={0.4} />
         <Suspense fallback={null}>
@@ -30,7 +30,7 @@ function Main() {
             position={[0, -1.5, 1.4]}
             rotation={[-0.01, -0.4, 0.0]}
           />
-          <Environment preset={'lobby'} />
+          <Environment preset={'lobby'} background={true} />
         </Suspense>
       </Canvas>
         <div
@@ -40,35 +40,34 @@ function Main() {
           }
         >
           <Shevron />
-          <div>Дізнатись більше</div>
+          <div style={{textShadow: "1px 1px 5px #fff, -1px -1px 5px #fff, 1px -1px 5px #fff, -1px 1px 5px #fff" }}>Дізнатись більше</div>
         </div>
       </div>
       <div className="App-content" ref={contentRef}>
         <div className="App-content-article">
           <img
-            src="./dog1.jfif"
+            src="/owl.png"
             alt="Math and pen"
             width="500px"
             height="280px"
           />
-          <span className="App-article">
-            <b className="App-article-letter">Д</b>аний вебсервіс призначений
-            для є гарним прикладом рішення задачі класифікації на прикладі
-            визначення породи собаки за її фотографією.
+          <span style={{ paddingLeft: "0" }} className="App-article">
+            <b className="App-article-letter">Д</b>аний вебсервіс є реалізацією 
+            інтерактивної системи пошуку книг у бібліотеці з використанням 
+            мультимедійного помічника та голосового асистента.
           </span>
         </div>
         <div className="App-content-article">
           <div className="App-article-container">
             <span className="App-article">
-              <b className="App-article-letter">В</b>икористовуючи алгоритми
-              машинного навчання, а також потужний датасет із більш ніж 130
-              різними видами породи, нашою командою розроюників була натренована
-              нейронна мережа, що дозволяє дізнатися користувачу породу собаки
-              із фотографії, а також отримати так звануц "впевненість" мережі у
-              своєму виборі - належність до того чи іншого класу у відсотковому
-              еквіваленті.
+              <b className="App-article-letter">Р</b>озробка призначена для спрощення 
+              пошуку та замовлення обраної книги для відвідувачів бібліотек і книгарень. 
+              Голосовий асистент надає змогу взаємодіяти з системою дуже швидко, що є 
+              особливо актуальним для літніх людей, яким зазвичай незручно використовувати 
+              клавіатуру. А мультимедійний помічник зробить цей процес більш інтерактивним, 
+              що може стати фактором популяризації читання книг серед дітей.
             </span>
-            <span className="App-start">Почніть прямо зараз!</span>
+            <span style={{ marginTop: "22px" }} className="App-start">Почніть прямо зараз!</span>
             <div className="App-actions">
               <Button
                 variant="outlined"

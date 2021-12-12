@@ -50,13 +50,13 @@ export function Header() {
             >
               OwlLib
             </Typography>
-            <Button
+            {/* <Button
               className={classes.link}
               component={RouterLink}
               to="/assistant"
             >
               Мультимедійний асистент
-            </Button>
+            </Button> */}
             <Button
               className={classes.link}
               component={RouterLink}

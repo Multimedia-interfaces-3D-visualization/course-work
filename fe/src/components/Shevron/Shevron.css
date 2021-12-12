@@ -34,12 +34,14 @@
 .chevron:before {
   left: 0;
   transform: skew(0deg, 30deg);
+  box-shadow: 1px 1px 5px #fff, 1px -1px 5px #fff, 1px -1px 5px #fff, 1px 1px 5px #fff;
 }
 
 .chevron:after {
   right: 0;
   width: 50%;
   transform: skew(0deg, -30deg);
+  box-shadow: 2px 1px 4px #fff, 2px -1px 4px #fff;
 }
 
 @keyframes move {
