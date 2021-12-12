@@ -120,6 +120,9 @@ const Book = (props) => {
               {displayedFields.map((field) =>
                 Field(book[field], displayedValuesLabels[field], classes),
               )}
+              <div className={classes.abstract}>
+                {book.abstract?.length ? book.abstract : null}
+              </div>
             </>
           )}
         </div>

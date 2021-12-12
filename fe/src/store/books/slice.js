@@ -10,6 +10,7 @@ const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     getBooks: noop,
+    createBook: noop,
     setBooks: (state, { payload }) => ({ ...initialState, books: payload }),
     replyReport: noop,
   },
@@ -17,4 +18,4 @@ const { actions, reducer } = createSlice({
 
 export { actions, reducer };
 
-export const { getBooks, setBooks } = actions;
+export const { getBooks, setBooks, createBook } = actions;

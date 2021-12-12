@@ -25,6 +25,7 @@ import useStyles from '../../../utils/hooks/useStyles';
 import styles from './styles';
 import validationSchema from './validationSchema';
 import { selectors, actions } from '../../../store/user';
+import { createBook } from '../../../store/books/slice';
 
 const CreateBook = () => {
   const classes = useStyles(styles);
@@ -43,7 +44,7 @@ const CreateBook = () => {
       issuer: '',
       countPages: '10',
       keywords: '',
-      languageISO: 'UKR',
+      languageISO: 'українська',
       type: '',
       imageURL: '',
       abstract: '',
@@ -51,13 +52,7 @@ const CreateBook = () => {
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
       console.log('values', values);
-      dispatch(
-        actions.register({
-          ...values,
-          username: values.email,
-          surname: values.lastName,
-        }),
-      );
+      dispatch(createBook(values));
     },
   });
 

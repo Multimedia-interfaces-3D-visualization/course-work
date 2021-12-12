@@ -169,5 +169,5 @@ export const commands = [
     text: 'Перехід на сторінку замовлення. Гарного читання!',
     redirect: '/orders/orderBook/',
     next: 0,
-  }
+  },
 ];

@@ -34,7 +34,8 @@
 .chevron:before {
   left: 0;
   transform: skew(0deg, 30deg);
-  box-shadow: 1px 1px 5px #fff, 1px -1px 5px #fff, 1px -1px 5px #fff, 1px 1px 5px #fff;
+  box-shadow: 1px 1px 5px #fff, 1px -1px 5px #fff, 1px -1px 5px #fff,
+    1px 1px 5px #fff;
 }
 
 .chevron:after {

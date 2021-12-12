@@ -10,6 +10,7 @@ const apiUrls = {
   books: `${base}/book/all`,
   orders: `${base}/order/all`,
   makeOrder: `${base}/order/add`,
+  createBook: `${base}/book/add`,
 };
 
 export default apiUrls;

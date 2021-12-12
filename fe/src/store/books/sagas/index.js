@@ -1,4 +1,5 @@
 import getBooks from './getBooks.saga';
+import createBook from './createBook.saga';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default [getBooks];
+export default [getBooks, createBook];

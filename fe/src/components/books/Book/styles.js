@@ -13,6 +13,10 @@ const styles = {
     // height: '250px',
     width: '250px',
   },
+  abstract: {
+    fontSize: '20px',
+    fontStyle: 'italic',
+  },
   userData: {
     display: 'flex',
     flexDirection: 'column',
