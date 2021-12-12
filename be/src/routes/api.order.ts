@@ -15,7 +15,8 @@ function deleteRedundantInfoInObjectAndReturn(data: IOrderModel) {
 
 const router = Express.Router();
 
-router.post("/add", authorize, authorizeVisitor, async (req, res) => {
+// TODO check if needed authorizeVisitor
+router.post("/add", authorize, async (req, res) => {
     if (!req.body) {
         res.status(400).send({ err: "Invalid request data in body" });
         return;
@@ -163,7 +164,8 @@ router.put("/id/:id", authorize, async (req, res) => {
     }
 });
 
-router.delete("/id/:id", authorize, authorizeAdmin, async (req, res) => {
+// TODO check if needed authorizeAdmin
+router.delete("/id/:id", authorize, async (req, res) => {
     try {
         const id = req.params.id;
         const order = await Order.getById(id);

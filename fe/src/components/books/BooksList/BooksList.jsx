@@ -97,7 +97,8 @@ const BooksList = (params) => {
 
                           <Button
                             className={classes.rejectButton}
-                            //onClick={}
+                            component={RouterLink}
+                            to={`/orders/orderBook/${row.id}`}
                             variant="outlined"
                           >
                             Замовити

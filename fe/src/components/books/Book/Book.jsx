@@ -58,68 +58,71 @@ const Book = (props) => {
   const book = useSelector(selectors.getBookById(params.id));
 
   return (
-    <div className={classes.content}>
-      <div className={classes.leftside}>
-        {book?.imageURL ? (
-          <img
-            src={book?.imageURL}
-            alt={book?.name}
-            className={classes.accountPhoto}
-          />
-        ) : (
-          <BookIcon className={classes.accountPhoto} />
-        )}
-        {isAdmin && (
-          <>
+    <>
+      <h1 style={{ textAlign: 'center', fontSize: 40}}>Книга {book?.name}</h1>
+      <div className={classes.content}>
+        <div className={classes.leftside}>
+          {book?.imageURL ? (
+            <img
+              src={book?.imageURL}
+              alt={book?.name}
+              className={classes.accountPhoto}
+            />
+          ) : (
+            <BookIcon className={classes.accountPhoto} />
+          )}
+          {isLoggedIn && (
             <Button
               className={classes.acceptButton}
               component={RouterLink}
-              to={`/lib/edit/${params.id}`}
-              variant="outlined"
+              to={`/orders/orderBook/${params.id}`}
+              variant="contained"
             >
-              Редагувати
+              Замовити
             </Button>
-            <Button
-              className={classes.rejectButton}
-              //onClick={}
-              variant="outlined"
-            >
-              Видалити
-            </Button>
-          </>
-        )}
-        {isLoggedIn && (
-          <Button
-            className={classes.acceptButton}
-            component={RouterLink}
-            to={`/orders/orderBook/${params.id}`}
-            variant="outlined"
-          >
-            Замовити
-          </Button>
-        )}
+          )}
+          {isAdmin && (
+            <>
+              <Button
+                className={classes.acceptButton}
+                component={RouterLink}
+                to={`/lib/edit/${params.id}`}
+                variant="outlined"
+              >
+                Редагувати
+              </Button>
+              <Button
+                className={classes.rejectButton}
+                //onClick={}
+                variant="outlined"
+              >
+                Видалити
+              </Button>
+            </>
+          )}
+        </div>
+        <div className={classes.userData}>
+          {book && (
+            <>
+              {Field(book.name, displayedValuesLabels.name, classes)}
+              {Field(
+                transformList(book.authors),
+                displayedValuesLabels['authors'],
+                classes,
+              )}
+              <div>
+                {book?.keywords?.length
+                  ? book?.keywords.map((word) => <Chip label={word} />)
+                  : null}
+              </div>
+              {displayedFields.map((field) =>
+                Field(book[field], displayedValuesLabels[field], classes),
+              )}
+            </>
+          )}
+        </div>
       </div>
-      <div className={classes.userData}>
-        {book && (
-          <>
-            {Field(book.name, displayedValuesLabels.name, classes)}
-            {Field(
-              transformList(book.authors),
-              displayedValuesLabels['authors'],
-              classes,
-            )}
-            <div>
-              {book?.keywords?.length
-                ? book?.keywords.map((word) => <Chip label={word} />)
-                : null}
-            </div>
-            {displayedFields.map((field) =>
-              Field(book[field], displayedValuesLabels[field], classes),
-            )}
-          </>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

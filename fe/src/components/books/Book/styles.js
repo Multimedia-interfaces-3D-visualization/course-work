@@ -1,5 +1,6 @@
 const styles = {
   content: {
+    paddingTop: '30px',
     backgroundColor: 'whitesmoke',
     maxWidth: '1024px',
     margin: '0 auto',
@@ -9,7 +10,7 @@ const styles = {
     padding: '0 50px',
   },
   accountPhoto: {
-    height: '250px',
+    // height: '250px',
     width: '250px',
   },
   userData: {
@@ -39,7 +40,7 @@ const styles = {
     color: 'green',
     borderColor: 'green',
     marginTop: '10px',
-    marginRight: '10px',
+    // marginRight: '10px',
     backgroundColor: 'white',
 
     '&:hover': {
