@@ -110,7 +110,7 @@ const Assistant = () => {
 
   useEffect(() => {
     if (IsAudioFinished && !IsCommandPlayed) {
-      if (!Command.skip && !Command.field) {
+      if (!Command.skip && !Command.field && !Command.fail) {
         dispatchSaga(actions.setNextCommand());
       } else {
         dispatchSaga(actions.setStartedListening());
