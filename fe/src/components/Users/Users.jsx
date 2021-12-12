@@ -36,9 +36,7 @@ const Users = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }}>
-        Користувачі
-      </h1>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>Користувачі</h1>
       <div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>

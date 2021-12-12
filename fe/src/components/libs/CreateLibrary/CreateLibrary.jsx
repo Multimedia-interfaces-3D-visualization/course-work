@@ -18,6 +18,7 @@ import useStyles from '../../../utils/hooks/useStyles';
 import styles from './styles';
 import validationSchema from './validationSchema';
 import { selectors, actions } from '../../../store/user';
+import { createLib } from '../../../store/libs/slice';
 
 const CreateLibrary = () => {
   const classes = useStyles(styles);
@@ -39,13 +40,7 @@ const CreateLibrary = () => {
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
       console.log('values', values);
-      dispatch(
-        actions.register({
-          ...values,
-          username: values.email,
-          surname: values.lastName,
-        }),
-      );
+      dispatch(createLib(values));
     },
   });
 

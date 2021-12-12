@@ -5,23 +5,22 @@ import urls from '../../../services/apiUrl';
 import { startLoading, stopLoading } from '../../loading/slice';
 import history from '../../../history';
 
-function* makeOrder({ payload }) {
+function* createLib({ payload }) {
   try {
     yield put(startLoading());
-    console.log('AAAAAA');
-    console.log(payload);
 
     const { status: _, response } = yield call(
       api.post,
-      urls.makeOrder,
+      urls.createLib,
       payload,
     );
+    console.log('{ status: _, response }', { status: _, response });
   } catch (error) {
     console.error(error);
   } finally {
     yield put(stopLoading());
-    history.push('/orders');
+    history.push('/libs');
   }
 }
 
-export default takeLatest(actions.makeOrder, makeOrder);
+export default takeLatest(actions.createLib, createLib);

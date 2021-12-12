@@ -14,12 +14,14 @@ import columns from './columns';
 import useStyles from '../../../utils/hooks/useStyles';
 import tableStyles from './tableStyles';
 import { actions, selectors } from '../../../store/libs';
+import { selectors as userSelectors } from '../../../store/user';
 
 const Libraries = () => {
   const classes = useStyles(tableStyles);
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const isAdmin = useSelector(userSelectors.getIsAdmin);
   const rows = useSelector(selectors.getLibs) ?? [];
   console.log('rows', rows);
 
@@ -36,7 +38,19 @@ const Libraries = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }}>Бібліотеки</h1>
+      <div className={classes.header}>
+        <h1 style={{ textAlign: 'center', fontSize: 40 }}>Бібліотеки</h1>
+        {isAdmin && (
+          <Button
+            className={classes.acceptButton}
+            component={RouterLink}
+            to={'/create-lib'}
+            variant="outlined"
+          >
+            Додати Бібліотеку
+          </Button>
+        )}
+      </div>
       <div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>

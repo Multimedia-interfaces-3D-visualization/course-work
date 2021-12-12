@@ -9,12 +9,18 @@ const styles = {
     maxHeight: 'calc(100vh - 230px) !important',
     minHeight: '400px',
   },
+  header: {
+    display: 'flex',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   acceptButton: {
     color: 'green',
     borderColor: 'green',
-    marginTop: '10px',
-    marginRight: '10px',
+    margin: '5px',
     backgroundColor: 'white',
+    maxHeight: '50px',
 
     '&:hover': {
       borderColor: 'darkgreen',
@@ -38,9 +44,6 @@ const styles = {
       borderColor: 'red',
       backgroundColor: 'rgb(250, 220, 256)',
     },
-  },
-  header: {
-    fontSize: '16px',
   },
   message: {
     fontFamily: 'KaTeX_Main',

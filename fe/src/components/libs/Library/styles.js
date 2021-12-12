@@ -25,6 +25,10 @@ const styles = {
   field: {
     display: 'flex',
   },
+  abstract: {
+    fontSize: '20px',
+    fontStyle: 'italic',
+  },
   fieldLabel: {
     display: 'flex',
     '&::after': {

@@ -8,7 +8,10 @@ import BookIcon from '@material-ui/icons/Book';
 import { Link as RouterLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
-import { selectors as libSelector, actions as libActions } from '../../../store/libs';
+import {
+  selectors as libSelector,
+  actions as libActions,
+} from '../../../store/libs';
 
 import { selectors as userSelectors } from '../../../store/user';
 
@@ -60,7 +63,9 @@ const Book = (props) => {
   useEffect(() => dispatch(actions.getBooks()), []);
   const book = useSelector(selectors.getBookById(params.id));
 
-  const isAvailable = libs?.find(x => x?.availableBooks?.find(y => y.toString() === params.id.toString()));
+  const isAvailable = libs?.find((x) =>
+    x?.availableBooks?.find((y) => y.toString() === params.id.toString()),
+  );
 
   return (
     <>
@@ -76,17 +81,16 @@ const Book = (props) => {
           ) : (
             <BookIcon className={classes.accountPhoto} />
           )}
-          {isLoggedIn && isAvailable ? 
-            (
-              <Button
-                className={classes.acceptButton}
-                component={RouterLink}
-                to={`/orders/orderBook/${params.id}`}
-                variant="contained"
-              >
-                Замовити
-              </Button>
-            ) : (
+          {isLoggedIn && isAvailable ? (
+            <Button
+              className={classes.acceptButton}
+              component={RouterLink}
+              to={`/orders/orderBook/${params.id}`}
+              variant="contained"
+            >
+              Замовити
+            </Button>
+          ) : (
             <Button
               className={classes.acceptButton}
               component={RouterLink}

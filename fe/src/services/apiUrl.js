@@ -11,6 +11,7 @@ const apiUrls = {
   orders: `${base}/order/all`,
   makeOrder: `${base}/order/add`,
   createBook: `${base}/book/add`,
+  createLib: `${base}/library/add`,
 };
 
 export default apiUrls;

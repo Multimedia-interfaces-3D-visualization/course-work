@@ -14,7 +14,10 @@ import columns from './columns';
 import useStyles from '../../../utils/hooks/useStyles';
 import tableStyles from './tableStyles';
 import { selectors as userSelectors } from '../../../store/user';
-import { selectors as libSelector, actions as libActions } from '../../../store/libs';
+import {
+  selectors as libSelector,
+  actions as libActions,
+} from '../../../store/libs';
 
 const BooksList = (params) => {
   const classes = useStyles(tableStyles);
@@ -87,7 +90,13 @@ const BooksList = (params) => {
                           );
                         })}
                         <TableCell key={`${row.id}-controls`} align="center">
-                          <div style={{ display: "flex", width: "350px", margin: "auto"}}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              width: '350px',
+                              margin: 'auto',
+                            }}
+                          >
                             <Button
                               className={classes.acceptButton}
                               component={RouterLink}
@@ -97,7 +106,11 @@ const BooksList = (params) => {
                               Переглянути
                             </Button>
 
-                            {libs?.find(x => x?.availableBooks?.find(y => y.toString() === row.id.toString())) ?
+                            {libs?.find((x) =>
+                              x?.availableBooks?.find(
+                                (y) => y.toString() === row.id.toString(),
+                              ),
+                            ) ? (
                               <Button
                                 className={classes.orderButton}
                                 component={RouterLink}
@@ -106,7 +119,7 @@ const BooksList = (params) => {
                               >
                                 Замовити
                               </Button>
-                              :
+                            ) : (
                               <Button
                                 className={classes.orderButtonDisabled}
                                 variant="outlined"
@@ -114,7 +127,7 @@ const BooksList = (params) => {
                               >
                                 Немає в наявності
                               </Button>
-                            }
+                            )}
                           </div>
                         </TableCell>
                       </TableRow>

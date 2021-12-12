@@ -76,6 +76,9 @@ const Library = (props) => {
             )}
           </>
         )}
+        <div className={classes.abstract}>
+          {lib.description?.length ? lib.description : null}
+        </div>
       </div>
     </div>
   );

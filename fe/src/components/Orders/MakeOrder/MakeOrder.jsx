@@ -84,14 +84,17 @@ const MakeOrder = () => {
       <h1 style={{ textAlign: 'center', fontSize: 40, marginBottom: '10px' }}>
         Замовити книжку
       </h1>
-      <h2 style={{ textAlign: 'center', lineHeight: '32px', fontSize: '25px', marginTop: 0 }}>
+      <h2
+        style={{
+          textAlign: 'center',
+          lineHeight: '32px',
+          fontSize: '25px',
+          marginTop: 0,
+        }}
+      >
         {cur_book?.name}
       </h2>
-      <img
-        src={cur_book?.imageURL}
-        alt={cur_book?.name}
-        height="320px"
-      />
+      <img src={cur_book?.imageURL} alt={cur_book?.name} height="320px" />
       <h3 style={{ textAlign: 'center', marginTop: '30px', marginBottom: 0 }}>
         Заповніть інформацію про те, як ви хочете отримати книгу:
       </h3>

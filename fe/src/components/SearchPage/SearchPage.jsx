@@ -10,7 +10,7 @@ function SearchPage() {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center', fontSize: 40 }} >Пошук книг</h1>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>Пошук книг</h1>
       <div className={classes.page}>
         <SearchForm
           setIsTextSearch={setIsTextSearch}
