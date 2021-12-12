@@ -36,9 +36,9 @@ const Libraries = () => {
 
   return (
     <div>
-      <div style={{ margin: 'auto', fontSize: 40, width: 'fit-content' }}>
+      <h1 style={{ textAlign: 'center', fontSize: 40 }}>
         Бібліотеки
-      </div>
+      </h1>
       <div>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>

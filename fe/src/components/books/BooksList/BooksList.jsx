@@ -36,9 +36,9 @@ const BooksList = (params) => {
   return (
     <div>
       {!params.hideLabel ? (
-        <div style={{ margin: 'auto', fontSize: 40, width: 'fit-content' }}>
+        <h1 style={{ textAlign: 'center', fontSize: 40 }}>
           Знайдені книги
-        </div>
+        </h1>
       ) : null}
       <div>
         <Paper className={classes.root}>
