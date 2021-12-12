@@ -97,6 +97,7 @@ const Assistant = () => {
               console.log('===== parsed ======');
               console.log(response.data.data);
               console.log('===== parsed ======');
+              dispatchSaga(actions.setStoppedListening());
               dispatchSaga(actions.setRecordedText(response.data.data));
               dispatchSaga(actions.setNextCommand());
             })
@@ -112,6 +113,7 @@ const Assistant = () => {
       if (!Command.skip && !Command.field) {
         dispatchSaga(actions.setNextCommand());
       } else {
+        dispatchSaga(actions.setStartedListening());
         startRecording();
       }
     } else {
@@ -163,7 +165,7 @@ const Assistant = () => {
         <p>Сказано: </p>
         
       </div> */}
-      <audio id="audio-hidden" autoPlay="true" hidden={true}></audio>
+      <audio id="audio-hidden" autoPlay={true} hidden={true}></audio>
     </div>
   );
 };

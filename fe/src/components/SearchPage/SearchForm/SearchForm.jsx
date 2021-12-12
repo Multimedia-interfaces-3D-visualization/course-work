@@ -46,6 +46,9 @@ function SearchForm(props) {
     useSelector(assistantSelectors.getIsAudioFinished) ?? false;
   const IsAudioStarted =
     useSelector(assistantSelectors.getIsAudioStarted) ?? false;
+  const IsStartedListening = useSelector(assistantSelectors.getIsStartedListening) ?? false;
+  const IsStoppedListening = useSelector(assistantSelectors.getIsStoppedListening) ?? false;
+  const IsStartedWorking = useSelector(assistantSelectors.getIsStartedWorking) ?? false;
   const [owl, setOwl] = useState(<OwlAssistant speaking={false} />);
 
   const {
@@ -114,12 +117,18 @@ function SearchForm(props) {
   ];
 
   useEffect(() => {
+    setOwl(<OwlAssistant animation="idle" />);
+  }, []);
+
+  useEffect(() => {
     if (IsAudioStarted && !IsAudioFinished) {
-      setOwl(<OwlAssistant speaking={true} />);
-    } else {
-      setOwl(<OwlAssistant speaking={false} />);
+      setOwl(<OwlAssistant animation="speaking" />);
+    } else if (IsStartedListening && !IsStoppedListening) {
+      setOwl(<OwlAssistant animation="listening" />);
+    } else if (!IsStartedWorking) {
+      setOwl(<OwlAssistant animation="idle" />);
     }
-  }, [IsAudioStarted, IsAudioFinished]);
+  }, [IsAudioStarted, IsAudioFinished, IsStartedListening, IsStoppedListening, IsStartedWorking]);
 
   return (
     <>
