@@ -1,17 +1,17 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from '../slice';
 import { getRoot } from '../selectors';
+import { getSearchResults, getMaxCount } from '../../search/selectors';
 import { commands } from '../commands';
-import api from '../../../services/api';
-import urls from '../../../services/apiUrl';
 import { startLoading, stopLoading } from '../../loading/slice';
 import { actions as searchActions } from '../../search';
+import history from '../../../history';
 
 function* setNextCommand() {
   try {
     yield put(startLoading());
 
-    const { command, recordedText } = yield select(getRoot);
+    const { command, recordedText, selectedBook } = yield select(getRoot);
     const commandObj = commands[command];
 
     if (commandObj.skip) {
@@ -22,6 +22,37 @@ function* setNextCommand() {
       ) {
         return yield put(actions.updateCommand(commandObj.skip));
       }
+    }
+
+    if (commandObj.firstBook) {
+      const books = yield select(getSearchResults);
+      if (books.length == 1) {
+        history.push(`/book/${books[0].id}`);
+      }
+    }
+
+    if (commandObj.firstOrder) {
+      const books = yield select(getSearchResults);
+      if (books.length == 1) {
+        history.push(`/orders/orderBook/${books[0].id}`);
+      }
+    }
+
+    if (commandObj.redirect) {
+      console.log('selectedBook', selectedBook);
+      console.log('commandObj.redirect', commandObj.redirect);
+      history.push(`${commandObj.redirect}${selectedBook}`);
+    }
+
+    if (commandObj.fail && recordedText) {
+      const id = yield select(getMaxCount(recordedText));
+      console.log('id', id);
+
+      if (!id) {
+        return yield put(actions.updateCommand(commandObj.fail));
+      }
+
+      yield put(actions.setSelectedBook(id));
     }
 
     if (commandObj.field && recordedText) {
