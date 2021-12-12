@@ -12,7 +12,7 @@ function* setNextCommand() {
     yield put(startLoading());
 
     const { command, recordedText, selectedBook } = yield select(getRoot);
-    const commandObj = commands[command];
+    const commandObj = commands.find((it) => it.id === command);
 
     if (commandObj.skip) {
       if (
