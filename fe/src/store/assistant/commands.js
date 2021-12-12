@@ -4,7 +4,7 @@ export const commands = [
   {
     id: 0,
     text: 'Привіт! Почнімо пошук книг!',
-    next: 1,
+    next: 2,
   },
   {
     id: 1,

@@ -7,11 +7,14 @@ import { startLoading, stopLoading } from '../../loading/slice';
 function* makeOrder({ payload }) {
   try {
     yield put(startLoading());
-    console.log("AAAAAA");
+    console.log('AAAAAA');
     console.log(payload);
 
-    const { status: _, response } = yield call(api.post, urls.makeOrder, payload);
-
+    const { status: _, response } = yield call(
+      api.post,
+      urls.makeOrder,
+      payload,
+    );
   } catch (error) {
     console.error(error);
   } finally {

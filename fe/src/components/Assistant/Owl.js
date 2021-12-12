@@ -8,7 +8,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 export default function Model({ ...props }) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/animated_demo.glb');
-  const { actions } = useAnimations(animations, group)
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
     if (props.speaking.speaking === true) {

@@ -22,17 +22,24 @@ function* executeSearch() {
       searchText,
     } = yield select(getRoot);
 
-    const found = (arr1, arr2) => arr1.some((r) => arr2.includes(r));
+    const test = (arr, arg) => {
+      const res = arg.toLowerCase().split(' ');
+      const arrt = arr.map((s) => s.toLowerCase().split(' ')).flat();
+      return res.some((r) => arrt.includes(r.toLowerCase()));
+    };
+    const found = (arr1, arr2) => {
+      return arr1.some((r) => test(arr2, r));
+    };
     const fBooks = allBooks.filter(
       (book) =>
         (!searchText ||
           book.name.toLowerCase().includes(searchText.toLowerCase())) &&
         (!selectedAuthors.length || found(selectedAuthors, book.authors)) &&
         (!selectedKeywords.length || found(selectedKeywords, book.keywords)) &&
-        (!selectedIssuers.length || selectedIssuers.includes(book.issuer)) &&
-        (!selectedBookTypes.length || selectedBookTypes.includes(book.type)) &&
+        (!selectedIssuers.length || test(selectedIssuers, book.issuer)) &&
+        (!selectedBookTypes.length || test(selectedBookTypes, book.type)) &&
         (!selectedBookLanguages.length ||
-          selectedBookLanguages.includes(book.languageISO)) &&
+          test(selectedBookLanguages, book.languageISO)) &&
         book.yearPublished < yearRange[1] &&
         book.yearPublished > yearRange[0],
     );

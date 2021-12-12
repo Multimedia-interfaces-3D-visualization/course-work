@@ -8,9 +8,8 @@ export const getRecordedText = createSelector(
   (root) => root?.recordedText,
 );
 
-export const getCommand = createSelector(
-  getRoot,
-  (root) => commands.find((it) => it.id === root?.command),
+export const getCommand = createSelector(getRoot, (root) =>
+  commands.find((it) => it.id === root?.command),
 );
 export const getIsCommandPlayed = createSelector(
   getRoot,
@@ -18,16 +17,16 @@ export const getIsCommandPlayed = createSelector(
 );
 
 export const getIsStartedWorking = createSelector(
-    getRoot,
-    (root) => root.started,
-  );
+  getRoot,
+  (root) => root.started,
+);
 
 export const getIsAudioFinished = createSelector(
-    getRoot,
-    (root) => root.audioFinished,
-  );
+  getRoot,
+  (root) => root.audioFinished,
+);
 
-  export const getIsAudioStarted = createSelector(
-    getRoot,
-    (root) => root.audioStarted,
-  );
+export const getIsAudioStarted = createSelector(
+  getRoot,
+  (root) => root.audioStarted,
+);

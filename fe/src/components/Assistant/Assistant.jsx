@@ -11,7 +11,6 @@ import { Suspense } from 'react';
 import Owl from './Owl';
 import { actions, selectors } from '../../store/assistant';
 
-
 const Assistant = () => {
   const dispatchSaga = useDispatch();
   const recordedText = useSelector(selectors.getRecordedText) ?? '';
@@ -50,10 +49,7 @@ const Assistant = () => {
 
   const testPlayback = (data) => {
     const formData = new FormData();
-    formData.append(
-      'text_data',
-      data,
-    );
+    formData.append('text_data', data);
     dispatchSaga(actions.setAudioStarted());
     axios
       .post(
@@ -71,10 +67,14 @@ const Assistant = () => {
   };
 
   useEffect(() => {
-    document.getElementById('audio-hidden').addEventListener('ended', function ttt () {
-      console.log("Audio played");
-      dispatchSaga(actions.setAudioFinished());
-    }, false);
+    document.getElementById('audio-hidden').addEventListener(
+      'ended',
+      function ttt() {
+        console.log('Audio played');
+        dispatchSaga(actions.setAudioFinished());
+      },
+      false,
+    );
   }, []);
 
   useEffect(() => {
@@ -94,9 +94,9 @@ const Assistant = () => {
               formData,
             )
             .then((response) => {
-              console.log("===== parsed ======");
+              console.log('===== parsed ======');
               console.log(response.data.data);
-              console.log("===== parsed ======");
+              console.log('===== parsed ======');
               dispatchSaga(actions.setRecordedText(response.data.data));
               dispatchSaga(actions.setNextCommand());
             })
@@ -113,7 +113,7 @@ const Assistant = () => {
         dispatchSaga(actions.setNextCommand());
       } else {
         startRecording();
-      } 
+      }
     } else {
       if (IsStartedWorking && !IsCommandPlayed) {
         console.log(Command);
@@ -121,8 +121,6 @@ const Assistant = () => {
         testPlayback(txt);
       }
     }
-
-
   }, [IsStartedWorking, IsCommandPlayed, IsAudioFinished]);
 
   // useEffect(() => {

@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import useStyles from '../../../utils/hooks/useStyles';
 import styles from './styles';
 import { selectors as userSelectors } from '../../../store/user';
-import { actions as ordersActions, selectors as ordersSelectors } from '../../../store/orders';
-
+import {
+  actions as ordersActions,
+  selectors as ordersSelectors,
+} from '../../../store/orders';
 
 const Orders = () => {
   const classes = useStyles(styles);
@@ -18,17 +20,18 @@ const Orders = () => {
 
   console.log(orders);
 
-
-  if (!isLoggedIn || isAdmin) {
-    return (
-      <p>This page can see only logged in users</p>
-    );
+  if (!isLoggedIn || !isAdmin) {
+    return <p>This page can see only logged in users</p>;
   }
 
   return (
     <div>
       <p>Orders</p>
-      {orders.map(x => (<p key={x.id}>Order id = {x.id}, book id = {x.book}</p>))}
+      {orders.map((x) => (
+        <p key={x.id}>
+          Order id = {x.id}, book id = {x.book}
+        </p>
+      ))}
     </div>
   );
 };

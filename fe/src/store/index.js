@@ -10,7 +10,7 @@ import * as books from './books';
 import * as breed from './breed';
 import * as assistant from './assistant';
 import * as search from './search';
-import * as orders from './orders'
+import * as orders from './orders';
 
 export default createStore({
   reducer: combineReducers({

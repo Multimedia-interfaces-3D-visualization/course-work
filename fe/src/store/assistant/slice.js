@@ -29,7 +29,7 @@ const { actions, reducer } = createSlice({
       isCommandPlayed: false,
       recordedText: '',
       audioFinished: false,
-      audioStarted: false
+      audioStarted: false,
     }),
     startRecording: noop,
   },

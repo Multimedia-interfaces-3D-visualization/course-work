@@ -36,7 +36,7 @@ function* setNextCommand() {
         yield put(
           searchActions.addToSelected({
             field: commandObj.field,
-            value: recordedText,
+            value: recordedText.toLowerCase(),
           }),
         );
       }

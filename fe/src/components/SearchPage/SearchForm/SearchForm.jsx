@@ -42,9 +42,11 @@ function SearchForm(props) {
   const bookTypes = useSelector(bookSelectors.getUniqueTypes);
   const keywords = useSelector(bookSelectors.getUniqueKeywords);
   const bookLanguages = useSelector(bookSelectors.getUniqueLanguage);
-  const IsAudioFinished = useSelector(assistantSelectors.getIsAudioFinished) ?? false;
-  const IsAudioStarted = useSelector(assistantSelectors.getIsAudioStarted) ?? false;
-  const [ owl, setOwl ] = useState((<OwlAssistant speaking={false} />));
+  const IsAudioFinished =
+    useSelector(assistantSelectors.getIsAudioFinished) ?? false;
+  const IsAudioStarted =
+    useSelector(assistantSelectors.getIsAudioStarted) ?? false;
+  const [owl, setOwl] = useState(<OwlAssistant speaking={false} />);
 
   const {
     selectedLibs,
@@ -59,7 +61,17 @@ function SearchForm(props) {
   } = useSelector(searchSelectors.getRoot);
 
   const getHandleChange = (field) => {
-    return (value) => dispatch(actions.setSelected({ value, field }));
+    return (value) => {
+      console.log('value', value);
+      dispatch(
+        actions.setSelected({
+          value: Array.isArray(value)
+            ? [...new Set(value.map((s) => s.toLowerCase()))]
+            : value,
+          field,
+        }),
+      );
+    };
   };
 
   const selectors = [
@@ -111,10 +123,8 @@ function SearchForm(props) {
 
   return (
     <>
-      <div className={classes.OwlAssistant}>
-      {owl}
-      </div>
-      <div style={{display: "none"}}>
+      <div className={classes.OwlAssistant}>{owl}</div>
+      <div style={{ display: 'none' }}>
         <Assistant />
       </div>
       <div
