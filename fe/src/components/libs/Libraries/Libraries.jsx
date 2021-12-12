@@ -38,7 +38,7 @@ const Libraries = () => {
 
   return (
     <div>
-      <div className={classes.header}>
+      <div className={classes.headerTop}>
         <h1 style={{ textAlign: 'center', fontSize: 40 }}>Бібліотеки</h1>
         {isAdmin && (
           <Button

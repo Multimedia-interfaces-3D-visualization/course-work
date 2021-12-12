@@ -10,6 +10,9 @@ const styles = {
     minHeight: '400px',
   },
   header: {
+    fontSize: '16px',
+  },
+  headerTop: {
     display: 'flex',
     textAlign: 'center',
     justifyContent: 'center',
@@ -18,7 +21,9 @@ const styles = {
   acceptButton: {
     color: 'green',
     borderColor: 'green',
-    margin: '5px',
+    marginTop: '10px',
+    marginLeft: '5px',
+    marginRight: '5px',
     backgroundColor: 'white',
     maxHeight: '50px',
 
