@@ -70,6 +70,11 @@ export function Header() {
             <Button className={classes.link} component={RouterLink} to="/books">
               Книги
             </Button>
+            {loggedIn && (
+              <Button className={classes.link} component={RouterLink} to="/orders">
+                Замовлення
+              </Button>
+            )}
             {isAdmin && (
               <>
                 <Button
