@@ -13,7 +13,11 @@ export const OwlAssistant = (speaking) => {
       <ambientLight intensity={0.5} />
       <directionalLight intensity={0.4} />
       <Suspense fallback={null}>
-        <Owl speaking={speaking} position={[0, -1.5, 1.4]} rotation={[-0.01, -0.4, 0.0]} />
+        <Owl
+          speaking={speaking}
+          position={[0, -1.5, 1.4]}
+          rotation={[-0.01, -0.4, 0.0]}
+        />
         <Environment preset={'lobby'} />
       </Suspense>
     </Canvas>

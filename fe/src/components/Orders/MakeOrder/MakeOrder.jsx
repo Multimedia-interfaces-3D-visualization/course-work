@@ -9,7 +9,6 @@ import { actions as ordersActions } from '../../../store/orders';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom';
 
-
 const MakeOrder = () => {
   const classes = useStyles(styles);
   const dispatch = useDispatch();
@@ -19,10 +18,8 @@ const MakeOrder = () => {
 
   useEffect(() => dispatch(actions.getBooks()), []);
 
-  if (!isLoggedIn || isAdmin) {
-    return (
-      <p>This page can see only logged in users</p>
-    );
+  if (!isLoggedIn || !isAdmin) {
+    return <p>This page can see only logged in users</p>;
   }
 
   return (
@@ -30,16 +27,22 @@ const MakeOrder = () => {
       <p>Make Order</p>
       <Button
         className={classes.acceptButton}
-        onClick={() => dispatch(ordersActions.makeOrder({
-          book: params.id,
-          libraryOwner: "61a89e955b02048d1f55fdb4",
-          type: "shipping",
-        }))}
+        onClick={() =>
+          dispatch(
+            ordersActions.makeOrder({
+              book: params.id,
+              libraryOwner: '61a89e955b02048d1f55fdb4',
+              type: 'shipping',
+            }),
+          )
+        }
         variant="outlined"
       >
         Замовити
       </Button>
-      <RouterLink to="/orders/"><a>All orders</a></RouterLink>
+      <RouterLink to="/orders/">
+        <a>All orders</a>
+      </RouterLink>
     </div>
   );
 };
