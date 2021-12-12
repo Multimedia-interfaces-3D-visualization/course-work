@@ -61,6 +61,9 @@ const Orders = () => {
         align: 'center',
       });
     }
+    if (!isAdmin && columns.find(x => x.id === "borrower")) {
+      columns.splice(2, 1);
+    }
   }, []);
 
 
