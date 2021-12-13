@@ -5,15 +5,16 @@ import urls from '../../../services/apiUrl';
 import { startLoading, stopLoading } from '../../loading/slice';
 import history from '../../../history';
 
-function* makeOrder({ payload }) {
+function* updateOrder({ payload }) {
   try {
     yield put(startLoading());
 
     const { status: _, response } = yield call(
-      api.post,
-      urls.makeOrder,
+      api.put,
+      urls.deleteOrder + payload.id,
       payload,
     );
+    
   } catch (error) {
     console.error(error);
   } finally {
@@ -22,4 +23,4 @@ function* makeOrder({ payload }) {
   }
 }
 
-export default takeLatest(actions.makeOrder, makeOrder);
+export default takeLatest(actions.updateOrder, updateOrder);

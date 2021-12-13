@@ -3,23 +3,21 @@ import { actions } from '../slice';
 import api from '../../../services/api';
 import urls from '../../../services/apiUrl';
 import { startLoading, stopLoading } from '../../loading/slice';
-import history from '../../../history';
+import { getOrders } from '../slice';
 
-function* makeOrder({ payload }) {
+function* deleteOrder({ payload }) {
   try {
     yield put(startLoading());
-
     const { status: _, response } = yield call(
-      api.post,
-      urls.makeOrder,
-      payload,
+      api.delete,
+      urls.deleteOrder + payload,
     );
+    yield put(getOrders());
   } catch (error) {
     console.error(error);
   } finally {
     yield put(stopLoading());
-    history.push('/orders');
   }
 }
 
-export default takeLatest(actions.makeOrder, makeOrder);
+export default takeLatest(actions.deleteOrder, deleteOrder);

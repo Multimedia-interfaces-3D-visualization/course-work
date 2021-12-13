@@ -80,6 +80,10 @@ const Orders = () => {
     return <p>This page can see only logged in users</p>;
   }
 
+  const handleDelete = (id) => {
+    dispatch(ordersActions.deleteOrder(id));
+  }
+
   return (
     <div>
       <h1 style={{ textAlign: 'center', fontSize: 40 }}>
@@ -102,7 +106,7 @@ const Orders = () => {
                 <TableCell
                   key="controls"
                   align="center"
-                  style={{ minWidth: '150px', fontSize: '16px' }}
+                  style={{ minWidth: '280px', fontSize: '16px' }}
                 >
                   Управління
                 </TableCell>
@@ -162,18 +166,19 @@ const Orders = () => {
                         <Button
                           className={classes.acceptButton}
                           component={RouterLink}
-                          to={`/book/${row.id}`}
+                          to={`/orders/edit/${row.id}`}
+                          disabled={!isAdmin && row.takenDate}
                           variant="outlined"
                         >
-                          Переглянути
+                          Оновити
                         </Button>
-
                         <Button
                           className={classes.rejectButton}
-                          //onClick={}
+                          onClick={() => handleDelete(row.id)}
+                          disabled={!isAdmin && row.takenDate}
                           variant="outlined"
                         >
-                          Замовити
+                          Видалити
                         </Button>
                       </TableCell>
                     </TableRow>

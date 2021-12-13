@@ -12,9 +12,11 @@ const { actions, reducer } = createSlice({
     getOrders: noop,
     setOrders: (state, { payload }) => ({ ...initialState, orders: payload }),
     makeOrder: noop,
+    deleteOrder: noop,
+    updateOrder: noop,
   },
 });
 
 export { actions, reducer };
 
-export const { getOrders, setOrders, makeOrder } = actions;
+export const { getOrders, setOrders, makeOrder, deleteOrder, updateOrder } = actions;
