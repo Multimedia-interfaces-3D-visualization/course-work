@@ -90,6 +90,17 @@ export function Header() {
                 </Button>
               </>
             )}
+            {!isAdmin && loggedIn && (
+              <>
+                <Button
+                  className={classes.link}
+                  component={RouterLink}
+                  to={"/user/" + localStorage.getItem('id')} 
+                >
+                  Мій профіль
+                </Button>
+              </>
+            )}
             {loggedIn ? (
               <>
                 <Button

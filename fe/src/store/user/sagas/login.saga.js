@@ -23,6 +23,7 @@ function* loginSaga({ payload }) {
     localStorage.setItem('userFirstName', response.userData.firstName);
     localStorage.setItem('userLastName', response.userData.lastName);
     localStorage.setItem('userIsAdmin', response.userData.isAdmin);
+    localStorage.setItem('id', response.userData.id);
 
     sessionStorage.setItem('userAuthToken', response.token);
 

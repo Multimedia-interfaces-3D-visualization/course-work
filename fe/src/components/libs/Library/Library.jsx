@@ -23,7 +23,7 @@ const displayedFields = [
   'schedule',
   'telephone',
   'email',
-  'description',
+  // 'description',
 ];
 
 const Field = (value, label, classes) => {

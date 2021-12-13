@@ -42,7 +42,8 @@ router.get("/u/:username", authorize, authorizeAdmin, async (req, res) => {
     }
 });
 
-router.get("/id/:id", authorize, authorizeAdmin, async (req, res) => {
+// TODO authorizeAdmin check user
+router.get("/id/:id", authorize, async (req, res) => {
     try {
         const id = req.params.id;
         const result = await User.getById(id);
@@ -58,7 +59,8 @@ router.get("/id/:id", authorize, authorizeAdmin, async (req, res) => {
     }
 });
 
-router.get("/all/", authorize, authorizeAdmin, async (_, res) => {
+// TODO authorizeAdmin check user
+router.get("/all/", authorize, async (_, res) => {
     try {
         const results = await User.getAllUsers();
         const users = results.map(x => deleteSensetiveInfoInUserObjectAndReturn(x));

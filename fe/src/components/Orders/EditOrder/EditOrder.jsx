@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import PermPhoneMsgIcon from '@material-ui/icons/PermPhoneMsg';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import HourglassEmpty from '@material-ui/icons/HourglassEmpty';
 import EmailIcon from '@material-ui/icons/Email';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
@@ -26,6 +27,14 @@ import {
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import {
+  actions as libActions,
+  selectors as libSelectors,
+} from '../../../store/libs';
+import {
+  actions as bookActions,
+  selectors as bookSelectors,
+} from '../../../store/books';
 import styles from './styles';
 import validationSchema from './validationSchema';
 import { selectors, actions } from '../../../store/user';
@@ -40,14 +49,21 @@ const EditOrder = () => {
   const isAdmin = useSelector(selectors.getIsAdmin);
   const dispatch = useDispatch();
   const params = useParams();
-  const order = useSelector(ordersSelectors.getOrderById(params.id))
+  const order = useSelector(ordersSelectors.getOrderById(params.id));
+  const books = useSelector(bookSelectors.getBooks) ?? [];
+  const libs = useSelector(libSelectors.getLibs) ?? [];
+
+  useEffect(() => dispatch(bookActions.getBooks()), []);
+  useEffect(() => dispatch(libActions.getLibs()), []);
 
   const formik = useFormik({
     initialValues: {
       isReadyToTake: false,
       takenDate: null,
       returnDeadlineDate: null,
-      broughtDate: null
+      broughtDate: null,
+      type: '',
+      libraryOwner: ''
       // name: '',
       // address: '',
       // telephone: '',
@@ -67,18 +83,34 @@ const EditOrder = () => {
           returnDeadlineDate: values.returnDeadlineDate,
           broughtDate: values.broughtDate
         }))
+      } else {
+        dispatch(ordersActions.updateOrder({
+          id: params.id,
+          type: values.type,
+          libraryOwner: values.libraryOwner,
+        }))
       }
     },
   });
 
   const { setFieldValue } = formik;
+  
+  const cur_book = books.find((x) => x.id.toString() === order?.book?.toString());
+  const libs_available = libs?.filter((x) =>
+    x?.availableBooks.find((y) => y?.toString() === cur_book?.id?.toString()),
+  );
+
 
   useEffect(() => {
     setFieldValue("isReadyToTake", order?.isReadyToTake);
     setFieldValue("takenDate", order?.takenDate ?? null);
     setFieldValue("returnDeadlineDate", order?.returnDeadlineDate ?? null);
-    setFieldValue("broughtDate", order?.broughtDate ?? null);
+    setFieldValue("type", order?.type);
+    setFieldValue("libraryOwner", order?.libraryOwner);
   }, [order, setFieldValue]);
+
+
+  
 
   return (
     <div className={classes.registerContent}>
@@ -190,6 +222,55 @@ const EditOrder = () => {
                 }}
               />
             </MuiPickersUtilsProvider>
+          </>
+        )}
+        {!isAdmin &&(
+          <>
+            <FormControl fullWidth className={classes.firstName}>
+              <InputLabel style={{marginLeft: "13px" , marginTop: "-9px", zIndex: 2 }} id="type-select-label">Спосіб видачі</InputLabel>
+              <Select
+                labelId="type-select-label"
+                id="type"
+                name="type"
+                label="Спосіб видачі"
+                placeholder="Оберіть спосіб видачі"
+                value={formik.values.type}
+                onChange={formik.handleChange}
+                variant="outlined"
+                startAdornment={(
+                  <InputAdornment position="start">
+                    <LocalShippingIcon />
+                  </InputAdornment>
+                )}
+              >
+                <MenuItem value={'self-pickup'}>У біблотеці</MenuItem>
+                <MenuItem value={'shipping'}>Адресна доставка</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth className={classes.firstName}>
+              <InputLabel style={{marginLeft: "13px" , marginTop: "-9px", zIndex: 2 }} id="library-select-label">Бібліотека</InputLabel>
+              <Select
+                labelId="library-select-label"
+                id="libraryOwner"
+                name="libraryOwner"
+                label="Бібліотека"
+                placeholder="оберіть бібліотеку"
+                value={formik.values.libraryOwner}
+                onChange={formik.handleChange}
+                variant="outlined"
+                startAdornment={(
+                  <InputAdornment position="start">
+                    <LocalLibraryIcon />
+                  </InputAdornment>
+                )}
+              >
+                {libs_available.map((z) => (
+                  <MenuItem key={z.id} value={z.id}>
+                    {z.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </>
         )}
         {/* <TextField

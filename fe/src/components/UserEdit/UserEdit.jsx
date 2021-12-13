@@ -40,17 +40,28 @@ const UserEdit = () => {
     },
     validationSchema,
     onSubmit: ({ passwordConfirmation, ...values }) => {
-      dispatch(
-        actions.register({
-          ...values,
-          username: values.email,
-          surname: values.lastName,
-        }),
-      );
+      if (isAdmin) {
+        dispatch(
+          actions.register({
+            ...values,
+            username: values.email,
+            surname: values.lastName,
+          }),
+        );
+      } else {
+        dispatch(
+          actions.update({
+            username: values.email,
+            surname: values.lastName,
+            postalAddress: values.postalAddress,
+            postcode: values.postcode,
+          }),
+        );
+      }
     },
   });
 
-  return !isAdmin ? (
+  return !isAdmin && params.id !== localStorage.getItem('id') ? (
     <Redirect to="/search-page" />
   ) : (
     <div className={classes.registerContent}>

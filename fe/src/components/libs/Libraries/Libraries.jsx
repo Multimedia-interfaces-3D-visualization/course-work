@@ -105,14 +105,15 @@ const Libraries = () => {
                           >
                             Переглянути
                           </Button>
-
-                          <Button
-                            className={classes.rejectButton}
-                            //onClick={}
-                            variant="outlined"
-                          >
-                            Видалити
-                          </Button>
+                          {isAdmin && (
+                            <Button
+                              className={classes.rejectButton}
+                              //onClick={}
+                              variant="outlined"
+                            >
+                              Видалити
+                            </Button>
+                          )}
                         </TableCell>
                       </TableRow>
                     );

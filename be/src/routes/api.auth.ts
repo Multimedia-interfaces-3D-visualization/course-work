@@ -91,7 +91,8 @@ router.post("/login", async (req, res) => {
         userData: {
             firstName: user.firstName,
             lastName: user.surname,
-            isAdmin: user.role === 'admin'
+            isAdmin: user.role === 'admin',
+            id: user.id
         }});
 });
 

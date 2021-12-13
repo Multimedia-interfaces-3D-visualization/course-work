@@ -39,6 +39,7 @@ const User = (props) => {
 
   useEffect(() => dispatch(actions.getUsers()), []);
   const user = useSelector(selectors.getUserById(params.id));
+  const IsAdmin = localStorage.getItem('userIsAdmin') === 'true';
 
   return (
     <div className={classes.content}>
@@ -58,7 +59,7 @@ const User = (props) => {
               Редагувати
             </Button>
 
-            {user.role !== 'admin' && (
+            {user.role !== 'admin' && IsAdmin && (
               <Button
                 className={classes.rejectButton}
                 //onClick={}

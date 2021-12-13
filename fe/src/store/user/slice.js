@@ -19,6 +19,7 @@ const { actions, reducer } = createSlice({
     login: noop,
     logout: noop,
     register: noop,
+    update: noop,
     setLoginErrors: (state, { payload }) => ({
       ...state,
       loginErrors: payload,
@@ -45,6 +46,7 @@ export const {
   login,
   logout,
   register,
+  update,
   setLoginErrors,
   setUserData,
   clearUserData,
