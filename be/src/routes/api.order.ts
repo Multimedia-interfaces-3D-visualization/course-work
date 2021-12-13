@@ -142,7 +142,7 @@ router.put("/id/:id", authorize, async (req, res) => {
         } else {
             objToUpd = {
                 book: req.body.book,
-                borrower: req.user?.id,
+                // borrower: req.user?.id,
                 libraryOwner: req.body.libraryOwner,
                 type: req.body.type,
                 isReadyToTake: req.body.isReadyToTake,

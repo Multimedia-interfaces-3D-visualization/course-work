@@ -116,7 +116,7 @@ export const commands = [
   },
   {
     id: 20,
-    text: 'Гарного читання!',
+    text: 'Читайте на здоров\'я! Дякуємо, що скористалися мультимедійним асистентом! До нових зустрічей!',
     next: 0,
     stop: true,
   },
@@ -143,7 +143,7 @@ export const commands = [
     id: 23,
     text: 'Перехід на сторінку книги. Приємного перегляду!',
     redirect: '/book/',
-    next: 0,
+    next: 24,
   },
   {
     id: 24,
@@ -168,6 +168,6 @@ export const commands = [
     id: 26,
     text: 'Перехід на сторінку замовлення. Гарного читання!',
     redirect: '/orders/orderBook/',
-    next: 0,
+    next: 20,
   },
 ];
