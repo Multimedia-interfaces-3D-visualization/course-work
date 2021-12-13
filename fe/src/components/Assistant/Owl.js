@@ -20,37 +20,65 @@ export default function Model({ ...props }) {
   const prevAnimation = prevAnimationRef.current;
 
   useEffect(() => {
+    if (!actions) {
+      return;
+    }
     if (prevAnimation === props.animation) {
       return;
     }
 
+    if (prevAnimation !== "idle" && props.animation === "hello") {
+      return;
+    }
+
     // console.log(actions);
-    Object.entries(actions).forEach(([key, _]) => {
-      if (key !== props.animation) {
-        actions[key].stop();
-      }
-    });
+    const reset_all = () => {
+      Object.entries(actions).forEach(([key, _]) => {
+        if (key !== props.animation) {
+          actions[key]?.stop();
+        }
+      });
+    };
+    console.log(prevAnimation + " ====> " + props.animation);
 
     if (props.animation === 'listening') {
-      actions.listening_start.play();
+      reset_all();
+      actions.listening_start.timeScale = 3.0;
+      actions?.listening_start?.play();
       setTimeout(() => {
-        actions.listening_start.stop();
-        actions.listening_long.play();
+        actions?.listening_start?.stop();
+        actions?.listening_long?.play();
+      }, 500);
+    } else if (props.animation === 'speaking' && prevAnimation === 'hello') {
+      // console.log(prevAnimation + " ====> 2222 ====> " + props.animation);
+      setTimeout(() => {
+        reset_all();
+        actions?.speaking?.play();
+      }, 650);
+    } else if (props.animation === 'naklon') {
+      reset_all();
+      actions.listening_end.timeScale = 3.0;
+      actions?.listening_end?.play();
+      setTimeout(() => {
+        actions?.listening_end?.stop();
+        actions?.naklon?.play();
+      }, 500);
+    } else if (props.animation === 'idle' && prevAnimation === 'speaking') {
+      reset_all();
+      // actions.here_it_is.timeScale = 3.0;
+      actions?.here_it_is?.play();
+      setTimeout(() => {
+        actions?.here_it_is?.stop();
+        actions?.idle?.play();
       }, 1500);
     } else {
-      if (prevAnimation === 'listening') {
-        console.log('listening_end');
-        actions.listening_end.play();
-        setTimeout(() => {
-          console.log('listening_end after timeout');
-          actions.listening_end.stop();
-          actions[props.animation].play();
-        }, 1500);
-      } else {
-        console.log('another animation');
-        console.log('prev: ' + prevAnimation, 'cur: ' + props.animation);
-        actions[props.animation].play();
+      reset_all();
+      if (props.animation === "hello") {
+        actions[props.animation].timeScale = 2.0;
       }
+      // console.log(prevAnimation + " ====> 1111 ====> " + props.animation);
+      // console.log('prev: ' + prevAnimation, 'cur: ' + props.animation);
+      actions[props.animation]?.play();
     }
 
     // if (props.speaking.speaking === true) {
@@ -60,7 +88,7 @@ export default function Model({ ...props }) {
     //   actions['speaking'].stop();
     //   actions['listening_start'].play();
     // }
-  });
+  }, [actions, prevAnimation, props.animation]);
 
   return (
     <group ref={group} {...props} dispose={null}>

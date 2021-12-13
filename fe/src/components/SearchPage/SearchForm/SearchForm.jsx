@@ -128,8 +128,12 @@ function SearchForm(props) {
       setOwl(<OwlAssistant animation="speaking" />);
     } else if (IsStartedListening && !IsStoppedListening) {
       setOwl(<OwlAssistant animation="listening" />);
+    } else if (IsStartedListening && IsStoppedListening) {
+      setOwl(<OwlAssistant animation="naklon" />);
     } else if (!IsStartedWorking) {
       setOwl(<OwlAssistant animation="idle" />);
+    } else if (IsStartedWorking && !IsAudioStarted && !IsStartedListening) {
+      setOwl(<OwlAssistant animation="hello" />);
     }
   }, [
     IsAudioStarted,

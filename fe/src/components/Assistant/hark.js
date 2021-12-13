@@ -1,7 +1,4 @@
-// original source code is taken from:
-// https://github.com/SimpleWebRTC/hark
-// copyright goes to &yet team
-// edited by Muaz Khan for RTCMultiConnection.js
+
 function hark(stream, options) {
   var audioContextType = window.webkitAudioContext || window.AudioContext;
 

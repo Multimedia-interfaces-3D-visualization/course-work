@@ -45,14 +45,14 @@ const UserEdit = () => {
           actions.register({
             ...values,
             username: values.email,
-            surname: values.lastName,
+            lastName: values.lastName,
           }),
         );
       } else {
         dispatch(
           actions.update({
-            username: values.email,
-            surname: values.lastName,
+            // username: values.email,
+            // lastName: values.lastName,
             postalAddress: values.postalAddress,
             postcode: values.postcode,
           }),
