@@ -50,3 +50,8 @@ export const getCommandTextInterpolationObject = createSelector(
   getRoot,
   (root) => root.commandTextInterpolationObject,
 );
+
+export const getTemp = createSelector(
+  getRoot,
+  (root) => root.temp,
+);

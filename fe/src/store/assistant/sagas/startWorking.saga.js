@@ -16,7 +16,7 @@ function* startWorking() {
 
     if (commandObj.needToInterpolate === true) {
       if (commandObj.id === 0) {
-        yield put(actions.setCommandTextInterpolationObject({ username: `, ${username}` }));
+        yield put(actions.setCommandTextInterpolationObject({ username: `${username}` }));
       }
     }
 

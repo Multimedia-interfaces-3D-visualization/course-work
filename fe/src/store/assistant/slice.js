@@ -11,6 +11,7 @@ const initialState = {
   isStartedListening: false,
   isStoppedListening: false,
   selectedBook: '',
+  temp: '',
   commandTextInterpolationObject: {}
 };
 
@@ -23,6 +24,10 @@ const { actions, reducer } = createSlice({
     setRecordedText: (state, { payload }) => ({
       ...state,
       recordedText: payload,
+    }),
+    setTemp: (state, { payload }) => ({
+      ...state,
+      temp: payload,
     }),
     setCommandTextInterpolationObject: (state, { payload }) => ({
       ...state,

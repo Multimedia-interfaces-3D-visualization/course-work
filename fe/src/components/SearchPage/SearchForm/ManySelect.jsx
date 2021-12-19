@@ -24,12 +24,17 @@ const exist = (arr1, arr2) => {
   const arrt = arr2.map((s) => s.toLowerCase());
   return arr1.filter((r) => !arrt.includes(r.toLowerCase()));
 };
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string, onlyFirst=false) {
   const words = string.split(' ');
 
   return words
-    .map((word) => {
-      return word[0].toUpperCase() + word.substring(1);
+    .map((word, i) => {
+      if (!onlyFirst || i === 0) {
+        return word[0].toUpperCase() + word.substring(1);
+      } else {
+        return word;
+      }
+     
     })
     .join(' ');
 }
@@ -81,7 +86,7 @@ export default function ManySelect({ label, list, selected, setSelected }) {
               {select.map((value) => (
                 <Chip
                   key={value.toLowerCase()}
-                  label={capitalizeFirstLetter(value)}
+                  label={capitalizeFirstLetter(value, label === "type")}
                 />
               ))}
             </Box>
@@ -93,7 +98,7 @@ export default function ManySelect({ label, list, selected, setSelected }) {
               <MenuItem key={name.toLowerCase()} value={name.toLowerCase()}>
                 <Checkbox checked={test(selected, name)} />
                 <ListItemText
-                  primary={capitalizeFirstLetter(name)}
+                  primary={capitalizeFirstLetter(name, label === "type")}
                   style={{ 'white-space': 'break-spaces' }}
                 />
               </MenuItem>
