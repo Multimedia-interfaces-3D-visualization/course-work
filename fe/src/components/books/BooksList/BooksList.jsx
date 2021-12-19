@@ -93,7 +93,7 @@ const BooksList = (params) => {
                           <div
                             style={{
                               display: 'flex',
-                              width: '350px',
+                              width: '310px',
                               margin: 'auto',
                             }}
                           >

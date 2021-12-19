@@ -12,7 +12,7 @@ const styles = {
   },
   VoiceButton: {
     position: 'fixed',
-    bottom: '70px',
+    bottom: '40px',
     right: '20px',
     'z-index': '999999',
   },

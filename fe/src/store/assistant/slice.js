@@ -11,6 +11,7 @@ const initialState = {
   isStartedListening: false,
   isStoppedListening: false,
   selectedBook: '',
+  commandTextInterpolationObject: {}
 };
 
 const { actions, reducer } = createSlice({
@@ -22,6 +23,13 @@ const { actions, reducer } = createSlice({
     setRecordedText: (state, { payload }) => ({
       ...state,
       recordedText: payload,
+    }),
+    setCommandTextInterpolationObject: (state, { payload }) => ({
+      ...state,
+      commandTextInterpolationObject: {
+        ...state.commandTextInterpolationObject,
+        ...payload
+      },
     }),
     setNextCommand: (state) => ({ ...state, isCommandPlayed: true }),
     setAudioFinished: (state) => ({ ...state, audioFinished: true }),

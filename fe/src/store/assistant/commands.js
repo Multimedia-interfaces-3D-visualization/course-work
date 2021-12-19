@@ -3,7 +3,30 @@ import { executeSearch } from '../search/slice';
 export const commands = [
   {
     id: 0,
-    text: 'Привіт! Почнімо пошук книг!',
+    text: 'Привіт@@@username@@@! Я — сова, твій мультимедійний асистент. Можу допомогти перейти на сторінку сайту або почати пошук книг.',
+    next: 9001,
+    needToInterpolate: true
+  },
+  {
+    id: 9001,
+    text: 'Що ви хочете зараз зробити?',
+    next: 9002,
+    fail: 9003,
+  },
+  {
+    id: 9002,
+    text: 'Ви сказали: @@@response@@@. Тому я виконую @@@objective@@@',
+    needToInterpolate: true
+  },
+  {
+    id: 9003,
+    text: 'Ви сказали: @@@response@@@. Проте я не зрозуміла Вас. Повторіть, будь ласка, ще раз.',
+    next: 9001,
+    needToInterpolate: true
+  },
+  {
+    id: 900,
+    text: 'Почнімо пошук книг!',
     next: 1,
   },
   {

@@ -18,6 +18,7 @@ const Assistant = () => {
   const IsCommandPlayed = useSelector(selectors.getIsCommandPlayed) ?? false;
   const IsAudioFinished = useSelector(selectors.getIsAudioFinished) ?? false;
   const Command = useSelector(selectors.getCommand) ?? null;
+  const CommandTextInterpolationObject = useSelector(selectors.getCommandTextInterpolationObject) ?? {};
 
   const classes = useStyles(styles);
   const [inited, setInited] = useState(false);
@@ -48,6 +49,10 @@ const Assistant = () => {
   }, [previewAudioStream, stopRecording, inited]);
 
   const testPlayback = (data) => {
+    for (const key in CommandTextInterpolationObject) {
+      data = data.replaceAll("@@@" + key + "@@@", CommandTextInterpolationObject[key])
+    }
+
     const formData = new FormData();
     formData.append('text_data', data);
     dispatchSaga(actions.setAudioStarted());

@@ -14,6 +14,18 @@ const styles = {
     fontSize: '35px',
     textShadow: '1px 1px white',
   },
+  owlBoxDrawer: {
+    width: '300px !important',
+    height: '300px !important',
+  },
+  '@media (min-width:1900px)': {
+    owlBoxDrawer: {
+      width: '450px !important',
+      height: '450px !important',
+      // marginRight: '-50px',
+      marginTop: '245px',
+    }
+  }
 };
 
 export default styles;

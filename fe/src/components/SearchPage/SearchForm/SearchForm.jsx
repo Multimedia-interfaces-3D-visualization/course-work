@@ -212,7 +212,9 @@ function SearchForm(props) {
           </Button>
         </div>
         {searchResult?.length ? (
-          <BooksList rows={searchResult} hideLabel />
+          <div style={{ marginLeft: "15px", maxWidth: "1030px"}}>
+            <BooksList rows={searchResult} hideLabel />
+          </div>
         ) : (
           <div className={classes.nothing}>Нічого не знайдено</div>
         )}

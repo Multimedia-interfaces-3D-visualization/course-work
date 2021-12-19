@@ -45,3 +45,8 @@ export const getSelectedBook = createSelector(
   getRoot,
   (root) => root.selectedBook,
 );
+
+export const getCommandTextInterpolationObject = createSelector(
+  getRoot,
+  (root) => root.commandTextInterpolationObject,
+);

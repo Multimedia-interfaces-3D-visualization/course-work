@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from '../slice';
-import { getRoot } from '../selectors';
+import { getRoot, getRecordedText } from '../selectors';
 import { getSearchResults, getMaxCount } from '../../search/selectors';
 import { commands } from '../commands';
 import { startLoading, stopLoading } from '../../loading/slice';
@@ -13,6 +13,27 @@ function* setNextCommand() {
 
     const { command, recordedText, selectedBook } = yield select(getRoot);
     const commandObj = commands.find((it) => it.id === command);
+    
+    // NEW COMMANDS -- START
+    if (commandObj.needToInterpolate === true) {
+      yield put(actions.setCommandTextInterpolationObject({ response: recordedText }));
+    }
+
+    if (commandObj.next === 9002) {
+      if (recordedText.includes("лист")) {
+        yield put(actions.setCommandTextInterpolationObject({ response: recordedText }));
+        return yield put(actions.updateCommand(commandObj.fail));
+      }
+
+      yield put(actions.setCommandTextInterpolationObject({response: recordedText, objective: "пошук книг" }));
+      return yield put(actions.updateCommand(9002));
+    }
+
+    if (commandObj.id === 9002) {
+      return yield put(actions.updateCommand(900));
+    }
+    // NEW COMMANDS -- END
+
 
     if (commandObj.skip) {
       if (
